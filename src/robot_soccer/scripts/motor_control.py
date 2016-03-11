@@ -741,6 +741,11 @@ def vect2motors(data):
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
 
+def tentative():
+    SpeedM1(128,20)
+    SpeedM2(128,20)
+    SpeedM1(129,30)
+    vel.stop()
 
 def motorControl():
 
