@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "robot_soccer")
+set(robot_soccer_MAINTAINER "ecestudent <ecestudent@todo.todo>")
+set(robot_soccer_DEPRECATED "")
+set(robot_soccer_VERSION "0.0.0")
+set(robot_soccer_BUILD_DEPENDS "roscpp" "rospy" "std_msgs" "message_generation" "sensor_msgs" "cv_bridge" "image_transport")
+set(robot_soccer_RUN_DEPENDS "sensor_msgs" "cv_bridge" "image_transport" "message_generation" "message_runtime" "roscpp" "rospy" "std_msgs")
+set(robot_soccer_BUILDTOOL_DEPENDS "catkin")
