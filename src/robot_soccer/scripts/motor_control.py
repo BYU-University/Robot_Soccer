@@ -2,8 +2,8 @@
 #import rospy
 from roboclaw import *
 import calibratepid as c
-#import math
-#import mat
+import math
+import mat
 #import velchangers as vel
 #import param
 #from std_msgs.msg import String
@@ -46,7 +46,7 @@ def vect2motors(data):
     xCommand = math.cos(toBall)#*speed
     yCommand = math.sin(toBall)#*speed
     fixAngle = float(toGoal/500)
-    rospy.loginfo("ewhaetever : %f, %f,%f" %(xCommand,yCommand,fixAngle))
+    rospy.loginfo("xcommand,ycommand and fixangle : %f, %f,%f" %(xCommand,yCommand,fixAngle))
     #vel.testrun(xCommand,qyCommand,fixAngle)
     #vel.stop()
 

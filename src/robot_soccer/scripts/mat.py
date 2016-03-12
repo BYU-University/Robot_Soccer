@@ -19,12 +19,12 @@ r3theta = math.pi
 r3x = math.cos(r3theta)*r
 r3y = math.sin(r3theta)*r
 
-print r1x
-print r1y
-print r2x
-print r2y
-print r3x
-print r3y
+#print r1x
+#print r1y
+#print r2x
+#print r2y
+#print r3x
+#print r3y
 
 s1theta = r1theta - math.pi/2
 s1x = math.cos(s1theta)
@@ -37,12 +37,12 @@ s2y = math.sin(s2theta)
 s3theta = r3theta - math.pi/2
 s3x = math.cos(s3theta)
 s3y = math.sin(s3theta)
-print s1x
-print s1y
-print s2x
-print s2y
-print s3x
-print s3y
+#print s1x
+#print s1y
+#print s2x
+#print s2y
+#print s3x
+#print s3y
 mSub = matrix( [[s1x,s1y,(s1y*r1x - s1x*r1y)],
                 [s2x,s2y,(s2y*r2x - s2x*r2y)],
                 [s3x,s3y,(s3y*r3x - s3x*r3y)]] )
@@ -56,7 +56,7 @@ R = lambda theta: matrix( [[math.cos(theta),math.sin(theta),0.0],
              [0.0,0.0,1.0]] )
 
 
-print M
+#print M
 
 def getWheelVel(x,y,omega):
   desired = matrix( [[x],
