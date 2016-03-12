@@ -785,6 +785,8 @@ def tentative(v,p,i,d,kid,dead,min,max):
     SetM1VelocityPID(129,p,i,d,speed129[1])
     #SetM1PositionPID(address,kp,ki,kd,kimax,deadzone,min,max):
     SetM1PositionPID(128,p,i,d,kid,dead,min,max)
+    SetM2PositionPID(128,p,i,d,kid,dead,min,max)
+    SetM1PositionPID(129,p,i,d,kid,dead,min,max)
     print "segunda leitura"
     read128 = ReadMainBatteryVoltage(128)
     read129 = ReadMainBatteryVoltage(129)
