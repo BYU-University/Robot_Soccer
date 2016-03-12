@@ -11,14 +11,17 @@ Open('/dev/ttySAC0', 38400)
 #p = int(1 * 4) #262144
 #i = int(1 * 2) #131072
 #d = int(1 * 6)  #65536
+M1speed = 278700
+M2speed = 253800
+M3speed = 269400
 
 #p = 65536
 #i = 32768
 #d = 16384
 #q = 308419
-p = 4
-i = 2
-d = 6
+p = 4.0
+i = 2.0
+d = 6.0999908447265625
 q = 308419
 #kp = 3.991973876953125
 #ki = 1.9959869384765625
@@ -206,10 +209,12 @@ def go():
 		
 		print "P D=%.2f" % p
 		print "P D=%.2f" % i
-		print "P D=%.2f" % d		
-		SetM1VelocityPID(128,p,i,d,speedM1)
-		SetM2VelocityPID(128,p,i,d,speedM2)
-		SetM1VelocityPID(129,p,i,d,speedM3)
+		print "P D=%.2f" % d
+
+def setvelocity():
+		SetM1VelocityPID(128,p,i,d,M1speed)
+		SetM2VelocityPID(128,p,i,d,M2speed)
+		SetM1VelocityPID(129,p,i,d,M3speed)
 		stop();
 
 	

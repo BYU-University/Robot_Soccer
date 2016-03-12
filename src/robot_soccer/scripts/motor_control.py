@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #import rospy
 from roboclaw import *
+import calibratepid as c
 #import math
 #import mat
 #import velchangers as vel
@@ -804,6 +805,7 @@ def tentative(p,i,d,v):
     encb = ReadEncM2(128)
     encc = ReadEncM1(129)
     print "encoder 1, 2 and 3",enca,encb,encc
+    c.setvelocity()
 
 
 '''
