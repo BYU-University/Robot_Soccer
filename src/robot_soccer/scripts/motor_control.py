@@ -9,7 +9,7 @@ import calibratepid as c
 #from std_msgs.msg import String
 #from robot_soccer.msg import velocities
 #from robot_soccer.msg import locations
-#from robot_soccer.msg import convertedCoordinates
+from robot_soccer.msg import convertedCoordinates
 #import calibratepid
 #import tty, sys
 
