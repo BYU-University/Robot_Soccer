@@ -12,6 +12,8 @@ import velchangers as vel
 #import calibratepid
 #import tty, sys
 
+Open('/dev/ttySAC0', 38400)
+
 '''
 .....
 control_k_phi = 2;
