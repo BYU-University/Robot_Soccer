@@ -746,7 +746,7 @@ def run(speed):
     c.setvelocity()
     #SpeedM1(128,)
 # this is just to read values to calculate the PID, and to set the velocity
-def tentative(p,i,d,kid,dead,min,max):
+def tentative(v,p,i,d,kid,dead,min,max):
     ForwardM1(128,v)
     ForwardM2(128,v)
     ForwardM1(129,v)
