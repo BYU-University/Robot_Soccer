@@ -697,8 +697,6 @@ def callback(data):
    #callback.counter = 0
 
 def vect2motors(data):
-   #tty.setraw(sys.stdin.fileno())
-   #while 1:
     speed = 1
     xg = 180
     yg = 0
@@ -744,7 +742,11 @@ def vect2motors(data):
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
 '''
-def tentative(p,i,d,v):
+def run(speed):
+    c.setvelocity()
+    #SpeedM1(128,)
+# this is just to read values to calculate the PID, and to set the velocity
+def tentative(p,i,d,kid,dead,min,max):
     ForwardM1(128,v)
     ForwardM2(128,v)
     ForwardM1(129,v)
@@ -762,9 +764,7 @@ def tentative(p,i,d,v):
     speed129 = ReadISpeedM1(129)
     #SetM1VelocityPID(address,p,i,d,qpps)
 
-    SetM1VelocityPID(128,p,i,d,speed128a[1])
-    SetM2VelocityPID(128,p,i,d,speed128b[1])
-    SetM1VelocityPID(129,p,i,d,speed129[1])
+
     print "speed128a: ",speed128a
     print "speed128b: ",speed128b
     print "speed129:", speed129
@@ -780,6 +780,11 @@ def tentative(p,i,d,v):
     print "encoder 1, 2 and 3",enca,encb,encc
     time.sleep(5)
     stop()
+    SetM1VelocityPID(128,p,i,d,speed128a[1])
+    SetM2VelocityPID(128,p,i,d,speed128b[1])
+    SetM1VelocityPID(129,p,i,d,speed129[1])
+    #SetM1PositionPID(address,kp,ki,kd,kimax,deadzone,min,max):
+    SetM1PositionPID(128,p,i,d,kid,dead,min,max)
     print "segunda leitura"
     read128 = ReadMainBatteryVoltage(128)
     read129 = ReadMainBatteryVoltage(129)
@@ -805,8 +810,11 @@ def tentative(p,i,d,v):
     encb = ReadEncM2(128)
     encc = ReadEncM1(129)
     print "encoder 1, 2 and 3",enca,encb,encc
-    c.setvelocity()
 
+def stop():
+    ForwardM1(128,0)
+    ForwardM2(128,0)
+    ForwardM1(129,0)
 
 '''
 def motorControl():
@@ -824,11 +832,8 @@ def motorControl():
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
-'''''
-def stop():
-   ForwardM1(128,0)
-   ForwardM2(128,0)
-   ForwardM1(129,0)
+
+
 
 
 if __name__ == '__main__':
@@ -847,6 +852,6 @@ if __name__ == '__main__':
    # time.sleep(140)
     
 
-
+'''
 
 

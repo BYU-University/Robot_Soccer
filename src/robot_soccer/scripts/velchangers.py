@@ -9,7 +9,7 @@ cap = .3
 
 def radianToQpps(radian):
   result = int(radian * 19820.0 / (2.0*math.pi))
-  if result > 308420:
+  if result > 308420: #max velocity (127) in Qpps
     return 308420
   elif result < -308420:
     return -308420
