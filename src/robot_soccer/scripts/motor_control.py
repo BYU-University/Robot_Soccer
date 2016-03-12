@@ -742,9 +742,9 @@ def vect2motors(data):
 #    [xCommand,yCommand,toGoal]
 
 def tentative():
-    SpeedM1(128,20)
-    SpeedM2(128,20)
-    SpeedM1(129,30)
+    SpeedM1(128,127)
+    SpeedM2(128,127)
+    SpeedM1(129,127)
     read128 = ReadMainBatteryVoltage(128)
     read129 = ReadMainBatteryVoltage(129)
     print 'read128: ',read128
