@@ -35,7 +35,7 @@ print "121 M1 P=%.2f" % (p3/65536.0)
 print "129 M1 I=%.2f" % (i3/65536.0)
 print "129 M1 D=%.2f" % (d3/65536.0)
 print "129 M1 QPPS=",q3
-'''
+
 def forward():
 		ForwardM1(128,20)
 		ForwardM2(128,20)
@@ -197,7 +197,7 @@ def go():
 		print "P D=%.2f" % p
 		print "P D=%.2f" % i
 		print "P D=%.2f" % d
-
+'''
 def setvelocity():
 		SetM1VelocityPID(128,p,i,d,M1speed)
 		SetM2VelocityPID(128,p,i,d,M2speed)
