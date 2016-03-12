@@ -742,8 +742,11 @@ def vect2motors(data):
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
 '''
-def run(speed):
+def run(v,p,i,d,kid,dead,min,max):
     c.setvelocity()
+    SetM1PositionPID(128,p,i,d,kid,dead,min,max)
+    SetM2PositionPID(128,p,i,d,kid,dead,min,max)
+    SetM1PositionPID(129,p,i,d,kid,dead,min,max)
     #SpeedM1(128,)
 # this is just to read values to calculate the PID, and to set the velocity
 def tentative(v,p,i,d,kid,dead,min,max):
