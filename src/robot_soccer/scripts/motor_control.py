@@ -743,10 +743,11 @@ def vect2motors(data):
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
 '''
-def tentative(w1,w2,w3):
-    ForwardM1(128,w1)
-    ForwardM2(128,w2)
-    ForwardM1(129,w3)
+def tentative(p,i,d,v):
+    ForwardM1(128,v)
+    ForwardM2(128,v)
+    ForwardM1(129,v)
+
     read128 = ReadMainBatteryVoltage(128)
     read129 = ReadMainBatteryVoltage(129)
     print 'readBattery128: ',read128
@@ -758,6 +759,10 @@ def tentative(w1,w2,w3):
     speed128a = ReadISpeedM1(128)
     speed128b = ReadISpeedM2(128)
     speed129 = ReadISpeedM1(129)
+    #SetM1VelocityPID(address,p,i,d,qpps)
+    SetM1VelocityPID(128,p,i,d,speed128a)
+    SetM2VelocityPID(128,p,i,d,speed128b)
+    SetM1VelocityPID(129,p,i,d,speed129)
     print "speed128a: ",speed128a
     print "speed128b: ",speed128b
     print "speed129:", speed129
