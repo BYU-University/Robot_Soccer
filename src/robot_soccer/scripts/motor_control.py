@@ -743,10 +743,10 @@ def vect2motors(data):
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
 '''
-def tentative():
-    SpeedM1(128,0)
-    SpeedM2(128,0)
-    SpeedM1(129,0)
+def tentative(w1,w2,w3):
+    SpeedM1(128,w1)
+    SpeedM2(128,w2)
+    SpeedM1(129,w3)
     read128 = ReadMainBatteryVoltage(128)
     read129 = ReadMainBatteryVoltage(129)
     print 'readBattery128: ',read128
@@ -773,6 +773,33 @@ def tentative():
     print "encoder 1, 2 and 3",enca,encb,encc
     time.sleep(5)
     stop()
+    print "segunda leitura"
+    read128 = ReadMainBatteryVoltage(128)
+    read129 = ReadMainBatteryVoltage(129)
+    print 'readBattery128: ',read128
+    print "readBattery129", read129
+    logic128 = ReadLogicBatteryVoltage(128)
+    logic129 = ReadLogicBatteryVoltage(129)
+    print "Batterylogic128: ", logic128
+    print "Batterylogic129: ", logic129
+    speed128a = ReadISpeedM1(128)
+    speed128b = ReadISpeedM2(128)
+    speed129 = ReadISpeedM1(129)
+    print "speed128a: ",speed128a
+    print "speed128b: ",speed128b
+    print "speed129:", speed129
+    wheela = ReadM1VelocityPID(128)
+    wheelb = ReadM2VelocityPID(128)
+    wheelc = ReadM1VelocityPID(129)
+    print "velocity128a",wheela
+    print "velocity128b",wheelb
+    print "velocity128c",wheelc
+    enca = ReadEncM1(128)
+    encb = ReadEncM2(128)
+    encc = ReadEncM1(129)
+    print "encoder 1, 2 and 3",enca,encb,encc
+
+
 '''
 def motorControl():
 
