@@ -1,12 +1,12 @@
 #!/usr/bin/env python
-#import rospy
+import rospy
 from roboclaw import *
 import calibratepid as c
 import math
 import mat
 #import velchangers as vel
 #import param
-#from std_msgs.msg import String
+from std_msgs.msg import String
 #from robot_soccer.msg import velocities
 #from robot_soccer.msg import locations
 from robot_soccer.msg import convertedCoordinates
