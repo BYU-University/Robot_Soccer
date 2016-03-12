@@ -744,6 +744,7 @@ def vect2motors(data):
 '''
 def run(_speed1,_speed2,_speed3,_distance,_buffer):
     c.setvelocity()
+    #receives speed as qpps. The distance I didn't figure out yet. I guess it receives in cent
     SpeedDistanceM1(128,_speed1,_distance,_buffer)
     SpeedDistanceM2(128,_speed2,_distance,_buffer)
     SpeedDistanceM1(129,_speed3,_distance,_buffer)
@@ -752,6 +753,8 @@ def run(_speed1,_speed2,_speed3,_distance,_buffer):
     #SetM2PositionPID(128,p,i,d,kid,dead,min,max)
     #SetM1PositionPID(129,p,i,d,kid,dead,min,max)
     #SpeedM1(128,)
+
+
 # this is just to read values to calculate the PID, and to set the velocity
 def tentative(v,p,i,d,kid,dead,min,max):
     ForwardM1(128,v)

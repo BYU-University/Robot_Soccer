@@ -1,32 +1,19 @@
 #!/usr/bin/env python
 from roboclaw import *
-#import motor_control.roboclaw
 import velchangers
 import time
 Open('/dev/ttySAC0', 38400)
 
-#p = int(65536 * 4) #262144
-#i = int(65536 * 2) #131072
-#d = int(65536 * 6)  #65536
-#p = int(1 * 4) #262144
-#i = int(1 * 2) #131072
-#d = int(1 * 6)  #65536
-M1speed = 278700
-M2speed = 253800
-M3speed = 269400
-
-#p = 65536
-#i = 32768
-#d = 16384
-#q = 308419
+#this is the calc made on motor_control->tentative
+M1speed = 200000#278700
+M2speed = 200000#253800
+M3speed = 200000#269400
 p = 4.0
 i = 2.0
 d = 6.0999908447265625
 q = 308419
-#kp = 3.991973876953125
-#ki = 1.9959869384765625
-#kd = 5.969512939453125
-#q  = 308419
+
+
 '''
 print ReadM1VelocityPID(128)
 p1,i1,d1,q1,t1 = ReadM1VelocityPID(128)

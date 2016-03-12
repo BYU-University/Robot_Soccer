@@ -97,12 +97,4 @@ def getWheelVelTheta(x,y,omega,theta):
 
   return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]
 
-#def radianToQpps(radian):
-#  result = int(radian * 19820.0 / (2*math.pi))
-  #print result 
-#  if result > 31471:
- #   return 31471
- # elif result < -31498:
- #   return -31498
- # else:
- #   return result
+

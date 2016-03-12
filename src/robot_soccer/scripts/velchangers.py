@@ -14,23 +14,8 @@ def radianToQpps(radian):
   elif result < -308420:
     return -308420
   else:
-    #result4 = result
     return result
-#14509.47)#
 
-#def radianToQpps(radian):
-#  result = int(radian * 19820.0 / (2*math.pi))
-  #print result 
-#  if result > 31471:
-#    return 31471
-#  elif result < -31498:
-#    return -31498
- # elif result < -23876:
-  #  return -23876
-  #elif result < 22034:
-#	return 22034
-#  else:
- #   return result
     
 #def qppsToRadian(qpps):
 #  result = int((qpps[0] / 19820.0) * (2.0*math.pi))
