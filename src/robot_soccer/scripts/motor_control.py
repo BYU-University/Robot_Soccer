@@ -3,7 +3,7 @@
 from roboclaw import *
 #import math
 #import mat
-import velchangers as vel
+#import velchangers as vel
 #import param
 #from std_msgs.msg import String
 #from robot_soccer.msg import velocities
@@ -772,7 +772,7 @@ def tentative():
     encc = ReadEncM1(129)
     print "encoder 1, 2 and 3",enca,encb,encc
     time.sleep(5)
-    vel.stop()
+    stop()
 '''
 def motorControl():
 
@@ -790,6 +790,11 @@ def motorControl():
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 '''''
+def stop():
+   ForwardM1(128,0)
+   ForwardM2(128,0)
+   ForwardM1(129,0)
+
 
 if __name__ == '__main__':
     try:
