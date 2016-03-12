@@ -1,18 +1,18 @@
 #!/usr/bin/env python
-import rospy
+#import rospy
 from roboclaw import *
-import math
-import mat
-import velchangers as vel
+#import math
+#import mat
+#import velchangers as vel
 #import param
-from std_msgs.msg import String
-from robot_soccer.msg import velocities
-from robot_soccer.msg import locations 
-from robot_soccer.msg import convertedCoordinates
+#from std_msgs.msg import String
+#from robot_soccer.msg import velocities
+#from robot_soccer.msg import locations
+#from robot_soccer.msg import convertedCoordinates
 import calibratepid 
 import tty, sys
 
-"""
+'''
 .....
 control_k_phi = 2;
 control_k_vx = 5;
@@ -740,7 +740,7 @@ def vect2motors(data):
 
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
-
+'''
 def tentative():
     SpeedM1(128,0)
     SpeedM2(128,0)
@@ -771,7 +771,7 @@ def tentative():
     print "encoder 1, 2 and 3",enca,encb,encc
     time.sleep(5)
     vel.stop()
-
+'''
 def motorControl():
 
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -787,7 +787,7 @@ def motorControl():
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
-
+'''''
 
 if __name__ == '__main__':
     try:
@@ -805,7 +805,6 @@ if __name__ == '__main__':
    # time.sleep(140)
     
 
-# calculations
-import math
+
 
 
