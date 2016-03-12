@@ -215,6 +215,6 @@ def setvelocity():
 		SetM1VelocityPID(128,p,i,d,M1speed)
 		SetM2VelocityPID(128,p,i,d,M2speed)
 		SetM1VelocityPID(129,p,i,d,M3speed)
-		stop();
+		#stop();
 
 	
