@@ -3,14 +3,14 @@
 from roboclaw import *
 #import math
 #import mat
-#import velchangers as vel
+import velchangers as vel
 #import param
 #from std_msgs.msg import String
 #from robot_soccer.msg import velocities
 #from robot_soccer.msg import locations
 #from robot_soccer.msg import convertedCoordinates
-import calibratepid 
-import tty, sys
+#import calibratepid
+#import tty, sys
 
 '''
 .....
