@@ -745,6 +745,31 @@ def tentative():
     SpeedM1(128,20)
     SpeedM2(128,20)
     SpeedM1(129,30)
+    read128 = ReadMainBatteryVoltage(128)
+    read129 = ReadMainBatteryVoltage(129)
+    print 'read128: ',read128
+    print "read129", read129
+    logic128 = ReadLogicBatteryVoltage(128)
+    logic129 = ReadLogicBatteryVoltage(129)
+    print "logic128: ", logic128
+    print "logic129: ", logic129
+    speed128a = ReadISpeedM1(128)
+    speed128b = ReadISpeedM2(128)
+    speed129 = ReadISpeedM1(129)
+    print "speed128a: ",speed128a
+    print "speed128b: ",speed128b
+    print "speed129:", speed129
+    wheela = ReadM1VelocityPID(128)
+    wheelb = ReadM2VelocityPID(128)
+    wheelc = ReadM1VelocityPID(129)
+    print "velocity128a",wheela
+    print "velocity128b",wheelb
+    print "velocity128c",wheelc
+    enca = ReadEncM1(128)
+    encb = ReadEncM2(128)
+    encc = ReadEncM1(129)
+    print "encoder 1, 2 and 3",enca,encb,encc
+    time.sleep(5)
     vel.stop()
 
 def motorControl():
@@ -768,12 +793,12 @@ if __name__ == '__main__':
     try:
      Open('/dev/ttySAC0', 38400)
     
-     calibratepid.go(); 
-     motorControl()
+     #calibratepid.go();
+     #motorControl()
     except:
      global _SERIAL_ERR
      _SERIAL_ERR = True
-     vel.stop()
+     #vel.stop()
    # ForwardM1(W1,10)
    # ForwardM2(W1,10)
    # ForwardM1(W2,10)
