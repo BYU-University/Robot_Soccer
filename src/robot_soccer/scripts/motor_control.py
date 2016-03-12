@@ -695,7 +695,7 @@ def callback(data):
  # mat.getWheelVelTheta(vx,vy,omega,data.home1_theta);
   
    #callback.counter = 0
-
+'''
 def vect2motors(data):
     speed = 1
     xg = 180
@@ -706,6 +706,8 @@ def vect2motors(data):
     xr = data.home1_x
     yr = data.home1_y
     tr = data.home1_theta
+    print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
+
     xball = xb-xr
     if xball == 0:
 	xball = .01
@@ -715,7 +717,7 @@ def vect2motors(data):
     try:
      toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
      toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
-     #rospy.loginfo("ewhaetever : %f, %f" %(toBall,toGoal))
+     rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
     except ValueError:
      print "Please enter 3 valid sides"
     
@@ -726,8 +728,8 @@ def vect2motors(data):
     yCommand = math.sin(toBall)*speed
     fixAngle = float(toGoal/500)
     rospy.loginfo("ewhaetever : %f, %f,%f" %(xCommand,yCommand,fixAngle))
-    #vel.testrun(xCommand,yCommand,fixAngle)
-    vel.stop()
+    #vel.testrun(xCommand,qyCommand,fixAngle)
+    #vel.stop()
 
    
     #ch = sys.stdin.read(1)
@@ -741,13 +743,13 @@ def vect2motors(data):
 
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
-'''
+
 def run(_speed1,_speed2,_speed3,_distance,_buffer):
     c.setvelocity()
     #receives speed as qpps. The distance I didn't figure out yet. I guess it receives in cent
-    SpeedDistanceM1(128,_speed1,_distance,_buffer)
-    SpeedDistanceM2(128,_speed2,_distance,_buffer)
-    SpeedDistanceM1(129,_speed3,_distance,_buffer)
+    #SpeedDistanceM1(128,_speed1,_distance,_buffer)
+    #SpeedDistanceM2(128,_speed2,_distance,_buffer)
+    #SpeedDistanceM1(129,_speed3,_distance,_buffer)
     #this did not work
     #SetM1PositionPID(128,p,i,d,kid,dead,min,max)
     #SetM2PositionPID(128,p,i,d,kid,dead,min,max)
@@ -828,7 +830,7 @@ def stop():
     ForwardM2(128,0)
     ForwardM1(129,0)
 
-'''
+
 def motorControl():
 
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -852,8 +854,8 @@ if __name__ == '__main__':
     try:
      Open('/dev/ttySAC0', 38400)
     
-     #calibratepid.go();
-     #motorControl()
+     c.setvelocity()
+     motorControl()
     except:
      global _SERIAL_ERR
      _SERIAL_ERR = True
@@ -864,6 +866,6 @@ if __name__ == '__main__':
    # time.sleep(140)
     
 
-'''
+
 
 

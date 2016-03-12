@@ -56,7 +56,7 @@ R = lambda theta: matrix( [[math.cos(theta),math.sin(theta),0.0],
              [0.0,0.0,1.0]] )
 
 
-#print M
+print M
 
 def getWheelVel(x,y,omega):
   desired = matrix( [[x],
