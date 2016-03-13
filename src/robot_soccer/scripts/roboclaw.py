@@ -1035,23 +1035,3 @@ def Open(comport, rate):
 	global port
 	port = serial.Serial(comport, baudrate=rate, timeout=0.1, interCharTimeout=0.01)
 	return
-'''
-def SetM1pidq(addr,p,i,d,qpps):
-	_sendcommand(addr,28)
-	_writelong(d)
-	_writelong(p)
-	_writelong(i)
-	_writelong(qpps)
-	#_writebyte(checksum&0x7F);
-	return;
-
-def SetM2pidq(addr,p,i,d,qpps):
-	_sendcommand(addr,29)
-	_writelong(d)
-	_writelong(p)
-	_writelong(i)
-	_writelong(qpps)
-	#_writebyte(checksum&0x7F);
-	return;
-#Open('/dev/ttySAC0', 460800)
-'''

@@ -65,49 +65,21 @@ print "this is the M value:", M
 
 #here starts the defs
 
-def getWheelVel(x,y,omega):
-  desired = matrix( [[x],
-                     [y],
-                     [omega]] )
-                   
-  result = M*desired
-  print "this is wheelVelocity: ",result
-
-
-  return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]
-
-
-#not very helpful now. It's giving weird numbers
-def getXYOmega(v1,v2,v3):
-  velocity = matrix( [[v1],
-                      [v2],
-                      [v3]] )
-  Minv = linalg.inv(M)
-  
-  result = Minv*velocity
-  print "this is GetXYOmega",result
-  
-  return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]
-
 #this return a tuple with x, y, omega(or theta)
-def getRobotXYOmega(x,y,omega,theta):
+def getRobotXYOmega(x,y,theta):
+  #for now, I changed omega=0
+  omega = 0
   desired = matrix( [[x],
                      [y],
                      [omega]] )
   desired = R(theta)*desired
   print "this is GetRobotXYOmega",desired
   return desired
-  
-def getRobotXYOmegaAsTuple(x, y, omega, theta):
-  desired = getRobotXYOmega(x, y, omega, theta)
-  asArray = desired.getA()
-  return asArray[0][0], asArray[1][0], asArray[2][0]
 
-def getWheelVelTheta(x,y,omega,theta):
-  desired = getRobotXYOmega(x, y, omega, theta)
-                   
+def getWheelVelTheta(x,y,theta):
+  desired = getRobotXYOmega(x, y,theta)
   result = M*desired
-  print "this is getRobotXYOMEGAASTuple",result
+  #print "this is getRobotXYOMEGAASTuple",result
   return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]
 
 
