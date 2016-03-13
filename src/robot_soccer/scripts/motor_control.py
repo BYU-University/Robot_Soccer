@@ -16,6 +16,7 @@ from robot_soccer.msg import convertedCoordinates
 Open('/dev/ttySAC0', 38400)
 
 def goCenter(data):
+    c.setvelocity()
     xb = data.ball_x
     yb = data.ball_y
     xr = data.home1_x
@@ -34,8 +35,9 @@ def vect2motors(data):
     xr = data.home1_x
     yr = data.home1_y
     tr = data.home1_theta
+    rospy.loginfo("robot x,y,theta : %f, %f" %(xr,yr,tr))
     print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
-    vel.goXYOmegaTheta(xr,yr,1,tr)
+    vel.goXYOmegaTheta(xr,yr,tr)
 
     xball = xb-xr
     if xball == 0:
@@ -170,7 +172,7 @@ def motorControl():
     rospy.init_node('motorControl', anonymous=True)
 
     # This subscribes to the velTopic topic expecting the 'velocities' message
-    rospy.Subscriber('coordinates', convertedCoordinates, vect2motors)
+    rospy.Subscriber('coordinates', convertedCoordinates, goCenter)
     #rospy.loginfo(msg)
 
     # spin() simply keeps python from exiting until this node is stopped
