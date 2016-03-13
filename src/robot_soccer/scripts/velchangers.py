@@ -50,7 +50,7 @@ def goXYOmegaTheta(x,y,theta):
    print "this is the scale",scale
    x = x *scale
    y = y *scale
-  v1,v2,v3 = mat.getWheelVelTheta(x,y,0,theta)
+  v1,v2,v3 = mat.getWheelVelTheta(x,y,theta)
   s1 = radianToQpps(v1)
   s2 = radianToQpps(v2)
   s3 = radianToQpps(v3)
