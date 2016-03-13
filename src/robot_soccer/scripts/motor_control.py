@@ -3,8 +3,8 @@ import rospy
 from roboclaw import *
 import calibratepid as c
 import math
-import mat
-#import velchangers as vel
+#import mat
+import velchangers as vel
 #import param
 from std_msgs.msg import String
 #from robot_soccer.msg import velocities
@@ -14,6 +14,15 @@ from robot_soccer.msg import convertedCoordinates
 #import tty, sys
 
 Open('/dev/ttySAC0', 38400)
+
+def goCenter(data):
+    xb = data.ball_x
+    yb = data.ball_y
+    xr = data.home1_x
+    yr = data.home1_y
+    tr = data.home1_theta
+    print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
+    vel.goXYOmegaTheta(xr,yr,tr)
 
 def vect2motors(data):
    # speed = 1
@@ -26,6 +35,7 @@ def vect2motors(data):
     yr = data.home1_y
     tr = data.home1_theta
     print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
+    vel.goXYOmegaTheta(xr,yr,1,tr)
 
     xball = xb-xr
     if xball == 0:
@@ -47,7 +57,7 @@ def vect2motors(data):
     yCommand = math.sin(toBall)#*speed
     fixAngle = float(toGoal/500)
     rospy.loginfo("xcommand,ycommand and fixangle : %f, %f,%f" %(xCommand,yCommand,fixAngle))
-    #vel.testrun(xCommand,qyCommand,fixAngle)
+    vel.testrun(xCommand,yCommand,fixAngle)
     #vel.stop()
 
    

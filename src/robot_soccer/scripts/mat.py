@@ -19,12 +19,13 @@ r3theta = math.pi
 r3x = math.cos(r3theta)*r
 r3y = math.sin(r3theta)*r
 
-#print r1x
-#print r1y
-#print r2x
-#print r2y
-#print r3x
-#print r3y
+print "this prints info from Mat values of r1,r2,r3 in x,y direction"
+print r1x
+print r1y
+print r2x
+print r2y
+print r3x
+print r3y
 
 s1theta = r1theta - math.pi/2
 s1x = math.cos(s1theta)
@@ -37,26 +38,32 @@ s2y = math.sin(s2theta)
 s3theta = r3theta - math.pi/2
 s3x = math.cos(s3theta)
 s3y = math.sin(s3theta)
-#print s1x
-#print s1y
-#print s2x
-#print s2y
-#print s3x
-#print s3y
+
+print "here for s1,s2,s3 in x,y direction"
+print s1x
+print s1y
+print s2x
+print s2y
+print s3x
+print s3y
+
 mSub = matrix( [[s1x,s1y,(s1y*r1x - s1x*r1y)],
                 [s2x,s2y,(s2y*r2x - s2x*r2y)],
                 [s3x,s3y,(s3y*r3x - s3x*r3y)]] )
                 
-#print mSub
+print "this is the MSub MAtrix",mSub
 
 M = realWorldOffset*(1.0/s)*mSub
+
 #this is the rotation matrix where turns in the x and y directions
 R = lambda theta: matrix( [[math.cos(theta),math.sin(theta),0.0],
              [-math.sin(theta),math.cos(theta),0.0],
              [0.0,0.0,1.0]] )
 
 
-#print M
+print "this is the M value:", M
+
+#here starts the defs
 
 def getWheelVel(x,y,omega):
   desired = matrix( [[x],
@@ -64,9 +71,13 @@ def getWheelVel(x,y,omega):
                      [omega]] )
                    
   result = M*desired
+  print "this is wheelVelocity: ",result
+
 
   return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]
-  
+
+
+#not very helpful now. It's giving weird numbers
 def getXYOmega(v1,v2,v3):
   velocity = matrix( [[v1],
                       [v2],
@@ -74,15 +85,17 @@ def getXYOmega(v1,v2,v3):
   Minv = linalg.inv(M)
   
   result = Minv*velocity
+  print "this is GetXYOmega",result
   
   return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]
 
+#this return a tuple with x, y, omega(or theta)
 def getRobotXYOmega(x,y,omega,theta):
   desired = matrix( [[x],
                      [y],
                      [omega]] )
   desired = R(theta)*desired
-  
+  print "this is GetRobotXYOmega",desired
   return desired
   
 def getRobotXYOmegaAsTuple(x, y, omega, theta):
@@ -94,7 +107,7 @@ def getWheelVelTheta(x,y,omega,theta):
   desired = getRobotXYOmega(x, y, omega, theta)
                    
   result = M*desired
-
+  print "this is getRobotXYOMEGAASTuple",result
   return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]
 
 

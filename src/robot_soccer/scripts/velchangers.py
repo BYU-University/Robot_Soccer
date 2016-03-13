@@ -7,6 +7,7 @@ import mat
 DEBUG = True
 cap = .3
 
+
 def radianToQpps(radian):
   result = int(radian * 19820.0 / (2.0*math.pi))
   if result > 308420: #max velocity (127) in Qpps
@@ -22,31 +23,39 @@ def radianToQpps(radian):
 #  return result
 
 def goXYOmega(x,y,omega,limit=False):
-  if limit:
-    total = math.sqrt(float(x**2+y**2))
-    if total > cap:
-      scale = cap / total
-      x = x * scale
-      y = y * scale
+  #if limit:
+   # total = math.sqrt(float(x**2+y**2))
+   # if total > cap:
+      #scale = cap / total
+     # x = x * scale
+     # y = y * scale
   v1,v2,v3 = mat.getWheelVel(x,y,omega)
   s1 = radianToQpps(v1)
   s2 = radianToQpps(v2)
   s3 = radianToQpps(v3)
-  SpeedM1(128,s1)
-  SpeedM2(128,s2)
-  SpeedM1(129,s3)
+  #SpeedM1(128,s1)
+  #SpeedM2(128,s2)
+  #SpeedM1(129,s3)
+  print "values for v1,v2,v3: ",v1,v2,v3
+  print " ....."
+  print "values for s1,s2,s2 speed",s1,s2,s3
 
-def goXYOmegaTheta(x,y,omega,theta,limit=False):
-  if limit:
-    total = math.sqrt(float(x**2+y**2))
-    if total > cap:
-      scale = cap / total
-      x = x * scale
-      y = y * scale
-  v1,v2,v3 = mat.getWheelVelTheta(x,y,omega,theta)
+
+#function to use. we dont need omega right now. Set it = 0
+def goXYOmegaTheta(x,y,theta):#theta,limit=True):
+  #if limit:
+  total = math.sqrt(float(x**2+y**2))
+  if total > cap:
+   scale = cap / total
+   x = x / scale
+   y = y / scale
+  v1,v2,v3 = mat.getWheelVelTheta(x,y,0,theta)
   s1 = radianToQpps(v1)
   s2 = radianToQpps(v2)
   s3 = radianToQpps(v3)
+  print "values for v2,v2,v3: ",v1,v2,v3
+  print "....."
+  print "values for s1,s2,s2 for speed: ",s1,s2,s3
   SpeedM1(128,s1)
   SpeedM2(128,s2)
   SpeedM1(129,s3)
@@ -71,12 +80,12 @@ def goXYOmegaAccel(x,y,theta):
   print 's3',s3
     
   #Ac=  
-  SpeedAccelM1(128,int(abs(s1)/time),s1)
-  SpeedAccelM2(128,int(abs(s2)/time),s2)
-  SpeedAccelM1(129,int(abs(s3)/time),s3)
-  s1_prev=s1
-  s2_prev=s2
-  s3_prev=s3
+  #SpeedAccelM1(128,int(abs(s1)/time),s1)
+  #SpeedAccelM2(128,int(abs(s2)/time),s2)
+  #SpeedAccelM1(129,int(abs(s3)/time),s3)
+  #s1_prev=s1
+  #s2_prev=s2
+  #s3_prev=s3
 
 def smoothStop(v1_1,v2_1,v3_1,v1_2,v2_2,v3_2):
   s1 = radianToQpps(v1_1)
@@ -114,8 +123,8 @@ def leftTurnMomentum():
 
 
 def testrun(x,y,theta):
-  goXYOmega(x,y,theta,'false')
-  #goXYOmegaAccel(x,y,theta)
+  #goXYOmega(x,y,theta,'false')
+  goXYOmegaAccel(x,y,theta)
   #time.sleep(3)
   #stop()
   #time.sleep(5)
