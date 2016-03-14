@@ -182,7 +182,7 @@ def motorControl():
     rospy.init_node('motorControl', anonymous=True)
 
     # This subscribes to the velTopic topic expecting the 'velocities' message
-    rospy.Subscriber('coordinates', convertedCoordinates, goCenter)
+    rospy.Subscriber('coordinates', convertedCoordinates, getBall)
     #rospy.loginfo(msg)
 
     # spin() simply keeps python from exiting until this node is stopped
