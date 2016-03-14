@@ -13,8 +13,8 @@ from std_msgs.msg import String
 from robot_soccer.msg import convertedCoordinates
 #import calibratepid
 #import tty, sys
-kickX = 0.15
-kickY = 0.15
+kickX = 0.1
+kickY = 0.1
 
 Open('/dev/ttySAC0', 38400)
 
@@ -27,8 +27,9 @@ def getBall(data):
     robotX = xr-xb
     robotY = yr-yb
     vel.goXYOmegaTheta(robotX,robotY,tr)
-    if robotX < kickX and robotY < kickY:
+    if robotX == kickX and robotY == kickY:
         k.kick()
+
 
 
 
