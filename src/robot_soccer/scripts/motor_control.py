@@ -15,6 +15,16 @@ from robot_soccer.msg import convertedCoordinates
 
 Open('/dev/ttySAC0', 38400)
 
+def getBall(data):
+    xb = data.ball_x
+    yb = data.ball_y
+    xr = data.home1_x
+    yr = data.home1_y
+    tr = data.home1_theta
+    robotX = xr-xb
+    robotY = yr-yb
+    vel.goXYOmegaTheta(robotX,robotY,tr)
+
 def goCenter(data):
    # c.setvelocity()
     xb = data.ball_x

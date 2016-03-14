@@ -41,7 +41,7 @@ def goXYOmega(x,y,omega,limit=False):
   print "values for s1,s2,s2 speed",s1,s2,s3
 '''
 
-#function to use. we dont need omega right now. Set it = 0
+#function to use. This functions will get current info to go...
 def goXYOmegaTheta(x,y,theta):
   #if limit:
   total = math.sqrt(float(x**2+y**2))
