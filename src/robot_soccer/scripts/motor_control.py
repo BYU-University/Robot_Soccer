@@ -2,6 +2,7 @@
 import rospy
 from roboclaw import *
 import calibratepid as c
+import kick as k
 import math
 #import mat
 import velchangers as vel
@@ -12,6 +13,8 @@ from std_msgs.msg import String
 from robot_soccer.msg import convertedCoordinates
 #import calibratepid
 #import tty, sys
+kickX = 0.15
+kickY = 0.15
 
 Open('/dev/ttySAC0', 38400)
 
@@ -24,6 +27,10 @@ def getBall(data):
     robotX = xr-xb
     robotY = yr-yb
     vel.goXYOmegaTheta(robotX,robotY,tr)
+    if robotX < kickX and robotY < kickY:
+        k.kick()
+
+
 
 def goCenter(data):
    # c.setvelocity()
