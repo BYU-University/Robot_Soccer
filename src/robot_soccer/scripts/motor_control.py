@@ -85,8 +85,9 @@ def vect2motors(data):
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
 
-def run(_speed1,_speed2,_speed3,_distance,_buffer):
-    c.setvelocity()
+def run(data):
+    goCenter(data)
+
     #receives speed as qpps. The distance I didn't figure out yet. I guess it receives in cent
     #SpeedDistanceM1(128,_speed1,_distance,_buffer)
     #SpeedDistanceM2(128,_speed2,_distance,_buffer)
@@ -182,7 +183,7 @@ def motorControl():
     rospy.init_node('motorControl', anonymous=True)
 
     # This subscribes to the velTopic topic expecting the 'velocities' message
-    rospy.Subscriber('coordinates', convertedCoordinates, getBall)
+    rospy.Subscriber('coordinates', convertedCoordinates, run)
     #rospy.loginfo(msg)
 
     # spin() simply keeps python from exiting until this node is stopped
@@ -196,6 +197,7 @@ if __name__ == '__main__':
      Open('/dev/ttySAC0', 38400)
     
     # c.setvelocity()
+     c.setvelocity()
      motorControl()
     except:
      global _SERIAL_ERR
