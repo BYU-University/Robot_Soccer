@@ -86,7 +86,8 @@ def vect2motors(data):
 #    [xCommand,yCommand,toGoal]
 
 def run(data):
-    goCenter(data)
+    #goCenter(data)
+    getBall(data)
 
     #receives speed as qpps. The distance I didn't figure out yet. I guess it receives in cent
     #SpeedDistanceM1(128,_speed1,_distance,_buffer)
