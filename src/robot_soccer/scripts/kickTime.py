@@ -11,7 +11,7 @@ def kickTime():
 	if count == 0 and xr > fP-s and math.abs(toGoal) < aA and xball < kR:
 	    kick()
 	    count += 1
-	else if count == 1000 or xball > bZ+kR:
+	elif count == 1000 or xball > bZ+kR:
 	    count = 0
 	else:
 	    count += 1
