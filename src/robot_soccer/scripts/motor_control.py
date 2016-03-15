@@ -2,6 +2,7 @@
 import rospy
 from roboclaw import *
 import calibratepid as c
+import kick as k
 import math
 #import mat
 import velchangers as vel
@@ -12,8 +13,25 @@ from std_msgs.msg import String
 from robot_soccer.msg import convertedCoordinates
 #import calibratepid
 #import tty, sys
+kickX = 0.1
+kickY = 0.1
 
 Open('/dev/ttySAC0', 38400)
+
+def getBall(data):
+    xb = data.ball_x
+    yb = data.ball_y
+    xr = data.home1_x
+    yr = data.home1_y
+    tr = data.home1_theta
+    robotX = xr-xb
+    robotY = yr-yb
+    vel.goXYOmegaTheta(robotX,robotY,tr)
+    if robotX == kickX and robotY == kickY:
+        k.kick()
+
+
+
 
 def goCenter(data):
    # c.setvelocity()
@@ -75,8 +93,10 @@ def vect2motors(data):
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
 
-def run(_speed1,_speed2,_speed3,_distance,_buffer):
-    c.setvelocity()
+def run(data):
+    goCenter(data)
+    #getBall(data)
+
     #receives speed as qpps. The distance I didn't figure out yet. I guess it receives in cent
     #SpeedDistanceM1(128,_speed1,_distance,_buffer)
     #SpeedDistanceM2(128,_speed2,_distance,_buffer)
@@ -172,7 +192,7 @@ def motorControl():
     rospy.init_node('motorControl', anonymous=True)
 
     # This subscribes to the velTopic topic expecting the 'velocities' message
-    rospy.Subscriber('coordinates', convertedCoordinates, goCenter)
+    rospy.Subscriber('coordinates', convertedCoordinates, run)
     #rospy.loginfo(msg)
 
     # spin() simply keeps python from exiting until this node is stopped
@@ -186,6 +206,7 @@ if __name__ == '__main__':
      Open('/dev/ttySAC0', 38400)
     
     # c.setvelocity()
+     c.setvelocity()
      motorControl()
     except:
      global _SERIAL_ERR

@@ -1,4 +1,4 @@
-import roboclaw as r
+import robot_soccer.scripts.roboclaw as r
 from functools import partial
 import functools
 import time
