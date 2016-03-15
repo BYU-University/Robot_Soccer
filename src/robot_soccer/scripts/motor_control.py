@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import kickTime
 import rospy
 from roboclaw import *
 import calibratepid as c
@@ -26,11 +27,21 @@ def getBall(data):
     tr = data.home1_theta
     robotX = xr-xb
     robotY = yr-yb
+
+    xball = xb-xr
+    if xball == 0:
+        xball = .01
+    xgoal = xg-xr
+    if xgoal == 0:
+        xgoal = .01
+    try:
+        toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
+        toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
+        rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
+    except ValueError:
+        print "Please enter 3 valid sides"
     vel.goXYOmegaTheta(robotX,robotY,tr)
-    if robotX == kickX and robotY == kickY:
-        k.kick()
-
-
+    kickTime()
 
 
 def goCenter(data):
@@ -94,8 +105,8 @@ def vect2motors(data):
 #    [xCommand,yCommand,toGoal]
 
 def run(data):
-    goCenter(data)
-    #getBall(data)
+    #goCenter(data)
+    getBall(data)
 
     #receives speed as qpps. The distance I didn't figure out yet. I guess it receives in cent
     #SpeedDistanceM1(128,_speed1,_distance,_buffer)
