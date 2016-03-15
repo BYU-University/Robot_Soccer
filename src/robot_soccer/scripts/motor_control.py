@@ -20,6 +20,8 @@ kickY = 0.1
 Open('/dev/ttySAC0', 38400)
 
 def getBall(data):
+    xg = 1.6
+    yg = 0
     xb = data.ball_x
     yb = data.ball_y
     xr = data.home1_x
