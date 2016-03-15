@@ -40,7 +40,7 @@ def getBall(data):
      toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
      rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
     except ValueError:
-         print "Please enter 3 valid sides"
+         print "Please enter 3 valid sides please"
 
     vel.goXYOmegaTheta(robotX,robotY,toBall)
 
