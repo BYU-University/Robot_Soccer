@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import kickTime
+import kickTime as kt
 import rospy
 from roboclaw import *
 import calibratepid as c
@@ -36,14 +36,14 @@ def getBall(data):
     xgoal = xg-xr
     if xgoal == 0:
         xgoal = .01
-    try:
-        toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
-        toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
-        rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
-    except ValueError:
-        print "Please enter 3 valid sides"
+    #try:
+    toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
+    toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
+    rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
+    #except ValueError:
+     #   print "Please enter 3 valid sides"
     vel.goXYOmegaTheta(robotX,robotY,tr)
-    kickTime()
+    kt.kickTime(xr,toGoal,xball)
 
 
 def goCenter(data):

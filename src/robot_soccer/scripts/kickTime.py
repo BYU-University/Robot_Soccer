@@ -7,7 +7,7 @@ aA = .05 #angular accuracy
 fPS = 20 #fieldx-position to shoot from
 cL = 1000 #count limit to reset
 
-def kickTime():
+def kickTime(xr, toGoal,xball):
 	if count == 0 and xr > fPs and math.abs(toGoal) < aA and xball < kR:
 	    kick()
 	    count += 1
