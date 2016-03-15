@@ -13,12 +13,15 @@ from std_msgs.msg import String
 from robot_soccer.msg import convertedCoordinates
 #import calibratepid
 #import tty, sys
-kickX = 0.1
-kickY = 0.1
+posBallX = 0.1
+posBallY = 0.1
 
 Open('/dev/ttySAC0', 38400)
 
 def getBall(data):
+    xg = 1.6
+    yg = 0
+    count = 0
     xb = data.ball_x
     yb = data.ball_y
     xr = data.home1_x
@@ -26,9 +29,29 @@ def getBall(data):
     tr = data.home1_theta
     robotX = xr-xb
     robotY = yr-yb
-    vel.goXYOmegaTheta(robotX,robotY,tr)
-    if robotX == kickX and robotY == kickY:
+    xball = xb-xr
+    if xball == 0:
+	    xball = .01
+    xgoal = xg-xr
+    if xgoal == 0:
+        xgoal = .01
+    try:
+     toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
+     toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
+     rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
+    except ValueError:
+         print "Please enter 3 valid sides"
+
+    vel.goXYOmegaTheta(robotX,robotY,toBall)
+
+    if robotX > posBallX and robotY > posBallY:
+        count = 1
+
+    elif count == 0 and robotX < posBallX and robotY < posBallY:
         k.kick()
+        count = 1
+
+
 
 
 
