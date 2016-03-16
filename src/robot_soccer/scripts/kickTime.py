@@ -1,5 +1,5 @@
 from kick import *
-
+#
 count = 0
 bZ = 10      # buffer zone
 kR = .09     # kick range
