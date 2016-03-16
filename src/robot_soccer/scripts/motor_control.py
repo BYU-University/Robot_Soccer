@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 #import kickTime as kt
 import rospy
+import numpy as np
 from roboclaw import *
 import calibratepid as c
 import kick as k
 import math
+import P
 #import matimport velchangers as vel
 #import param
 from std_msgs.msg import String
@@ -15,8 +17,8 @@ from robot_soccer.msg import convertedCoordinates
 #import tty, sys
 
 sample_rate = 0.01
-k_vx  = 5  # gain for proportional control of x-position
-k_vy  = 5  # gain for proportional control of y-position
+k_vx = 5  # gain for proportional control of x-position
+k_vy = 5  # gain for proportional control of y-position
 k_phi = 2  # gain for proportional angle control
 
 kickX = 0.1
@@ -27,6 +29,8 @@ kR = .09     # kick range
 aA = .05     # angular accuracy
 fPS = 20     # fieldx-position to shoot from
 cL = 1000    # count limit to reset
+
+P = P()      # class for storing data
 
 Open('/dev/ttySAC0', 38400)
 
@@ -57,12 +61,12 @@ def getBall(data):
      #   print "Please enter 3 valid sides"
 
 
-    for P control
-    vx = -k_vx*(xr-xpoint)
-    vy = -k_vy*(yr-ypoint)
-    theta_d = atan2(yg-yr, xg-xr)
-    omega = -k_phi*(tr - theta_d)
-    vel.goXYOmegaTheta(vx,vy,omega)
+    #for P control goes to ball
+    vx = -P.k_vx*(xr-xb)
+    vy = -P.k_vy*(yr-yb)
+    theta_d = math.atan2(yg-yr, xg-xr)
+    omega = -P.k_phi*(tr - theta_d)
+    vel.goXYOmegaTheta(vx, vy, omega)
 
 
     # vel.goXYOmegaTheta(robotX,robotY,tr)
@@ -73,7 +77,7 @@ def getBall(data):
 
 
 def kickTime(xr, toGoal, xball):
-    if count == 0 and xr > fPs and math.abs(toGoal) < aA and xball < kR:
+    if count == 0 and xr > fPS and math.fabs(toGoal) < aA and xball < kR:
         kick()
         count += 1
     elif count == 1000 or xball > bZ+kR:
@@ -82,44 +86,47 @@ def kickTime(xr, toGoal, xball):
         count += 1
 
 
-'''
+
 #utility - kalman filter for ball
 lpf_alpha = 0.7
 dirty_derivative_gain = P.camera_sample_rate/5
 camera_sample_rate = 10*control_sample_rate
 
-def ball = utility_kalman_filter_ball(ball,t,P)
+def ball = utility_kalman_filter_ball(ball, t, P)
+
+'''
     persistent xhat
     persistent xhat_delayed
     persistent S
     persistent S_delayed
+'''
 
-    if t==0:  % initialize filter
-        xhat = [...
-            0;... % initial guess at x-position of ball
-            0;... % initial guess at y-position of ball
-            0;... % initial guess at x-velocity of ball
-            0;... % initial guess at y-velocity of ball
-            0;... % initial guess at x-acceleration of ball
-            0;... % initial guess at y-acceleration of ball
-            0;... % initial guess at x-jerk of ball
-            0;... % initial guess at y-jerk of ball
-            ];
-        xhat_delayed = xhat;
-        S = diag([...
-            P.field_width/2;... % initial variance of x-position of ball
-            P.field_width/2;... % initial variance of y-position of ball
-            .01;... % initial variance of x-velocity of ball
-            .01;... % initial variance of y-velocity of ball
-            .001;... % initial variance of x-acceleration of ball
-            .001;... % initial variance of y-acceleration of ball
-            .0001;... % initial variance of x-jerk of ball
-            .0001;... % initial variance of y-jerk of ball
-            ]);
-        S_delayed=S;
+    if t == 0:  # initialize filter
+        xhat = np.matrix([
+            [0],               # initial guess at x-position of ball
+            [0],               # initial guess at y-position of ball
+            [0],               # initial guess at x-velocity of ball
+            [0],               # initial guess at y-velocity of ball
+            [0],               # initial guess at x-acceleration of ball
+            [0],               # initial guess at y-acceleration of ball
+            [0],               # initial guess at x-jerk of ball
+            [0]                # initial guess at y-jerk of ball
+            ])
+        xhat_delayed = xhat
+        S = np.diag([
+            [P.field_width/2, 0, 0, 0, 0, 0, 0, 0], # initial variance of x-position of ball
+            [0, P.field_width/2, 0, 0, 0, 0, 0, 0], # initial variance of y-position of ball
+            [0, 0, .01, 0, 0, 0, 0, 0],             # initial variance of x-velocity of ball
+            [0, 0, 0, .01, 0, 0, 0, 0],             # initial variance of y-velocity of ball
+            [0, 0, 0, 0, .001, 0, 0, 0],            # initial variance of x-acceleration of ball
+            [0, 0, 0, 0, 0, .001, 0, 0],            # initial variance of y-acceleration of ball
+            [0, 0, 0, 0, 0, 0, .0001, 0],           # initial variance of x-jerk of ball
+            [0, 0, 0, 0, 0, 0, 0, .0001]            # initial variance of y-jerk of ball
+            ])
+        S_delayed=S
 
     # prediction step between measurements
-    N = 10;
+    N = 10
     for i=1:N:
         xhat = xhat + (P.control_sample_rate/N)*P.A_ball*xhat
         S = S + (P.control_sample_rate/N)*(P.A_ball*S+S*P.A_ball'+P.Q_ball)
@@ -236,7 +243,7 @@ function velocity = utility_wall_bounce(position,velocity,P)
     if  abs(position(2)) >=  P.field_width/2:
         velocity(2)=-velocity(2)
 
-'''
+
 
 def goCenter(data):
    # c.setvelocity()
