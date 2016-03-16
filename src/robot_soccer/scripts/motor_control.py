@@ -55,6 +55,7 @@ def getBall(data):
      #   print "Please enter 3 valid sides"
 
 '''
+    for P control
     vx = -k_vx*(xr-xpoint)
     vy = -k_vy*(yr-ypoint)
     theta_d = atan2(yg-yr, xg-xr)
