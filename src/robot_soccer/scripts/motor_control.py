@@ -51,19 +51,21 @@ def getBall(data):
     toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
     toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
     rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
+    print(toGoal*180/math.pi) # converted to degrees
+    print(toBall*180/math.pi) # converted to degrees
     #except ValueError:
      #   print "Please enter 3 valid sides"
 
-'''
+
     for P control
     vx = -k_vx*(xr-xpoint)
     vy = -k_vy*(yr-ypoint)
     theta_d = atan2(yg-yr, xg-xr)
     omega = -k_phi*(tr - theta_d)
     vel.goXYOmegaTheta(vx,vy,omega)
-'''
 
-    vel.goXYOmegaTheta(robotX,robotY,tr)
+
+    # vel.goXYOmegaTheta(robotX,robotY,tr)
 
     #kickTime(xr, toGoal, xball)
 
