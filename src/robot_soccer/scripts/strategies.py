@@ -4,6 +4,7 @@ import plays as p
 
 
 def strategy_init(data):
+    '''
     bret = [data.home1_x, data.home1_y, data.home1_theta]
     # jamaine = [data.home2_x, data.home2_y, data.home2_theta]
     ball = [data.ball_x, data.ball_y]
@@ -22,6 +23,7 @@ def strategy_init(data):
 
     else:
         p.goToBall(bret, ball)
-
+    '''
+    p.getBall(data)
 
 
