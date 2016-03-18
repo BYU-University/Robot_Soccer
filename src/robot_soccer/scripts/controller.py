@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+import rospy
 #import pygame
 import strategies
 from storage import *
-import rospy
 from std_msgs.msg import String
 from robot_soccer.msg import convertedCoordinates
 import calibratepid as c
@@ -19,6 +19,9 @@ P = param()
 #pygame.display.set_mode((400, 400))
 #pygame.key.set_repeat(10, 10)
 #
+def run_init(data):
+    strategies.strategy_init(data)
+
 def MainController():
 	 # In ROS, nodes are uniquely named. If two nodes with the same
     # node are launched, the previous one is kicked off. The
@@ -28,7 +31,7 @@ def MainController():
     rospy.init_node('MainController', anonymous=True)
 
     # This subscribes to the velTopic topic expecting the 'velocities' message
-    rospy.Subscriber('coordinates', convertedCoordinates, strategy_init)
+    rospy.Subscriber('coordinates', convertedCoordinates, run_init)
     #rospy.loginfo(msg)
 
     # spin() simply keeps python from exiting until this node is stopped
