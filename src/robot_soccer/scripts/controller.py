@@ -1,8 +1,11 @@
-import pygame
-import run
+#import pygame
+import strategies
 from storage import *
 import rospy
+from std_msgs.msg import String
 from robot_soccer.msg import convertedCoordinates
+import calibratepid as c
+
 
 
 #this code is an interface between humans and the robot
@@ -10,12 +13,38 @@ from robot_soccer.msg import convertedCoordinates
 #human input to start and stop the robot
 
 P = P()
-go = 0
-pygame.init()
-pygame.display.set_mode((400, 400))
-pygame.key.set_repeat(10, 10)
+#go = 0
+#pygame.init()
+#pygame.display.set_mode((400, 400))
+#pygame.key.set_repeat(10, 10)
 
-if go == 0:
+def MainController():
+	 # In ROS, nodes are uniquely named. If two nodes with the same
+    # node are launched, the previous one is kicked off. The
+    # anonymous=True flag means that rospy will choose a unique
+    # name for our 'talker' node so that multiple talkers can
+    # run simultaneously.
+    rospy.init_node('MainController', anonymous=True)
+
+    # This subscribes to the velTopic topic expecting the 'velocities' message
+    rospy.Subscriber('coordinates', convertedCoordinates, strategy_init)
+    #rospy.loginfo(msg)
+
+    # spin() simply keeps python from exiting until this node is stopped
+    rospy.spin()
+
+
+if __name__ == '__main__':
+    try:
+     Open('/dev/ttySAC0', 38400)
+     c.setvelocity()
+     MainController()
+    except:
+     global _SERIAL_ERR
+     _SERIAL_ERR = True
+
+'''
+ if go == 0:
 	# wait for keyboard initialization
     for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -32,7 +61,7 @@ if go == 0:
 		    print('The robots are dead!')
 		    pygame.quit()
 
-if go != 0:
+ if go != 0:
 	for event in pygame.event.get():
 
         # quit the program
@@ -40,13 +69,4 @@ if go != 0:
 		    print('The robots are dead!')
 		    #pygame.quit()
 			go = 0
-
-    # below we put the code in that makes tactical decisions and calls the next move
-    rospy.init_node('motorControl', anonymous=True)
-
-    # This subscribes to the velTopic topic expecting the 'velocities' message
-    rospy.Subscriber('coordinates', convertedCoordinates, run)
-    #rospy.loginfo(msg)
-
-    # spin() simply keeps python from exiting until this node is stopped
-    rospy.spin()
+'''

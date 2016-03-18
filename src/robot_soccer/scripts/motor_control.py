@@ -8,10 +8,9 @@ import kick as k
 import math
 import velchangers as vel
 #import param
-from std_msgs.msg import String
+
 #from robot_soccer.msg import velocities
 #from robot_soccer.msg import locations
-from robot_soccer.msg import convertedCoordinates
 #import calibratepid
 #import tty, sys
 
@@ -28,44 +27,6 @@ cL = 1000    # count limit to reset
 
 Open('/dev/ttySAC0', 38400)
 
-def getBall(data):
-    xg = 1.6
-    yg = 0
-    xb = data.ball_x
-    yb = data.ball_y
-    xr = data.home1_x
-    yr = data.home1_y
-    tr = data.home1_theta
-    robotX = xr-xb
-    robotY = yr-yb
-
-    xball = xb-xr
-    if xball == 0:
-        xball = .01
-    xgoal = xg-xr
-    if xgoal == 0:
-        xgoal = .01
-    #try:
-    toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
-    toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
-    rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
-    print(toGoal*180/math.pi) # converted to degrees
-    print(toBall*180/math.pi) # converted to degrees
-    #except ValueError:
-     #   print "Please enter 3 valid sides"
-
-
-    #for P control goes to ball
-    vx = k_vx*(xr-xb)
-    vy = k_vy*(yr-yb)
-    theta_d = math.atan2(yg-yr, xg-xr)
-    omega = k_phi*(tr - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
-
-
-    # vel.goXYOmegaTheta(robotX,robotY,tr)
-
-    #kickTime(xr, toGoal, xball)
 
 def getData(data):
     xb = data.ball_x
@@ -76,15 +37,7 @@ def getData(data):
     mydata=[xb,yb,xr,yr,tr]
     return mydata
 
-def goCenter(data):
-   # c.setvelocity()
-    xb = data.ball_x
-    yb = data.ball_y
-    xr = data.home1_x
-    yr = data.home1_y
-    tr = data.home1_theta
-    print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
-    vel.goXYOmegaTheta(xr,yr,tr)
+
 
 def vect2motors(data):
    # speed = 1
@@ -224,7 +177,7 @@ def stop():
     ForwardM2(128,0)
     ForwardM1(129,0)
 
-
+'''
 def motorControl():
 
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -259,7 +212,7 @@ if __name__ == '__main__':
    # ForwardM2(W1,10)
    # ForwardM1(W2,10)
    # time.sleep(140)
-    
+'''
 
 
 

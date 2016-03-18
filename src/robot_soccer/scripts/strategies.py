@@ -3,7 +3,7 @@ import plays as p
 #import motor_control as m
 
 
-def run(data):
+def strategy_init(data):
     bret = [data.home1_x, data.home1_y, data.home1_theta]
     # jamaine = [data.home2_x, data.home2_y, data.home2_theta]
     ball = [data.ball_x, data.ball_y]
