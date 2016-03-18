@@ -9,6 +9,9 @@ class kalStore:
         self.S_delayed = 0
 
 
+
+
+
 class P:
     def __init__(self):
         # number of robots per team
@@ -19,14 +22,16 @@ class P:
         self.field_width   = 1.6 # meters (16 ft)
         self.goal_width = self.field_width/3
         self.display_rate = 0.1
+        self.startForward = [0.6, 0]
+        self.startDefender = [1.5, 0]
+        self.goal = [1.6, 0]
 
-        '''
-        self.field_color = [16, 92, 1]/256
-        self.home_team_color = 'b'
-        self.away_team_color = 'g'
-        self.ball_color = 'y'
-        self.goal_color = [252, 148, 3]/256
-        '''
+        #self.field_color = [16, 92, 1]/256
+        #self.home_team_color = 'b'
+        #self.away_team_color = 'g'
+        #self.ball_color = 'y'
+        #self.goal_color = [252, 148, 3]/256
+
 
         # constants that govern ball dynamics
         self.ball_radius = 0.03

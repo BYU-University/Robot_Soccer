@@ -1,6 +1,9 @@
 import vect2motors
 import calib
 import pygame
+import run
+from storage import *
+import math as m
 import motor_control as mc
 
 #
@@ -8,13 +11,13 @@ import motor_control as mc
 #it will call the motor functions and calibration and allow
 #human input to start and stop the robot
 
-
+P = P()
 go = 0
 pygame.init()
 pygame.display.set_mode((400, 400))
 pygame.key.set_repeat(10, 10)
 
-while go == 0:
+if go == 0:
 	# wait for keyboard initialization
     for event in pygame.event.get():
 		if event.type == pygame.QUIT:
@@ -26,21 +29,20 @@ while go == 0:
 		    print('Begin Roboboogie')
 		    go = 1
 
+		# starts robot function
+	    if keys[K_SPACE]:
+		    print('Start positions!')
+		    goToStartForward(jamaine)
+			goToStartDefender(bret)
+
         # quit the program
 	    if keys[K_ESCAPE]:
 		    print('The robots are dead!')
 		    pygame.quit()
 		    break
 
-while go == 1:
+if go != 0:
 	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-	        keys=pygame.key.get_pressed()
-	    if keys[K_ESC]:
-		    print('Roboboogie is over')
-		    go = 0
-            vel.goXYOmegaTheta(0,0,0)
-
 
         # quit the program
 	    if keys[K_ESCAPE]:
@@ -49,4 +51,4 @@ while go == 1:
 		    break
     # below we put the code in that makes tactical decisions and calls the next move
 
-    mc.getBall(data)
+		run()
