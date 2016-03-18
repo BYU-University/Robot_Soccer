@@ -27,17 +27,10 @@ if go == 0:
 		    print('Begin Roboboogie')
 		    go = 1
 
-		# starts robot function
-	    if keys[K_SPACE]:
-		    print('Start positions!')
-		    goToStartForward(jamaine)
-			goToStartDefender(bret)
-
-        # quit the program
+		# quit the program
 	    if keys[K_ESCAPE]:
 		    print('The robots are dead!')
 		    pygame.quit()
-		    break
 
 if go != 0:
 	for event in pygame.event.get():
@@ -45,8 +38,9 @@ if go != 0:
         # quit the program
 	    if keys[K_ESCAPE]:
 		    print('The robots are dead!')
-		    pygame.quit()
-		    break
+		    #pygame.quit()
+			go = 0
+
     # below we put the code in that makes tactical decisions and calls the next move
     rospy.init_node('motorControl', anonymous=True)
 
@@ -56,4 +50,3 @@ if go != 0:
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
-

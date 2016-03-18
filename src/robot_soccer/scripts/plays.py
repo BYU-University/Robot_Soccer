@@ -1,6 +1,6 @@
 import velchangers as vel
-import math as m
 from run import *
+from controller import *
 
 # This is where we store our different plays
 
@@ -24,29 +24,29 @@ def goToGoal(r):
 
 
 def goToStartForward(r):
-    p = P.startForward
+    pos = P.startForward
     g = P.goal
-    vx = P.k_vx*(r[0]-p[0])
-    vy = P.k_vy*(r[1]-p[1])
+    vx = P.k_vx*(r[0]-pos[0])
+    vy = P.k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
 
 
 def goToStartDefender(r):
-    p = P.startDefender
+    pos = P.startDefender
     g = P.goal
-    vx = P.k_vx*(r[0]-p[0])
-    vy = P.k_vy*(r[1]-p[1])
+    vx = P.k_vx*(r[0]-pos[0])
+    vy = P.k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
 
 
-def goToPoint(r, p):
+def goToPoint(r, pos):
     g = P.goal
-    vx = P.k_vx*(r[0]-p[0])
-    vy = P.k_vy*(r[1]-p[1])
+    vx = P.k_vx*(r[0]-pos[0])
+    vy = P.k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
