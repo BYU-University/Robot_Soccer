@@ -10,7 +10,7 @@ class kalStore:
         self.S_delayed = 0
 
 
-class P:
+class param:
     def __init__(self):
         # number of robots per team
         self.num_robots = 2

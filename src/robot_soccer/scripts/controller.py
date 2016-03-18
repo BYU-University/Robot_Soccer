@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #import pygame
 import strategies
 from storage import *
@@ -12,7 +13,7 @@ import calibratepid as c
 #it will call the motor functions and calibration and allow
 #human input to start and stop the robot
 
-P = P()
+P = param()
 #go = 0
 #pygame.init()
 #pygame.display.set_mode((400, 400))
