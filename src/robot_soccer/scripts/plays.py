@@ -91,13 +91,13 @@ def getBall(data):
 
 
     #for P control goes to ball
-    vx = P.k_vx*(xr-xb)
-    vy = P.k_vy*(yr-yb)
-    theta_d = math.atan2(yg-yr, xg-xr)
-    omega = P.k_phi*(tr - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    #vx = P.k_vx*(xr-xb)
+    #vy = P.k_vy*(yr-yb)
+    #theta_d = math.atan2(yg-yr, xg-xr)
+    #omega = P.k_phi*(tr - theta_d)
+    #vel.goXYOmegaTheta(vx, vy, omega)
 
 
-    # vel.goXYOmegaTheta(robotX,robotY,tr)
+    vel.goXYOmegaTheta(robotX,robotY,toGoal)
 
     #kickTime(xr, toGoal, xball)

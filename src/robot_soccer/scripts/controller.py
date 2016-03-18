@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import rospy
+from roboclaw import *
 #import pygame
 import strategies
 from storage import *
@@ -40,12 +41,13 @@ def mainController():
 
 if __name__ == '__main__':
     try:
-     Open('/dev/ttySAC0', 38400)
-     c.setvelocity()
-     mainController()
+        Open('/dev/ttySAC0', 38400)
+        c.setvelocity()
+        mainController()
     except:
-     global _SERIAL_ERR
-     _SERIAL_ERR = True
+        global _SERIAL_ERR
+        _SERIAL_ERR = True
+
 
 '''
  if go == 0:
