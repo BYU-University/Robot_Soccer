@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 class kalStore:
     def __init__(self):
@@ -7,9 +8,6 @@ class kalStore:
         self.xhat_delayed = 0
         self.S = 0
         self.S_delayed = 0
-
-
-
 
 
 class P:
