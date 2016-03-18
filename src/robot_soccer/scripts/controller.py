@@ -22,13 +22,13 @@ P = param()
 def run_init(data):
     strategies.strategy_init(data)
 
-def MainController():
+def mainController():
 	 # In ROS, nodes are uniquely named. If two nodes with the same
     # node are launched, the previous one is kicked off. The
     # anonymous=True flag means that rospy will choose a unique
     # name for our 'talker' node so that multiple talkers can
     # run simultaneously.
-    rospy.init_node('MainController', anonymous=True)
+    rospy.init_node('mainController', anonymous=True)
 
     # This subscribes to the velTopic topic expecting the 'velocities' message
     rospy.Subscriber('coordinates', convertedCoordinates, run_init)
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     try:
      Open('/dev/ttySAC0', 38400)
      c.setvelocity()
-     MainController()
+     mainController()
     except:
      global _SERIAL_ERR
      _SERIAL_ERR = True
