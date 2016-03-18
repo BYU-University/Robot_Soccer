@@ -2,10 +2,6 @@ import velchangers as vel
 import math as m
 from run import *
 
-k_vx = 5  # gain for proportional control of x-position
-k_vy = 5  # gain for proportional control of y-position
-k_phi = 2  # gain for proportional angle control
-
 # This is where we store our different plays
 
 
