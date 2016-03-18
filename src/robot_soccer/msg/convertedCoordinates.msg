@@ -2,6 +2,14 @@ Header header
 float64 home1_x
 float64 home1_y
 float64 home1_theta
+float64 home2_x
+float64 home2_y
+float64 home2_theta
+float64 away1_x
+float64 away1_y
+float64 away1_theta
+float64 away2_x
+float64 away2_y
+float64 away2_theta
 float64 ball_x
 float64 ball_y
-~
