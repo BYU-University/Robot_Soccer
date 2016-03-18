@@ -1,13 +1,10 @@
-import vect2motors
-import calib
 import pygame
 import run
 from storage import *
 import rospy
-import math as m
-import motor_control as mc
+from robot_soccer.msg import convertedCoordinates
 
-#
+
 #this code is an interface between humans and the robot
 #it will call the motor functions and calibration and allow
 #human input to start and stop the robot
