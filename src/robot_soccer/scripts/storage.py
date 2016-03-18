@@ -44,6 +44,7 @@ class param:
         self.robot_max_omega = 2*np.pi      # 360 degrees/sec
         # the geometry assumes 60 degree equally distributed wheels at distance 5cm
         # from center
+        '''
         phi = 60*np.pi/180
         r1 = self.robot_radius*[[math.cos(phi)], [math.sin(phi)]]
         r2 = self.robot_radius*[[-math.cos(phi)], [math.sin(phi)]]
@@ -155,3 +156,5 @@ class param:
 
         self.C_ball = np.matrix([[1, 0, 0, 0, 0, 0],
                               [0, 1, 0, 0, 0, 0]])
+        '''
+
