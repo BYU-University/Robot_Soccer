@@ -3,11 +3,12 @@ import calib
 import pygame
 import run
 from storage import *
+import rospy
 import math as m
 import motor_control as mc
 
 #
-#this code is anm intreface between humans and the robot
+#this code is an interface between humans and the robot
 #it will call the motor functions and calibration and allow
 #human input to start and stop the robot
 
@@ -50,5 +51,12 @@ if go != 0:
 		    pygame.quit()
 		    break
     # below we put the code in that makes tactical decisions and calls the next move
+    rospy.init_node('motorControl', anonymous=True)
 
-		run()
+    # This subscribes to the velTopic topic expecting the 'velocities' message
+    rospy.Subscriber('coordinates', convertedCoordinates, run)
+    #rospy.loginfo(msg)
+
+    # spin() simply keeps python from exiting until this node is stopped
+    rospy.spin()
+

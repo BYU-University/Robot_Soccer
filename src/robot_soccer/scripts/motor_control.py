@@ -106,7 +106,7 @@ def vect2motors(data):
      print "Please enter 3 valid sides"
     
     #print toBall
-    #print toGoal
+    #print toGoal		run()
     
     xCommand = math.cos(toBall)#*speed
     yCommand = math.sin(toBall)#*speed
@@ -128,9 +128,9 @@ def vect2motors(data):
 #    head to ball, face the goal
 #    [xCommand,yCommand,toGoal]
 
-def run(data):
+#def run(data):
     #goCenter(data)
-    getBall(data)
+    #getBall(data)
 
     #receives speed as qpps. The distance I didn't figure out yet. I guess it receives in cent
     #SpeedDistanceM1(128,_speed1,_distance,_buffer)
