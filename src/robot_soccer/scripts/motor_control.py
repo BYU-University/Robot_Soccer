@@ -67,6 +67,14 @@ def getBall(data):
 
     #kickTime(xr, toGoal, xball)
 
+def getData(data):
+    xb = data.ball_x
+    yb = data.ball_y
+    xr = data.home1_x
+    yr = data.home1_y
+    tr = data.home1_theta
+    mydata=[xb,yb,xr,yr,tr]
+    return mydata
 
 def goCenter(data):
    # c.setvelocity()
@@ -227,7 +235,7 @@ def motorControl():
     rospy.init_node('motorControl', anonymous=True)
 
     # This subscribes to the velTopic topic expecting the 'velocities' message
-    rospy.Subscriber('coordinates', convertedCoordinates, run)
+    rospy.Subscriber('coordinates', convertedCoordinates, runProgram)
     #rospy.loginfo(msg)
 
     # spin() simply keeps python from exiting until this node is stopped

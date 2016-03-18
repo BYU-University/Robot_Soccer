@@ -1,6 +1,7 @@
 import velchangers as vel
 import math as m
-from run import *
+import storage as P
+#from run import *
 
 # This is where we store our different plays
 
