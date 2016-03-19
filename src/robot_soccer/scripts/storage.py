@@ -46,9 +46,9 @@ class param:
         # from center
 
         phi = 60*np.pi/180
-        r1 = self.robot_radius*[[math.cos(phi)], [math.sin(phi)]]
-        r2 = self.robot_radius*[[-math.cos(phi)], [math.sin(phi)]]
-        r3 = self.robot_radius*[[0], [1]]
+        r1 = float(self.robot_radius*[[math.cos(phi)], [math.sin(phi)]])
+        r2 = float(self.robot_radius*[[-math.cos(phi)], [math.sin(phi)]])
+        r3 = float(self.robot_radius*[[0], [1]])
         s1 = np.matrix([[-math.sin(phi)], [math.cos(phi)]])
         s2 = np.matrix([[-math.sin(phi)], [-math.cos(phi)]])
         s3 = np.matrix([[1], [0]])
