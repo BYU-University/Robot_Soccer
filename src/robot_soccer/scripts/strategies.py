@@ -20,9 +20,9 @@ def strategy_init(data):
         if data.home1_x > 1.78 and data.home1_y < -0.01:
             p.goCenter(data)  # reset robot to go center field
             time.sleep(5)
-    if jamaineToBall < 0.02:
-        kick.kick()
-        time.sleep(0.5)
+   # if jamaineToBall < 0.02:
+    #    kick.kick()
+    #    time.sleep(0.5)
 
     # reset robot positions
     #elif keys[K_SPACE]:
@@ -32,8 +32,8 @@ def strategy_init(data):
 
     else:
         p.goToBall(bret, ball)
-        p.goToStartDefender(jamaine)
-        p.defendBall(jamaine,ball)
+        #Sp.goToStartDefender(jamaine)
+        #p.defendBall(jamaine,ball)
     #p.getBall(data)
 
 
