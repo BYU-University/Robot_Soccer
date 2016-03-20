@@ -51,9 +51,9 @@ class param:
         r1 = ([mx,my])
         r2 = ([-mx,my])#r2 = float(self.robot_radius*[[-math.cos(phi)], [math.sin(phi)]])
         r3 = ([self.robot_radius,self.robot_radius])#r3 = float(self.robot_radius*[[0], [1]])
-        s1 = (np.matrix[-my,mx])#s1 = np.matrix([[-math.sin(phi)], [math.cos(phi)]])
-        s2 = (np.matrix[-my,-mx])#s2 = np.matrix([[-math.sin(phi)], [-math.cos(phi)]])
-        s3 = (np.matrix[self.robot_radius,self.robot_radius]) #s3 = np.matrix([[1], [0]])
+        s1 = (np.matrix[-my, mx])#s1 = np.matrix([[-math.sin(phi)], [math.cos(phi)]])
+        s2 = (np.matrix[-my, -mx])#s2 = np.matrix([[-math.sin(phi)], [-math.cos(phi)]])
+        s3 = (np.matrix[self.robot_radius, self.robot_radius]) #s3 = np.matrix([[1], [0]])
         # kinematic matrix relating wheel velocity to body velocity
 
         self.M3 = 1/self.wheel_radius*np.matrix([
