@@ -15,4 +15,3 @@ int32 ball_x
 int32 ball_y
 int32 field_width
 int32 field_height
-~
