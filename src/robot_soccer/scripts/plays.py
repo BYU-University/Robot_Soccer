@@ -8,7 +8,7 @@ from controller import *
 def goToBall(r, b):
     g = P.goal
     vx = P.control_k_vx*(r[0]-b[0])
-    vy = P.control_k_vxy*(r[1]-b[1])
+    vy = P.control_k_vy*(r[1]-b[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
@@ -18,7 +18,7 @@ def goToGoal(r):
     g = P.goal
     #vx =
     vx = P.control_k_vx*(r[0]-g[0])
-    vy = P.control_k_vxy*(r[1]-g[1])
+    vy = P.control_k_vy*(r[1]-g[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
@@ -28,7 +28,7 @@ def goToStartForward(r):
     pos = P.startForward
     g = P.goal
     vx = P.control_k_vx*(r[0]-pos[0])
-    vy = P.control_k_vxy*(r[1]-pos[1])
+    vy = P.control_k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
@@ -38,7 +38,7 @@ def goToStartDefender(r):
     pos = P.startDefender
     g = P.goal
     vx = P.control_k_vx*(r[0]-pos[0])
-    vy = P.control_k_vxy*(r[1]-pos[1])
+    vy = P.control_k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
@@ -47,7 +47,7 @@ def goToStartDefender(r):
 def goToPoint(r, pos):
     g = P.goal
     vx = P.control_k_vx*(r[0]-pos[0])
-    vy = P.control_k_vxy*(r[1]-pos[1])
+    vy = P.control_k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
@@ -93,7 +93,7 @@ def getBall(data):
 
     #for P control goes to ball
     #vx = P.control_k_vx*(xr-xb)
-    #vy = P.control_k_vxy*(yr-yb)
+    #vy = P.control_k_vy*(yr-yb)
     #theta_d = math.atan2(yg-yr, xg-xr)
     #omega = P.control_k_phi*(tr - theta_d)
     #vel.goXYOmegaTheta(vx, vy, omega)
