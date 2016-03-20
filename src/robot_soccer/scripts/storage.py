@@ -46,18 +46,20 @@ class param:
         # from center
 
         phi = 60*np.pi/180
-        r1 = float(self.robot_radius*[[math.cos(phi)], [math.sin(phi)]])
-        r2 = float(self.robot_radius*[[-math.cos(phi)], [math.sin(phi)]])
-        r3 = float(self.robot_radius*[[0], [1]])
-        s1 = np.matrix([[-math.sin(phi)], [math.cos(phi)]])
-        s2 = np.matrix([[-math.sin(phi)], [-math.cos(phi)]])
-        s3 = np.matrix([[1], [0]])
+        mx = self.robot_radius*math.cos(phi)
+        my = self.robot_radius*math.sin(phi)
+        r1 = float([mx,my])
+        r2 = float([-mx,my])#r2 = float(self.robot_radius*[[-math.cos(phi)], [math.sin(phi)]])
+        r3 = float([self.robot_radius,self.robot_radius])#r3 = float(self.robot_radius*[[0], [1]])
+        s1 = float(np.matrix[-my,mx])#s1 = np.matrix([[-math.sin(phi)], [math.cos(phi)]])
+        s2 = float(np.matrix[-my,-mx])#s2 = np.matrix([[-math.sin(phi)], [-math.cos(phi)]])
+        s3 = float(np.matrix[self.robot_radius,self.robot_radius]) #s3 = np.matrix([[1], [0]])
         # kinematic matrix relating wheel velocity to body velocity
 
         self.M3 = 1/self.wheel_radius*np.matrix([
-            [s1[1], s1[2], (s1[2]*r1[1]-s1[1]*r1[2])],
-            [s2[1], s2[2], (s2[2]*r2[1]-s2[1]*r2[2])],
-            [s3[1], s3[2], (s3[2]*r3[1]-s3[1]*r3[2])]])
+            [s1[0], s1[1], (s1[1]*r1[0]-s1[0]*r1[1])],
+            [s2[0], s2[1], (s2[1]*r2[0]-s2[0]*r2[1])],
+            [s3[0], s3[1], (s3[1]*r3[0]-s3[0]*r3[1])]])
 
         self.M3inv = np.linalg.inv(self.M3)
 
