@@ -22,7 +22,7 @@ P = param()
 #
 def run_init(data):
     debbuging = strategies.strategy_init(data)
-    rospy.loginfo("information for debuging",debbuging)
+    #rospy.loginfo("information for debuging",debbuging)
 def mainController():
 	 # In ROS, nodes are uniquely named. If two nodes with the same
     # node are launched, the previous one is kicked off. The
