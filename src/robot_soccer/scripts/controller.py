@@ -21,8 +21,8 @@ P = param()
 #pygame.key.set_repeat(10, 10)
 #
 def run_init(data):
-    strategies.strategy_init(data)
-
+    debbuging = strategies.strategy_init(data)
+    rospy.loginfo("information for debuging",debbuging)
 def mainController():
 	 # In ROS, nodes are uniquely named. If two nodes with the same
     # node are launched, the previous one is kicked off. The
