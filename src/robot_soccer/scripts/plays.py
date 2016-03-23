@@ -66,6 +66,7 @@ def goCenter(data):
     xr = data.home1_x
     yr = data.home1_y
     tr = data.home1_theta
+    print "info for debugg"
     print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
     vel.goXYOmegaTheta(xr,yr,tr)
 
