@@ -16,12 +16,12 @@ def strategy_init(data):
     bretToGoal = m.sqrt((P.goal[0]-bret[0])**2+(P.goal[1]-bret[1])**2)
     jamaineToBall = m.sqrt((ball[0]-bret[0])**2+(ball[1]-bret[1])**2)
     # here we will pick tactics and call the functions
-    #p.goToGoal()
-    #time.sleed(8)
+    p.goToGoal(data)
+    #time.sleep(8)
     #p.goToOposeGoal()
-    #time.sleed(10)
-    p.goCenter(data)
-    #time.speed(5)
+    #time.sleep(10)
+    #p.goCenter(data)
+    #time.sleep(5)
 
 '''
     k.kickTime(bretToGoal, bretToBall)
