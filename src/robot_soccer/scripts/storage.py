@@ -10,6 +10,16 @@ class kalStore:
         self.S_delayed = 0
 
 
+class lpf:
+    def __init__(self):
+        self.position
+        self.position_delayed
+        self.velocity
+        self.old_position_measurement
+        self.a1
+        self.a2
+
+
 class param:
     def __init__(self):
         # number of robots per team

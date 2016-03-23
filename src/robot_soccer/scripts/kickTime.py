@@ -1,18 +1,17 @@
 from kick import *
-#
-count = 0
-bZ = 10      # buffer zone
-kR = .09     # kick range
-aA = .05     # angular accuracy
-fPS = 20     # field x-position to shoot from
-cL = 1000    # count limit to reset
+from controller import *
 
-def kickTime(xr, toGoal, xball):
-	if kickTime.count == 0 and xr > fPs and math.abs(toGoal) < aA and xball < kR:
-	    kick()
-	    kickTime.count += 1
-	elif kickTime.count == 1000 or xball > bZ+kR:
-	    kickTime.count = 0
-	else:
-	    kickTime.count += 1
+# This the kick controller
+# it uses a timer to keep from wildly kicking all the time the ball is close.
+# the parameters for this and the counter are in 'storage.py' under the kTimer class
+
+
+def kickTime(toGoal, dToBall):
+    if K.count == 0 and K.xr > K.fPs and math.fabs(toGoal) < K.aA and dToBall < K.kR:
+        kick()
+        K.count += 1
+    elif K.count == 1000 or dToBall > K.bZ+K.kR:
+        K.count = 0
+    else:
+        K.count += 1
 

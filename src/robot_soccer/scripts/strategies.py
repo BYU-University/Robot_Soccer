@@ -1,5 +1,6 @@
 import math as m
 import plays as p
+import kickTime as k
 #import motor_control as m
 import time
 import kick
@@ -14,6 +15,8 @@ def strategy_init(data):
     bretToBall = m.sqrt((ball[0]-bret[0])**2+(ball[1]-bret[1])**2)
     jamaineToBall = m.sqrt((ball[0]-bret[0])**2+(ball[1]-bret[1])**2)
     # here we will pick tactics and call the functions
+
+    # k.kickTime(0, bretToBall)
 
     if bretToBall < .01:
         p.goToGoal(bret)
