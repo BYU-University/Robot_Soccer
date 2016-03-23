@@ -22,7 +22,7 @@ class kTimer():
         self.bZ = .11     # buffer zone
         self.kR = .09     # kick range
         self.aA = .05     # angular accuracy
-        self.fPS = 20     # field x-position to shoot from
+        self.fPs = 20     # field x-position to shoot from
         self.cL = 200    # count limit to reset
 
 
