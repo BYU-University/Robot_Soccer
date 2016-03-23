@@ -229,4 +229,4 @@ def calibration(p,i,d,speedM):
 def setSeed(speed):
 	SpeedM1(128,speed)
 	SpeedM2(128,speed)
-	SpeedM3(129,speed)
+	SpeedM1(129,speed)
