@@ -70,11 +70,13 @@ def goCenter(data):
     print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
     vel.goXYOmegaTheta(xr,yr,tr)
 
+#here we do homeX - 1.35 we go to home goal
+#here we fo homeX + 1.35 we go to away goal
 def goToGoal(data):
-    distGoalX = 1.35
-    distGoaly = data.home1_y
+    distGoalX = 1.39
+    #distGoaly = data.home1_y
     tg = data.home1_theta
-    goX = data.home1_x+1.35
+    goX = data.home1_x+distGoalX
     goY = data.home1_y
     #goTheta = tg - data.home1_theta
     vel.goXYOmegaTheta(goX,goY,tg)
