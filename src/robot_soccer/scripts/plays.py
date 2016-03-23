@@ -61,9 +61,9 @@ def goToPoint(r, pos):
 
 def goStart(data):
     start = 0.45
-    xb = data.ball_x - start
+    xb = data.ball_x
     yb = data.ball_y
-    xr = data.home1_x
+    xr = data.home1_x - start
     yr = data.home1_y
     tr = data.home1_theta
     print "info for debugg"
