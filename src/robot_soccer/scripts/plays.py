@@ -116,7 +116,7 @@ def getBall(data):
         xgoal = .01
     #try:
 
-    #toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
+    toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
     theta_d = m.atan2(yb-yr,xb-xr)
     omega = P.control_k_phi*(tr - theta_d)
 
@@ -138,7 +138,7 @@ def getBall(data):
     if xb > xg or xb < -xg:
         goCenter(data)
     else:
-        vel.goXYOmegaTheta(robotX,robotY,tr)
+        vel.goXYOmegaTheta(robotX,robotY,toBall)
 
         #time.sleep(5)
 
