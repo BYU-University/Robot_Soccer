@@ -16,6 +16,8 @@ def strategy_init(data):
     bretToGoal = m.sqrt((P.goal[0]-bret[0])**2+(P.goal[1]-bret[1])**2)
     jamaineToBall = m.sqrt((ball[0]-bret[0])**2+(ball[1]-bret[1])**2)
     # here we will pick tactics and call the functions
+    p.goHomeGoal(data)
+
     p.goToGoal(data)
     #time.sleep(8)
     #p.goToOposeGoal()
