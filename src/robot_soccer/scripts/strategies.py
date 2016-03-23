@@ -5,7 +5,7 @@ from controller import *
 #import motor_control as m
 import time
 
-
+count = 0
 def strategy_init(data):
 
     bret = [data.home1_x, data.home1_y, data.home1_theta]
@@ -17,16 +17,18 @@ def strategy_init(data):
     jamaineToBall = m.sqrt((ball[0]-bret[0])**2+(ball[1]-bret[1])**2)
     # here we will pick tactics and call the functions
 
-    if data.home1_x < - 1.45:
-        p.goHomeGoal(data)
-    if data.home1_x > 1.45:
-        p.goToGoal(data)
-    else: p.goHomeGoal(data)
+    #if data.home1_x < - 1.45:
+       # count +=1
+    #    p.goHomeGoal(data)
+    #if data.home1_x > 1.45:
+    #    p.goToGoal(data)
+    #else: p.goHomeGoal(data)
     #time.sleep(8)
     #p.goToOposeGoal()
     #time.sleep(10)
     #p.goCenter(data)
     #time.sleep(5)
+    p.getBall(data)
 
 '''
     k.kickTime(bretToGoal, bretToBall)

@@ -93,16 +93,9 @@ def goHomeGoal(data):
 def goTopoint(x,y,t):
     vel.goXYOmegaTheta(x,y,t)
 
-def goToOposeGoal():
-    xg = -1.45
-    yg = 0
-    tg = 0
-    vel.goXYOmegaTheta(xg,yg,tg)
-
-
 
 def getBall(data):
-    xg = 1.45
+    xg = 1.55
     yg = 0
     xb = data.ball_x
     yb = data.ball_y
@@ -143,6 +136,9 @@ def getBall(data):
     #vel.goXYOmegaTheta(vx, vy, omega)
 
 
-    vel.goXYOmegaTheta(robotX,robotY,omega)
+    vel.goXYOmegaTheta(robotX,robotY,toGoal)
+    if xb > xg or xb < -xg:
+        goCenter(data)
+        time.sleep(3)
 
     #kickTime(xr, toGoal, xball)
