@@ -71,7 +71,7 @@ def goCenter(data):
     vel.goXYOmegaTheta(xr,yr,tr)
 
 def goToGoal(data):
-    distGoalX = 1.45
+    distGoalX = 1.35
     distGoaly = 0
     tg = 0
     goX = distGoalX - data.home1_x
