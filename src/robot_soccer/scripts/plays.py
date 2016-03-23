@@ -73,7 +73,7 @@ def goCenter(data):
 #here we do homeX - 1.35 we go to home goal
 #here we fo homeX + 1.35 we go to away goal
 def goToGoal(data):
-    distGoalX = 1.39
+    distGoalX = 1.43
     #distGoaly = data.home1_y
     tg = data.home1_theta
     goX = data.home1_x+distGoalX
