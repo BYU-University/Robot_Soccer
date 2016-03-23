@@ -69,10 +69,22 @@ def goCenter(data):
     print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
     vel.goXYOmegaTheta(xr,yr,tr)
 
+def goToGoal():
+    xg = 1.45
+    yg = 0
+    tg = 0
+    vel.goXYOmegaTheta(xg,yg,tg)
+
+def goToOposeGoal():
+    xg = -1.45
+    yg = 0
+    tg = 0
+    vel.goXYOmegaTheta(xg,yg,tg)
+
 
 
 def getBall(data):
-    xg = 1.6
+    xg = 1.45
     yg = 0
     xb = data.ball_x
     yb = data.ball_y

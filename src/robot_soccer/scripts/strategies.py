@@ -16,7 +16,14 @@ def strategy_init(data):
     bretToGoal = m.sqrt((P.goal[0]-bret[0])**2+(P.goal[1]-bret[1])**2)
     jamaineToBall = m.sqrt((ball[0]-bret[0])**2+(ball[1]-bret[1])**2)
     # here we will pick tactics and call the functions
+    p.goToGoal()
+    time.sleep(8)
+    p.goToOposeGoal()
+    time.sleep(10)
+    p.goCenter(data)
+    time.speep(5)
 
+'''
     k.kickTime(bretToGoal, bretToBall)
 
     if bretToBall < .01:
@@ -40,5 +47,5 @@ def strategy_init(data):
         #Sp.goToStartDefender(jamaine)
         #p.defendBall(jamaine,ball)
     #p.getBall(data)
-
+'''
 
