@@ -94,7 +94,7 @@ def getBall(data):
     #try:
 
     #toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
-    theta_d = m.atan2(yb-yr,yb-yr)
+    theta_d = m.atan2(yb-yr,xb-xr)
     omega = P.control_k_phi*(tr - theta_d)
 
     toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
