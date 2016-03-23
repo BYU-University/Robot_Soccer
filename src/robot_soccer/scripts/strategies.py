@@ -18,7 +18,7 @@ def strategy_init(data):
     # here we will pick tactics and call the functions
     if data.home1_x < - 1.45:
         p.goHomeGoal(data)
-    if data.home1_x < 1.45:
+    if data.home1_x > 1.45:
         p.goToGoal(data)
     #time.sleep(8)
     #p.goToOposeGoal()
