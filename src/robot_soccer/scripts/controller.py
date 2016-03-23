@@ -15,6 +15,7 @@ import calibratepid as c
 #it will call the motor functions and calibration and allow
 #human input to start and stop the robot
 
+K = kTimer()
 P = param()
 #go = 0
 #pygame.init()

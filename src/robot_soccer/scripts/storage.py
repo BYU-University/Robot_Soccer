@@ -9,6 +9,15 @@ class kalStore:
         self.S = 0
         self.S_delayed = 0
 
+#class kTimer():
+#    def __init__(self):
+#        self.xr = .01
+#        self.fPs =
+#        self.count
+#        self.bZ
+#        self.kR
+#        self.aA
+
 
 class lpf:
     def __init__(self):
