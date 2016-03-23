@@ -19,6 +19,16 @@ d = 6.0999908447265625
 q = 308419
 
 
+def forward(speed):
+		ForwardM1(128,speed)
+		ForwardM2(128,speed)
+		ForwardM1(129,speed)
+
+def stop():
+	def forward():
+		ForwardM1(128,0)
+		ForwardM2(128,0)
+		ForwardM1(129,0)
 '''
 print ReadM1VelocityPID(128)
 p1,i1,d1,q1,t1 = ReadM1VelocityPID(128)
@@ -210,4 +220,8 @@ def setvelocity():
 		print "printing the values of p, i ,d :",p,i,d
 		#stop();
 
-	
+
+def calibration(p,i,d,speedM):
+		SetM1VelocityPID(128,p,i,d,speedM)
+		SetM2VelocityPID(128,p,i,d,speedM)
+		SetM1VelocityPID(129,p,i,d,speedM)
