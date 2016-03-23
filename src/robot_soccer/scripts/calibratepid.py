@@ -5,14 +5,18 @@ import time
 Open('/dev/ttySAC0', 38400)
 
 #this is the calc made on motor_control->tentative
-M1speed = 100#M1speed = 278700
-M2speed = 100#M2speed = 253800
-M3speed = 100#M3speed = 269400
+#M1speed = 100
+M1speed = 278700
+#M2speed = 100
+M2speed = 253800
+#M3speed = 100
+M3speed = 269400
 p = 4.0
-#i = 2.0
-i = 0.0
+i = 2.0
+#i = 0.0
 d = 6.0999908447265625
-q = 100#q = 308419
+#q = 100
+q = 308419
 
 
 '''
