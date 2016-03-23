@@ -20,6 +20,7 @@ def velDirve(x, y, a_d, r):
     # use the trims to correct the motor operation
     #OMEGA = np.dot(OMEGA,trims)
 
+
     DutyM1(128, OMEGA[0])
     DutyM2(128, OMEGA[1])
     DutyM1(129, OMEGA[2])
