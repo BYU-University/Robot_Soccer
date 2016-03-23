@@ -102,10 +102,10 @@ def getBall(data):
     xr = data.home1_x
     yr = data.home1_y
     tr = data.home1_theta
-    #robotX = xr-xb
-    #robotY = yr-yb
-    robotX = xb-xr
-    robotY = yb-yr
+    robotX = xr-xb
+    robotY = yr-yb
+    #robotX = xb-xr
+    #robotY = yb-yr
     g = P.goal
 
     xball = xb-xr
