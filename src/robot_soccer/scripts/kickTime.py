@@ -10,7 +10,7 @@ def kickTime(toGoal, dToBall):
     if K.count == 0 and K.kR > K.fPs and math.fabs(toGoal) < K.aA and dToBall < K.kR:
         kick()
         K.count += 1
-    elif K.count == 1000 or dToBall > K.bZ+K.kR:
+    elif K.count == K.cL or dToBall > K.bZ+K.kR:
         K.count = 0
     else:
         K.count += 1

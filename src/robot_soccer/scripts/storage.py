@@ -9,15 +9,21 @@ class kalStore:
         self.S = 0
         self.S_delayed = 0
 
+class gameInfo:
+    def __init__(self):
+        self.score = [0, 0]  # home and away score
+        self.reset = True   # Flag for making it return to the home positions
+        self.pause = False  # Flag for pausing the game
+
 
 class kTimer():
     def __init__(self):
         self.count = 0    # delay timer (cycles through code)
-        self.bZ = 10      # buffer zone
+        self.bZ = .11     # buffer zone
         self.kR = .09     # kick range
         self.aA = .05     # angular accuracy
         self.fPS = 20     # field x-position to shoot from
-        self.cL = 1000    # count limit to reset
+        self.cL = 200    # count limit to reset
 
 
 class lpf:

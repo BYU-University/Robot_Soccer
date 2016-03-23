@@ -1,6 +1,7 @@
 import velchangers as vel
 from strategies import *
 from controller import *
+import altDrive as ad
 
 # This is where we store our different plays
 
@@ -11,17 +12,23 @@ def goToBall(r, b):
     vy = -P.control_k_vy*(r[1]-b[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    #vel.goXYOmegaTheta(vx, vy, omega, r)
+    ad.velDirve(vx, vy, omega, r)
 
 
 def goToGoal(r):
     g = P.goal
-    #vx =
     vx = P.control_k_vx*(r[0]-g[0])
     vy = P.control_k_vy*(r[1]-g[1])
-    theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
+    theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    #vel.goXYOmegaTheta(vx, vy, omega, r)
+    ad.velDirve(vx, vy, omega, r)
+
+
+def holdPosition():
+    #vel.goXYOmegaTheta(vx, vy, omega, r)
+    ad.stop()
 
 
 def goToStartForward(r):
@@ -29,9 +36,10 @@ def goToStartForward(r):
     g = P.goal
     vx = P.control_k_vx*(r[0]-pos[0])
     vy = P.control_k_vy*(r[1]-pos[1])
-    theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
+    theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    #vel.goXYOmegaTheta(vx, vy, omega, r)
+    ad.velDirve(vx, vy, omega, r)
 
 
 def goToStartDefender(r):
@@ -39,17 +47,20 @@ def goToStartDefender(r):
     g = P.goal
     vx = P.control_k_vx*(r[0]-pos[0])
     vy = P.control_k_vy*(r[1]-pos[1])
-    theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
+    theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    #vel.goXYOmegaTheta(vx, vy, omega, r)
+    ad.velDirve(vx, vy, omega, r)
 
 def defendBall(r,b):
     g = P.goal
     vx = P.control_k_vx*(r[0])
     vy = P.control_k_vy*(r[1]-b[1])
-    theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
+    theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    #vel.goXYOmegaTheta(vx, vy, omega, r)
+    ad.velDirve(vx, vy, omega, r)
+
 
 def goToPoint(r, pos):
     g = P.goal
@@ -57,7 +68,8 @@ def goToPoint(r, pos):
     vy = P.control_k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    #vel.goXYOmegaTheta(vx, vy, omega, r)
+    ad.velDirve(vx, vy, omega, r)
 
 def goStart(data):
     start = 0.45
@@ -103,7 +115,6 @@ def goHomeGoal(data):
 def goTopoint(x,y,t):
     vel.goXYOmegaTheta(x,y,t)
 
-
 def getBall(data):
     xg = 1.75
     yg = 0
@@ -136,7 +147,6 @@ def getBall(data):
    # print(toBall*180/math.pi) # converted to degrees
     #except ValueError:
      #   print "Please enter 3 valid sides"
-
 
     #for P control goes to ball
     #vx = P.control_k_vx*(xr-xb)
