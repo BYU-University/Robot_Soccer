@@ -9,7 +9,7 @@ def goToBall(r, b):
     g = P.goal
     vx = -P.control_k_vx*(r[0]-b[0])
     vy = -P.control_k_vy*(r[1]-b[1])
-    theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
+    theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
 
@@ -81,6 +81,7 @@ def getBall(data):
     tr = data.home1_theta
     robotX = xr-xb
     robotY = yr-yb
+    g = P.goal
 
     xball = xb-xr
     if xball == 0:
@@ -89,11 +90,15 @@ def getBall(data):
     if xgoal == 0:
         xgoal = .01
     #try:
-    toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
+
+    #toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
+    theta_d = m.atan2(g[1]-yr,g[0]-xr)
+    omega = P.control_k_phi*(tr - theta_d)
+
     toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
     #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
     print(toGoal*180/math.pi) # converted to degrees
-    print(toBall*180/math.pi) # converted to degrees
+   # print(toBall*180/math.pi) # converted to degrees
     #except ValueError:
      #   print "Please enter 3 valid sides"
 
@@ -106,6 +111,6 @@ def getBall(data):
     #vel.goXYOmegaTheta(vx, vy, omega)
 
 
-    vel.goXYOmegaTheta(robotX,robotY,toGoal)
+    vel.goXYOmegaTheta(robotX,robotY,omega)
 
     #kickTime(xr, toGoal, xball)
