@@ -76,7 +76,7 @@ def goToGoal(data):
     tg = 0
     goX = distGoalX - data.home1_x
     goY = distGoaly - data.home1_y
-    goTheta = tg - data.home1_theta
+    #goTheta = tg - data.home1_theta
     vel.goXYOmegaTheta(goX,goY,data.home1_theta)
 
 def goTopoint(x,y,t):
