@@ -95,7 +95,7 @@ def goTopoint(x,y,t):
 
 
 def getBall(data):
-    xg = 1.55
+    xg = 1.75
     yg = 0
     xb = data.ball_x
     yb = data.ball_y
@@ -135,10 +135,11 @@ def getBall(data):
     #omega = P.control_k_phi*(tr - theta_d)
     #vel.goXYOmegaTheta(vx, vy, omega)
 
-
-    vel.goXYOmegaTheta(robotX,robotY,omega)
     if xb > xg or xb < -xg:
         goCenter(data)
-        time.sleep(5)
+    else:
+        vel.goXYOmegaTheta(robotX,robotY,omega)
+
+        #time.sleep(5)
 
     #kickTime(xr, toGoal, xball)
