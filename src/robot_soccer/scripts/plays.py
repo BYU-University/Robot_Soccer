@@ -59,6 +59,16 @@ def goToPoint(r, pos):
     omega = P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
 
+def goStart(data):
+    start = 0.45
+    xb = data.ball_x - start
+    yb = data.ball_y
+    xr = data.home1_x
+    yr = data.home1_y
+    tr = data.home1_theta
+    print "info for debugg"
+    print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
+    vel.goXYOmegaTheta(xr,yr,tr)
 
 def goCenter(data):
     xb = data.ball_x
@@ -136,7 +146,7 @@ def getBall(data):
     #vel.goXYOmegaTheta(vx, vy, omega)
 
     if xb > xg or xb < -xg:
-        goCenter(data)
+        goStart(data)
     else:
         vel.goXYOmegaTheta(robotX,robotY,omega)
 
