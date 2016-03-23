@@ -34,7 +34,7 @@ def strategy_init(data):
 	#   p.goToStartForward(bret)
 
     else:
-        p.getBall(data)
+        p.getBall(bret, ball)
         #Sp.goToStartDefender(jamaine)
         #p.defendBall(jamaine,ball)
     #p.getBall(data)
