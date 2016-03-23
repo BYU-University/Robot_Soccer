@@ -74,6 +74,8 @@ def goToGoal():
     yg = 0
     tg = 0
     vel.goXYOmegaTheta(xg,yg,tg)
+def goTopoint(x,y,t):
+    vel.goXYOmegaTheta(x,y,t)
 
 def goToOposeGoal():
     xg = -1.45
