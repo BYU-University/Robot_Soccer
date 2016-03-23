@@ -9,14 +9,15 @@ class kalStore:
         self.S = 0
         self.S_delayed = 0
 
-#class kTimer():
-#    def __init__(self):
-#        self.xr = .01
-#        self.fPs =
-#        self.count
-#        self.bZ
-#        self.kR
-#        self.aA
+
+class kTimer():
+    def __init__(self):
+        self.count = 0    # delay timer (cycles through code)
+        self.bZ = 10      # buffer zone
+        self.kR = .09     # kick range
+        self.aA = .05     # angular accuracy
+        self.fPS = 20     # field x-position to shoot from
+        self.cL = 1000    # count limit to reset
 
 
 class lpf:
