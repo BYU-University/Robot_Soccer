@@ -15,7 +15,8 @@ def velDirve(x, y, a_d, r):
 
     # individual motor commands we may need a control gain
     OMEGA = P.M3*rotate*commands
-
+    print('OMEGA!')
+    print(OMEGA)
     # use the trims to correct the motor operation
     #OMEGA = np.dot(OMEGA,trims)
 
