@@ -138,7 +138,7 @@ def getBall(data):
     if xb > xg or xb < -xg:
         goCenter(data)
     else:
-        vel.goXYOmegaTheta(robotX,robotY,toBall)
+        vel.goXYOmegaTheta(robotX,robotY,omega)
 
         #time.sleep(5)
 
