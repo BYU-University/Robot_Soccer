@@ -5,7 +5,7 @@ import numpy as np
 # PWM values range from -32767 to +32767 (eg. +-100% duty).
 
 
-def velDirve(x, y, a_d, r):
+def velDrive(x, y, a_d, r):
 
     commands = np.matrix([[x], [y], [a_d]])
 

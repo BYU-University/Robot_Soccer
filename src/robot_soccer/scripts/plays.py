@@ -13,7 +13,7 @@ def goToBall(r, b):
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
     #vel.goXYOmegaTheta(vx, vy, omega, r)
-    ad.velDirve(vx, vy, omega, r)
+    ad.velDrive(vx, vy, omega, r)
 
 
 def goToGoal(r):
@@ -23,7 +23,7 @@ def goToGoal(r):
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
     #vel.goXYOmegaTheta(vx, vy, omega, r)
-    ad.velDirve(vx, vy, omega, r)
+    ad.velDrive(vx, vy, omega, r)
 
 
 def holdPosition():
@@ -39,7 +39,7 @@ def goToStartForward(r):
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
     #vel.goXYOmegaTheta(vx, vy, omega, r)
-    ad.velDirve(vx, vy, omega, r)
+    ad.velDrive(vx, vy, omega, r)
 
 
 def goToStartDefender(r):
@@ -50,7 +50,7 @@ def goToStartDefender(r):
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
     #vel.goXYOmegaTheta(vx, vy, omega, r)
-    ad.velDirve(vx, vy, omega, r)
+    ad.velDrive(vx, vy, omega, r)
 
 def defendBall(r,b):
     g = P.goal
@@ -59,7 +59,7 @@ def defendBall(r,b):
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
     #vel.goXYOmegaTheta(vx, vy, omega, r)
-    ad.velDirve(vx, vy, omega, r)
+    ad.velDrive(vx, vy, omega, r)
 
 
 def goToPoint(r, pos):
@@ -69,7 +69,7 @@ def goToPoint(r, pos):
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
     #vel.goXYOmegaTheta(vx, vy, omega, r)
-    ad.velDirve(vx, vy, omega, r)
+    ad.velDrive(vx, vy, omega, r)
 
 def goStart(data):
     start = 0.45
