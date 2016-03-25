@@ -2,6 +2,7 @@ import math as m
 import plays as p
 import kickTime as k
 from controller import *
+import predictor
 import time
 
 count = 0
@@ -40,9 +41,9 @@ def strategy_init(data):
 
     if bretToBall < .01:
         p.goToGoal(bret)
-        if data.home1_x > 1.6 and data.home1_y < -0.01:
-            p.goCenter(data)  # reset robot to go center field
-            time.sleep(5)
+    #    if data.home1_x > 1.6 and data.home1_y < -0.01:
+    #        p.goCenter(data)  # reset robot to go center field
+    #        time.sleep(5)
     # if jamaineToBall < 0.02:
     #    kick.kick()
     #    time.sleep(0.5)
@@ -61,11 +62,14 @@ def strategy_init(data):
         p.holdPosition()
 
     else:
-        #p.goToBall(bret, ball)
-        p.getBall(data)
+        p.goToBall(bret, ball)
+        #p.getBall(data)
         #p.goToStartDefender(jamaine)
         #p.defendBall(jamaine,ball)
     #p.getBall(data)
+
+    # predictor.predict(ball)
+    # G.ballPast = ball
 
 
 
@@ -113,3 +117,8 @@ def pause():
 def go():
     G.pause = False
     G.reset = False
+
+
+
+
+
