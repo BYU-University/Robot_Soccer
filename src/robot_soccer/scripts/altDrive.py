@@ -18,13 +18,13 @@ def velDrive(x, y, a_d, r):
 
     # individual motor commands we may need a control gain
     OMEGA = P.M3*rotate*commands
-    print('OMEGA!')
+    print('OMEGA 1')
     print(OMEGA)
     # use the trims to correct the motor operation
     #OMEGA = np.dot(OMEGA,trims)
 
     OMEGA = int(round(OMEGA * 1000))
-    print('OMEGA!')
+    print('OMEGA 2')
     print(OMEGA)
 
 
