@@ -27,7 +27,7 @@ def strategy_init(data):
 
     #if data.home1_x < - 1.45:
        # count +=1
-    p.goHomeGoal(bret)
+    #p.goHomeGoal(bret)
     #if data.home1_x > 1.45:
     #p.goToGoal(bret)
     #else: p.goHomeGoal(data)
@@ -36,7 +36,7 @@ def strategy_init(data):
     #time.sleep(10)
     #p.goCenter(data)
     #time.sleep(5)
-    #p.getBall(bret,ball,goal)
+    p.getBall(bret,ball,goal)
 
 
 '''

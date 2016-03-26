@@ -2,6 +2,7 @@ import velchangers as vel
 from strategies import *
 from controller import *
 import math
+import kick
 
 # This is where we store our different plays
 
@@ -60,11 +61,11 @@ def goToPoint(r, pos):
     omega = P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
 
-def goStart(bret,ball):
+def goStart(bret):
     start = 0.45
     print "info for debugg"
-    xposition = float(bret[1]+start)
-    print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
+    xposition = float(bret[0]-start)
+    #print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
     vel.goXYOmegaTheta(xposition,bret[1],bret[2])
 
 def goCenter(data):
@@ -93,9 +94,9 @@ def goToGoal(bret):
 def goHomeGoal(bret):
     distGoalX = 1.56
     #distGoaly = data.home1_y
-    goX = bret[0]-distGoalX#data.home1_x+distGoalX
-    goY = bret[1]#data.home1_y
-    tg = bret[2]#data.home1_theta
+    goX = bret[0]-distGoalX
+    goY = bret[1]
+    tg = bret[2]
     #goTheta = tg - data.home1_theta
     vel.goXYOmegaTheta(goX,goY,tg)
 
@@ -119,27 +120,16 @@ def getBall(bret,ball,goal):
     #toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
     #theta_d = m.atan2(yb-yr,xb-xr)
     #omega = P.control_k_phi*(tr - theta_d)
-
+    kickX = ball[0]-bret[0]
+    kickY = ball[1]-bret[1]
     toGoal = float(math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(goal[1]-bret[1])**2))+bret[2])
     #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
-    print(toGoal*180/math.pi) # converted to degrees
-   # print(toBall*180/math.pi) # converted to degrees
-    #except ValueError:
-     #   print "Please enter 3 valid sides"
-
-
-    #for P control goes to ball
-    #vx = P.control_k_vx*(xr-xb)
-    #vy = P.control_k_vy*(yr-yb)
-    #theta_d = math.atan2(yg-yr, xg-xr)
-    #omega = P.control_k_phi*(tr - theta_d)
-    #vel.goXYOmegaTheta(vx, vy, omega)
-
     if ball[0] > goal[0] or ball[0] < -goal[0]:
-        goStart(bret,ball)
+        goStart(bret)
     else:
         vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
-
-        #time.sleep(5)
+    if ball[0] < 0.07 or ball[0] < -0.07:
+        kick.kick()
+        time.sleep(0.2)
 
     #kickTime(xr, toGoal, xball)
