@@ -64,7 +64,7 @@ def goToPoint(r, pos):
 def goStart(bret):
     start = 0.45
     print "info for debugg"
-    xposition = float(bret[0]+start)
+    xposition = float(bret[0]-start)
     #print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
     vel.goXYOmegaTheta(xposition,bret[1],bret[2])
 
@@ -129,7 +129,7 @@ def getBall(bret, ball, goal):
     if ball[0] > goal[0] or ball[0] < -goal[0]:
         goStart(bret)
     else:
-        vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
+        vel.goXYOmegaTheta(robotX,robotY,toGoal)
         print "Is not kicking  kicking :",kickX,kickY
 
     #if oldKickX != kickX:
