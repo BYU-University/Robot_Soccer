@@ -59,16 +59,11 @@ def goToPoint(r, pos):
     omega = P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmegaTheta(vx, vy, omega)
 
-def goStart(data):
+def goStart(bret,ball):
     start = 0.45
-    xb = data.ball_x
-    yb = data.ball_y
-    xr = data.home1_x - start
-    yr = data.home1_y
-    tr = data.home1_theta
     print "info for debugg"
-    print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
-    vel.goXYOmegaTheta(xr,yr,tr)
+    print "ballx,bally,homex,homey, hometheta",ball[0],ball[1],bret[0],bret[1],bret[2]
+    vel.goXYOmegaTheta(bret[0],bret[1],bret[2])
 
 def goCenter(data):
     xb = data.ball_x
@@ -104,33 +99,24 @@ def goTopoint(x,y,t):
     vel.goXYOmegaTheta(x,y,t)
 
 
-def getBall(data):
-    xg = 1.75
-    yg = 0
-    xb = data.ball_x
-    yb = data.ball_y
-    xr = data.home1_x
-    yr = data.home1_y
-    tr = data.home1_theta
-    robotX = xr-xb
-    robotY = yr-yb
-    #robotX = xb-xr
-    #robotY = yb-yr
+def getBall(bret,ball,goal):
+    robotX = ball[0]-bret[0]     #has to be balllocation - robotLocation
+    robotY = ball[1]-bret[1]
     g = P.goal
 
-    xball = xb-xr
-    if xball == 0:
-        xball = .01
-    xgoal = xg-xr
+
+    if robotX == 0:
+        robotX = .01
+    xgoal = goal[0]-bret[0]
     if xgoal == 0:
         xgoal = .01
     #try:
 
-    toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
-    theta_d = m.atan2(yb-yr,xb-xr)
-    omega = P.control_k_phi*(tr - theta_d)
+    #toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
+    #theta_d = m.atan2(yb-yr,xb-xr)
+    #omega = P.control_k_phi*(tr - theta_d)
 
-    toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(yg-yr)**2))+tr
+    toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(goal[1]-bret[1])**2))+bret[2]
     #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
     print(toGoal*180/math.pi) # converted to degrees
    # print(toBall*180/math.pi) # converted to degrees
@@ -145,10 +131,10 @@ def getBall(data):
     #omega = P.control_k_phi*(tr - theta_d)
     #vel.goXYOmegaTheta(vx, vy, omega)
 
-    if xb > xg or xb < -xg:
-        goStart(data)
+    if ball[0] > goal[0] or ball[0] < -goal[0]:
+        goStart(bret,ball)
     else:
-        vel.goXYOmegaTheta(robotX,robotY,omega)
+        vel.goXYOmegaTheta(robotX,robotY,toGoal)
 
         #time.sleep(5)
 

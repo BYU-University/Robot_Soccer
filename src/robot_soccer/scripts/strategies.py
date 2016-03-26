@@ -7,11 +7,19 @@ import time
 
 count = 0
 def strategy_init(data):
+    xg = 1.75
+    yg = 0
+    xb = data.ball_x
+    yb = data.ball_y
+    xr = data.home1_x
+    yr = data.home1_y
+    tr = data.home1_theta
 
-    bret = [data.home1_x, data.home1_y, data.home1_theta]
+    bret = [xr, yr, tr]
     # jamaine = [data.home2_x, data.home2_y, data.home2_theta]
 
-    ball = [data.ball_x, data.ball_y]
+    ball = [xb, yb]
+    goal = [xg,yg]
     bretToBall = m.sqrt((ball[0]-bret[0])**2+(ball[1]-bret[1])**2)
     bretToGoal = m.sqrt((P.goal[0]-bret[0])**2+(P.goal[1]-bret[1])**2)
     jamaineToBall = m.sqrt((ball[0]-bret[0])**2+(ball[1]-bret[1])**2)
@@ -28,7 +36,8 @@ def strategy_init(data):
     #time.sleep(10)
     #p.goCenter(data)
     #time.sleep(5)
-    p.getBall(data)
+    p.getBall(bret,ball,goal)
+
 
 '''
     k.kickTime(bretToGoal, bretToBall)
