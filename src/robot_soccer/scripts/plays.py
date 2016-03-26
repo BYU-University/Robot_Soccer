@@ -132,7 +132,7 @@ def getBall(bret,ball,goal):
     if ((kickX < 0.07 and kickX > 0) and (kickY < 0.07 and kickY > 0)):
         kick.kick()
         kickX =0;
-        time.sleep(0.2)
+        time.sleep(1)
         print "Is kicking positivr :",kickX,kickY
     #else:
     #    vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
