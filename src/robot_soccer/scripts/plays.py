@@ -135,7 +135,7 @@ def getBall(bret,ball,goal):
     if ball[0] > goal[0] or ball[0] < -goal[0]:
         goStart(bret,ball)
     else:
-        vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
+        vel.goXYOmegaTheta(-robotX,-robotY,-toGoal)
 
         #time.sleep(5)
 
