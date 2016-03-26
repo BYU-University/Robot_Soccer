@@ -63,8 +63,9 @@ def goToPoint(r, pos):
 def goStart(bret,ball):
     start = 0.45
     print "info for debugg"
+    xposition = float(bret[1]+start)
     print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
-    vel.goXYOmegaTheta(bret[0]-start,bret[1],bret[2])
+    vel.goXYOmegaTheta(xposition,-bret[1],bret[2])
 
 def goCenter(data):
     xb = data.ball_x
