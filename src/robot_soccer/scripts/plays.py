@@ -61,7 +61,7 @@ def goToPoint(r, pos):
     vel.goXYOmegaTheta(vx, vy, omega)
 
 def goStart(bret,ball):
-    start = 0.45
+    start = -0.45
     print "info for debugg"
     print "ballx,bally,homex,homey, hometheta",ball[0],ball[1],bret[0],bret[1],bret[2]
     vel.goXYOmegaTheta(bret[0],bret[1],bret[2])
