@@ -131,6 +131,7 @@ def getBall(bret,ball,goal):
         print "Is not kicking  kicking :",kickX,kickY
     if ((kickX < 0.07 and kickX > 0) and (kickY < 0.07 and kickY > 0)):
         kick.kick()
+        kickX =0;
         time.sleep(0.2)
         print "Is kicking positivr :",kickX,kickY
     #else:
