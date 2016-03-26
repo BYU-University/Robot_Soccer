@@ -51,7 +51,7 @@ def vect2motors(data):
     tr = data.home1_theta
     rospy.loginfo("robot x,y,theta : %f, %f" %(xr,yr,tr))
     print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
-    vel.goXYOmegaTheta(xr,yr,tr)
+    vel.goXYOmega(xr,yr,tr)
 
     xball = xb-xr
     if xball == 0:

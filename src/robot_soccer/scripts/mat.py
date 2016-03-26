@@ -66,9 +66,17 @@ print "this is the M value:", M
 #here starts the defs
 
 #this return a tuple with x, y, omega(or theta)
-def getRobotXYOmega(x,y,theta):
+def getRobotXYOmega(x,y,omega):
   #for now, I changed omega=0
-  omega = 0
+  omegaZero = 0
+  desired = matrix( [[x],
+                     [y],
+                     [omegaZero]] )
+  desired = R(omega)*desired
+  return desired
+
+def getRobotXYOmegaTheta(x,y,omega,theta):
+
   desired = matrix( [[x],
                      [y],
                      [omega]] )
@@ -76,8 +84,8 @@ def getRobotXYOmega(x,y,theta):
   #print "this is GetRobotXYOmega",desired
   return desired
 
-def getWheelVelTheta(x,y,theta):
-  desired = getRobotXYOmega(x, y,theta)
+def getWheelVelOmega(x,y,Omega):
+  desired = getRobotXYOmega(x, y,Omega)
   result = M*desired
   #print "this is getRobotXYOMEGAASTuple",result
   return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]

@@ -13,7 +13,7 @@ def goToBall(r, b):
     vy = -P.control_k_vy*(r[1]-b[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    vel.goXYOmega(vx, vy, omega)
 
 
 def goToGoal(r):
@@ -23,7 +23,7 @@ def goToGoal(r):
     vy = P.control_k_vy*(r[1]-g[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    vel.goXYOmega(vx, vy, omega)
 
 
 def goToStartForward(r):
@@ -33,7 +33,7 @@ def goToStartForward(r):
     vy = P.control_k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    vel.goXYOmega(vx, vy, omega)
 
 
 def goToStartDefender(r):
@@ -43,7 +43,7 @@ def goToStartDefender(r):
     vy = P.control_k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    vel.goXYOmega(vx, vy, omega)
 
 def defendBall(r,b):
     g = P.goal
@@ -51,7 +51,7 @@ def defendBall(r,b):
     vy = P.control_k_vy*(r[1]-b[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    vel.goXYOmega(vx, vy, omega)
 
 def goToPoint(r, pos):
     g = P.goal
@@ -59,14 +59,14 @@ def goToPoint(r, pos):
     vy = P.control_k_vy*(r[1]-pos[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmegaTheta(vx, vy, omega)
+    vel.goXYOmega(vx, vy, omega)
 
 def goStart(bret):
     start = 0.45
     print "info for debugg"
     xposition = float(bret[0]-start)
     #print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
-    vel.goXYOmegaTheta(xposition,bret[1],bret[2])
+    vel.goXYOmega(xposition,bret[1],bret[2])
 
 def goCenter(data):
     xb = data.ball_x
@@ -76,7 +76,7 @@ def goCenter(data):
     tr = data.home1_theta
     print "info for debugg"
     print "ballx,bally,homex,homey, hometheta",xb,yb,xr,yr,tr
-    vel.goXYOmegaTheta(xr,yr,tr)
+    vel.goXYOmega(xr,yr,tr)
 
 #here we do homeX - 1.35 we go to home goal
 #here we fo homeX + 1.35 we go to away goal
@@ -88,7 +88,7 @@ def goToGoal(bret):
     goY = bret[1]#data.home1_y
     tg = bret[2]#data.home1_theta
     #goTheta = tg - data.home1_theta
-    vel.goXYOmegaTheta(goX,goY,tg)
+    vel.goXYOmega(goX,goY,tg)
 
 
 def goHomeGoal(bret):
@@ -98,10 +98,10 @@ def goHomeGoal(bret):
     goY = bret[1]
     tg = bret[2]
     #goTheta = tg - data.home1_theta
-    vel.goXYOmegaTheta(goX,goY,tg)
+    vel.goXYOmega(goX,goY,tg)
 
 def goTopoint(x,y,t):
-    vel.goXYOmegaTheta(x,y,t)
+    vel.goXYOmega(x,y,t)
 
 
 def getBall(bret, ball, goal):
@@ -117,40 +117,22 @@ def getBall(bret, ball, goal):
     xgoal = goal[0]-bret[0]
     if xgoal == 0:
         xgoal = .01
-    #try:
 
-    #toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
-    #theta_d = m.atan2(yb-yr,xb-xr)
-    #omega = P.control_k_phi*(tr - theta_d)
-    kickX = abs(ball[0]-bret[0])
-    kickY = abs(ball[1]-bret[1])
+
     toGoal = float(math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(goal[1]-bret[1])**2))+bret[2])
     #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
     if ball[0] > goal[0] or ball[0] < -goal[0]:
         goStart(bret)
     else:
-        vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
+        vel.goXYOmega(-robotX,-robotY,toGoal)
         print "Is not kicking  kicking :",kickX,kickY
 
-    #if oldKickX != kickX:
+    kickX = abs(ball[0]-bret[0])
+    kickY = abs(ball[1]-bret[1])
     if ((kickX < 0.07 and kickX > 0) and (kickY < 0.07 and kickY > 0)):
         print "Is kicking positive :",kickX,kickY
         kick.kick()
-        oldKickX = kickX
-        oldKickY = kickY
         kickX =0.0
         kickY=0.0
-
         print "Reseting kicker :",kickX,kickY
 
-
-    #else:
-    #    vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
-    #if (kickX > -0.07 and kickX < 0 and kickY > -0.02 and kickY < 0):
-    #    kick.kick()
-    #    time.sleep(0.2)
-    #    print "Is kicking negativr :",kickX,kickY
-    #else:
-    #    vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
-
-    #kickTime(xr, toGoal, xball)
