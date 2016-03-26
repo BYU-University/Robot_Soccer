@@ -73,7 +73,7 @@ def getRobotXYOmega(x,y,theta):
                      [y],
                      [omega]] )
   desired = R(theta)*desired
-  print "this is GetRobotXYOmega",desired
+  #print "this is GetRobotXYOmega",desired
   return desired
 
 def getWheelVelTheta(x,y,theta):

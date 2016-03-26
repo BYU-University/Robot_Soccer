@@ -47,7 +47,7 @@ def goXYOmegaTheta(x,y,theta):
   total = math.sqrt(float(x**2+y**2))
   if total > cap:
    scale = cap / total
-   print "this is the scale",scale
+   #print "this is the scale",scale
    x = x *scale
    y = y *scale
   v1,v2,v3 = mat.getWheelVelTheta(x,y,theta)
