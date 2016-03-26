@@ -109,6 +109,8 @@ def getBall(bret,ball,goal):
     robotY = ball[1]-bret[1]
     #g = P.goal
 
+    oldPosX = robotX
+    oldPosY = robotY
 
     if robotX == 0:
         robotX = .01
@@ -124,7 +126,7 @@ def getBall(bret,ball,goal):
     kickY = abs(ball[1]-bret[1])
     toGoal = float(math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(goal[1]-bret[1])**2))+bret[2])
     #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
-    if ball[0] > goal[0] or ball[0] < -goal[0]:
+    if ball[0] > goal[0] or ball[0] < -goal[0] or ball[1] > goal[1] or ball[1] < -goal[1]:
         goStart(bret)
     else:
         vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
