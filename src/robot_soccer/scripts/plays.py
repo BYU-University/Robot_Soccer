@@ -120,8 +120,8 @@ def getBall(bret,ball,goal):
     #toBall = math.acos(float(xball)/math.sqrt(float(xball)**2+float(yb-yr)**2))+tr
     #theta_d = m.atan2(yb-yr,xb-xr)
     #omega = P.control_k_phi*(tr - theta_d)
-    kickX = ball[0]-bret[0]
-    kickY = ball[1]-bret[1]
+    kickX = abs(ball[0]-bret[0])
+    kickY = abs(ball[1]-bret[1])
     toGoal = float(math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(goal[1]-bret[1])**2))+bret[2])
     #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
     if ball[0] > goal[0] or ball[0] < -goal[0]:
@@ -129,16 +129,16 @@ def getBall(bret,ball,goal):
     else:
         vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
         print "Is not kicking  kicking :",kickX,kickY
-    if (kickX < 0.07 and kickX > 0 and kickY < 0.02 and kickY > 0):
+    if ((kickX < 0.07 and kickX > 0) and (kickY < 0.07 and kickY > 0)):
         kick.kick()
         time.sleep(0.2)
         print "Is kicking positivr :",kickX,kickY
     #else:
     #    vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
-    if (kickX > -0.07 and kickX < 0 and kickY > -0.02 and kickY < 0):
-        kick.kick()
-        time.sleep(0.2)
-        print "Is kicking negativr :",kickX,kickY
+    #if (kickX > -0.07 and kickX < 0 and kickY > -0.02 and kickY < 0):
+    #    kick.kick()
+    #    time.sleep(0.2)
+    #    print "Is kicking negativr :",kickX,kickY
     #else:
     #    vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
 
