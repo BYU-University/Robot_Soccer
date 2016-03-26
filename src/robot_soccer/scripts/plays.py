@@ -1,6 +1,7 @@
 import velchangers as vel
 from strategies import *
 from controller import *
+import math
 
 # This is where we store our different plays
 
