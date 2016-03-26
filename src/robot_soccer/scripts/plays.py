@@ -91,9 +91,9 @@ def goToGoal(bret):
 
 
 def goHomeGoal(bret):
-    distGoalX = -1.56
+    distGoalX = 1.56
     #distGoaly = data.home1_y
-    goX = bret[0]+distGoalX#data.home1_x+distGoalX
+    goX = bret[0]-distGoalX#data.home1_x+distGoalX
     goY = bret[1]#data.home1_y
     tg = bret[2]#data.home1_theta
     #goTheta = tg - data.home1_theta
