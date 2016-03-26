@@ -129,7 +129,7 @@ def getBall(bret, ball, goal):
     if ball[0] > goal[0] or ball[0] < -goal[0]:
         goStart(bret)
     else:
-        vel.goXYOmegaTheta(robotX,robotY,toGoal)
+        vel.goXYOmegaTheta(-robotX,robotY,toGoal)
         print "Is not kicking  kicking :",kickX,kickY
 
     #if oldKickX != kickX:
