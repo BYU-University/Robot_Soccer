@@ -116,7 +116,7 @@ def getBall(bret,ball,goal):
     #theta_d = m.atan2(yb-yr,xb-xr)
     #omega = P.control_k_phi*(tr - theta_d)
 
-    toGoal = math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(goal[1]-bret[1])**2))+bret[2]
+    toGoal = float(-math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(goal[1]-bret[1])**2))+bret[2])
     #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
     print(toGoal*180/math.pi) # converted to degrees
    # print(toBall*180/math.pi) # converted to degrees
