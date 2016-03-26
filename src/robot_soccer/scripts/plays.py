@@ -126,7 +126,7 @@ def getBall(bret,ball,goal):
     kickY = abs(ball[1]-bret[1])
     toGoal = float(math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(goal[1]-bret[1])**2))+bret[2])
     #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
-    if ball[0] > goal[0] or ball[0] < -goal[0] or ball[1] > goal[1] or ball[1] < -goal[1]:
+    if ball[0] > goal[0] or ball[0] < -goal[0]:
         goStart(bret)
     else:
         vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
@@ -134,10 +134,9 @@ def getBall(bret,ball,goal):
     if ((kickX < 0.07 and kickX > 0) and (kickY < 0.07 and kickY > 0)):
         print "Is kicking positive :",kickX,kickY
         kick.kick()
-        time.sleep(1)
-        kickX =0
-        kickY=0
-
+        kickX =0.0
+        kickY=0.0
+        time.sleep(0.5)
         print "Reseting kicker :",kickX,kickY
 
 
