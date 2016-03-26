@@ -17,6 +17,8 @@ import calibratepid as c
 
 K = kTimer()
 P = param()
+G = gameInfo()
+
 #go = 0
 #pygame.init()
 #pygame.display.set_mode((400, 400))
