@@ -128,6 +128,7 @@ def getBall(bret,ball,goal):
         goStart(bret)
     else:
         vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
+        print "Is kicking :",kickX,kickY
     if (kickX < 0.07 and kickX > 0 and kickY < 0.02 and kickY > 0):
         kick.kick()
         time.sleep(0.2)
