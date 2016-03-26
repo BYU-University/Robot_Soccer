@@ -140,7 +140,7 @@ def getBall(bret, ball, goal):
         oldKickY = kickY
         kickX =0.0
         kickY=0.0
-        time.sleep(1)
+
         print "Reseting kicker :",kickX,kickY
 
 
