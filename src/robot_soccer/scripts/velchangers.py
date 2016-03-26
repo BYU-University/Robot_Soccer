@@ -42,14 +42,14 @@ def goXYOmega(x,y,omega,limit=False):
 '''
 
 #function to use. This functions will get current info to go...
-def goXYOmegaTheta(x,y,theta,limit =False):
-  if limit:
-   total = math.sqrt(float(x**2+y**2))
-   if total > cap:
-    scale = cap / total
-    #print "this is the scale",scale
-    x = x *scale
-    y = y *scale
+def goXYOmegaTheta(x,y,theta):
+  #if limit:
+  total = math.sqrt(float(x**2+y**2))
+  if total > cap:
+   scale = cap / total
+   #print "this is the scale",scale
+   x = x *scale
+   y = y *scale
   v1,v2,v3 = mat.getWheelVelTheta(x,y,theta)
   s1 = radianToQpps(v1)
   s2 = radianToQpps(v2)
