@@ -80,7 +80,7 @@ def goCenter(data):
 #here we do homeX - 1.35 we go to home goal
 #here we fo homeX + 1.35 we go to away goal
 def goToGoal(bret):
-    distGoalX = -1.56
+    distGoalX = 1.56
     #distGoaly = data.home1_y
 
     goX = bret[0]+distGoalX#data.home1_x+distGoalX
@@ -90,12 +90,12 @@ def goToGoal(bret):
     vel.goXYOmegaTheta(goX,goY,tg)
 
 
-def goHomeGoal(data):
+def goHomeGoal(bret):
     distGoalX = -1.56
     #distGoaly = data.home1_y
-    tg = data.home1_theta
-    goX = data.home1_x+distGoalX
-    goY = data.home1_y
+    goX = bret[0]+distGoalX#data.home1_x+distGoalX
+    goY = bret[1]#data.home1_y
+    tg = bret[2]#data.home1_theta
     #goTheta = tg - data.home1_theta
     vel.goXYOmegaTheta(goX,goY,tg)
 
