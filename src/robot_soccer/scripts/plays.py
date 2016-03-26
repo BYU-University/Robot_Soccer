@@ -104,7 +104,7 @@ def goTopoint(x,y,t):
     vel.goXYOmegaTheta(x,y,t)
 
 
-def getBall(bret,ball,goal):
+def getBall(bret, ball, goal):
     robotX = ball[0]-bret[0]    #has to be balllocation - robotLocation
     robotY = ball[1]-bret[1]
     #g = P.goal
@@ -131,12 +131,16 @@ def getBall(bret,ball,goal):
     else:
         vel.goXYOmegaTheta(-robotX,-robotY,toGoal)
         print "Is not kicking  kicking :",kickX,kickY
+
+    #if oldKickX != kickX:
     if ((kickX < 0.07 and kickX > 0) and (kickY < 0.07 and kickY > 0)):
         print "Is kicking positive :",kickX,kickY
         kick.kick()
+        oldKickX = kickX
+        oldKickY = kickY
         kickX =0.0
         kickY=0.0
-        time.sleep(0.5)
+        time.sleep(1)
         print "Reseting kicker :",kickX,kickY
 
 
