@@ -29,7 +29,7 @@ def strategy_init(data):
        # count +=1
     #    p.goHomeGoal(data)
     #if data.home1_x > 1.45:
-    p.goToGoal(data)
+    p.goToGoal(bret)
     #else: p.goHomeGoal(data)
     #time.sleep(8)
     #p.goToOposeGoal()
