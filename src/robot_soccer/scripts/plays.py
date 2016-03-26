@@ -102,7 +102,7 @@ def goTopoint(x,y,t):
 def getBall(bret,ball,goal):
     robotX = ball[0]-bret[0]    #has to be balllocation - robotLocation
     robotY = ball[1]-bret[1]
-    g = P.goal
+    #g = P.goal
 
 
     if robotX == 0:
