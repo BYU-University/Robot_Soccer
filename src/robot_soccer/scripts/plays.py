@@ -1,6 +1,7 @@
 import velchangers as vel
 from strategies import *
 from controller import *
+import altDrive as ad
 import math
 import kick
 
@@ -13,7 +14,8 @@ def goToBall(r, b):
     vy = -P.control_k_vy*(r[1]-b[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = P.control_k_phi*(r[2] - theta_d)
-    vel.goXYOmega(vx, vy, omega)
+    #vel.goXYOmega(vx, vy, omega)
+    ad.velDrive(vx, vy, omega, r)
 
 
 def goToGoal(r):

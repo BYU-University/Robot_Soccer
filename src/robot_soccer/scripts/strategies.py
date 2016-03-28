@@ -13,7 +13,7 @@ def strategy_init(data):
     yb = data.ball_y
     xr = data.home1_x
     yr = data.home1_y
-    tr = data.home1_theta
+    tr = data.home1_thetaTrue
 
     bret = [xr, yr, tr]
     # jamaine = [data.home2_x, data.home2_y, data.home2_theta]
