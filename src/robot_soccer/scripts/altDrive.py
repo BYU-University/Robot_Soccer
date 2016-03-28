@@ -30,13 +30,11 @@ def velDrive(x, y, a_d, r):
     print('intmega')
     print(intmega)
 
-    DutyM1(128, intmega[0])
-    DutyM2(128, intmega[1])
-    DutyM1(129, intmega[2])
+    DutyM1M2(128, intmega[0], intmega[1])
+    DutyM1M2(129, intmega[2], 0)
 
 
 def stop():
-    DutyM1(128, 0)
-    DutyM2(128, 0)
-    DutyM1(129, 0)
+    DutyM1M2(128, 0, 0)
+    DutyM1M2(129, 0, 0)
 
