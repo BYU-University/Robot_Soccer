@@ -12,7 +12,7 @@ class kalStore:
 class gameInfo:
     def __init__(self):
         self.score = [0, 0]  # home and away score
-        self.reset = True   # Flag for making it return to the home positions
+        self.reset = False   # Flag for making it return to the home positions
         self.pause = False  # Flag for pausing the game
         self.ballPast = [0, 0]
         self.late = .001        # camera latency - consider making dynamic

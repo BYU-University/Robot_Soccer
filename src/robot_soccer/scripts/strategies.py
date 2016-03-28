@@ -59,7 +59,7 @@ def strategy_init(data):
         p.goToStartForward(bret)
         # p.goToStartDefender(jamaine)
 
-    elif G.pause == False:      # pauses the game
+    elif G.pause == True:      # pauses the game
         p.holdPosition()
 
     else:
