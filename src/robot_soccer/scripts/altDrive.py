@@ -24,9 +24,9 @@ def velDrive(x, y, a_d, r):
     #OMEGA = np.dot(OMEGA,trims)
 
     intmega = np.matrix([[0], [0], [0]])
-    intmega[0] = int(round(OMEGA[0] * 10))
-    intmega[1] = int(round(OMEGA[1] * 10))
-    intmega[2] = int(round(OMEGA[2] * 10))
+    intmega[0] = int(round(OMEGA[0] * 100))
+    intmega[1] = int(round(OMEGA[1] * 100))
+    intmega[2] = int(round(OMEGA[2] * 100))
     print('intmega')
     print(intmega)
 
