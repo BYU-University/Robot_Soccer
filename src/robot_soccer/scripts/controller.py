@@ -7,6 +7,7 @@ from storage import *
 from std_msgs.msg import String
 from robot_soccer.msg import convertedCoordinates
 import calibratepid as c
+from PID import *
 
 
 
@@ -18,6 +19,8 @@ import calibratepid as c
 K = kTimer()
 P = param()
 G = gameInfo()
+vars = pVars()
+vals = pidVals()
 
 #go = 0
 #pygame.init()
@@ -28,7 +31,7 @@ def run_init(data):
     debbuging = strategies.strategy_init(data)
     #rospy.loginfo("information for debuging",debbuging)
 def mainController():
-	 # In ROS, nodes are uniquely named. If two nodes with the same
+    # In ROS, nodes are uniquely named. If two nodes with the same
     # node are launched, the previous one is kicked off. The
     # anonymous=True flag means that rospy will choose a unique
     # name for our 'talker' node so that multiple talkers can

@@ -38,19 +38,6 @@ class lpf:
         self.a2
 
 
-class pidVals:
-    def __init__(self):
-        self.P = 1      # Proportional gain
-        self.I = 0.01   # Integral gain
-        self.D = 0.7    # Derivative gain
-        self.z_d   = 0
-        self.z     = 0
-        self.theta = 0
-        self.h_d   = 0
-        self.h     = 0
-        # self.t     = 0
-
-
 class param:
     def __init__(self):
         # number of robots per team

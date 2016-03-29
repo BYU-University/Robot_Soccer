@@ -10,7 +10,11 @@ import numpy as np
 
 def velDrive(x, y, a_d, r):
 
-    commands = np.matrix([[x], [y], [a_d]])
+    # can run predictor and path planning here for more accuracy
+
+    directionANDangle = PID(r, x, y, a_d)   # PID control
+
+    commands = np.matrix([directionANDangle])
 
     rotate = np.matrix([[np.cos(r[2]), np.sin(r[2]), 0.0],
                         [-np.sin(r[2]), np.cos(r[2]), 0.0],
