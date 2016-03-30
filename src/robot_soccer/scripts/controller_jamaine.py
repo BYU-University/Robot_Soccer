@@ -4,18 +4,17 @@ from robot_soccer.msg import convertedCoordinates
 from PID import *
 import strategies_jamaine
 from storage import *
-from PID import *
 
 
 #this code is an interface between humans and the robot
 #it will call the motor functions and calibration and allow
 #human input to start and stop the robot
 
-K = kTimer()
-P = param()
-G = gameInfo()
-var = pVars()
-vals = pidVals()
+K = kTimer
+P = param
+G = gameInfo
+var = pVars
+vals = pidVals
 
 
 def run_init(data):

@@ -18,7 +18,7 @@ class gameInfo:
         self.late = .001        # camera latency - consider making dynamic
 
 
-class kTimer():
+class kTimer:
     def __init__(self):
         self.count = 0    # delay timer (cycles through code)
         self.bZ = .11     # buffer zone
