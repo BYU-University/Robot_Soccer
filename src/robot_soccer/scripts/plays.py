@@ -130,12 +130,16 @@ def getBall(bret, ball, goal):
 
     kickX = abs(ball[0]-bret[0])
     kickY = abs(ball[1]-bret[1])
-    if ((kickX < 0.05 and kickX > 0) and (kickY < 0.05 and kickY > 0)):
+
+    if ((kickX < 0.09 and kickX > 0) and (kickY < 0.05 and kickY > 0)):
         print "Is kicking positive :",kickX,kickY
         kick.kick()
         kickX =0.0
         kickY=0.0
+
         print "Reseting kicker :",kickX,kickY
+    else:
+        count =0;
 
 
 def holdPosition():
