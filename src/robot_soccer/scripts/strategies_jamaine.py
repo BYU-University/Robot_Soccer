@@ -1,5 +1,5 @@
 import math as m
-import plays as p
+import plays_jamaine as p
 import kickTime as k
 import predictor
 
