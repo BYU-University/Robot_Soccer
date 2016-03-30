@@ -137,3 +137,6 @@ def getBall(bret, ball, goal):
         kickY=0.0
         print "Reseting kicker :",kickX,kickY
 
+
+def holdPosition():
+    ad.stop()

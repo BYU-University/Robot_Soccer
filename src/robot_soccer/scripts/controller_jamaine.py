@@ -1,12 +1,6 @@
 #!/usr/bin/env python
 import rospy
-from roboclaw import *
-#import pygame
-import strategies
-from storage import *
-from std_msgs.msg import String
 from robot_soccer.msg import convertedCoordinates
-import calibratepid as c
 from PID import *
 import strategies_jamaine
 
