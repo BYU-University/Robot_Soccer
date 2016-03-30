@@ -12,6 +12,7 @@ import time
 import kick
 import velchangers
 import MotionSkills
+from param import *
 from enum import Enum
 
 
@@ -189,6 +190,8 @@ class playable:
 
   def executionLoop(self, scheduler):
     scheduler.enter(.05, 1, self.executionLoop,(scheduler,))
+    self.gameState == GameState.play
+
     if self.gameState == GameState.play:
       self.play()
     elif self.gameState == GameState.stop:
