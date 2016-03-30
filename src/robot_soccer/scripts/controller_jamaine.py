@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 import rospy
+from roboclaw import *
 from robot_soccer.msg import convertedCoordinates
 from PID import *
 import strategies_jamaine
 from storage import *
+import calibratepid as c
 
 
 #this code is an interface between humans and the robot
@@ -13,7 +15,7 @@ from storage import *
 K = kTimer
 P = param
 G = gameInfo
-var = pVars
+#var = pVars.__init__(self)
 vals = pidVals
 
 
