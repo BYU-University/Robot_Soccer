@@ -12,25 +12,27 @@ import time
 import kick
 import velchangers
 import MotionSkills
-
-CENTER = Point()
-HEIGHT_FIELD_METER = 1.68
-MAX_SPEED = .7
-HOME_GOAL = Point(1.68,0)
-AWAY_GOAL = Point(1.68,0)
-DIS_BEHIND_BALL = .3
-SCALE_VEL = 5.0
-SCALE_OMEGA = 3.0
-MIN_SPEED = .1
-MIN_DELTA = .1
-RUSH_SPEED = .3
-CIRCLE_SPEED = .3
-
-
-def getTime():
-  return int((time.time()-1420000000)*100.0)
-
 from enum import Enum
+
+
+#CENTER = Point()
+#HEIGHT_FIELD_METER = 1.68
+#MAX_SPEED = .7
+#HOME_GOAL = Point(1.68,0)
+#AWAY_GOAL = Point(1.68,0)
+#DIS_BEHIND_BALL = .3
+#SCALE_VEL = 5.0
+#SCALE_OMEGA = 3.0
+#MIN_SPEED = .1
+#MIN_DELTA = .1
+#USH_SPEED = .3
+#CIRCLE_SPEED = .3
+
+
+#def getTime():
+#  return int((time.time()-1420000000)*100.0)
+
+
 class GameState(Enum):
   stop = 1
   play = 2
