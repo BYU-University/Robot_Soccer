@@ -17,7 +17,7 @@ def strategy_init(data):
     jamaineToBall = m.sqrt((ball[0]-jamaine[0])**2+(ball[1]-jamaine[1])**2)
     jamaineToGoal = m.sqrt((P.goal[0]-jamaine[0])**2+(P.goal[1]-jamaine[1])**2)
 
-    ball = predictor.predict(ball)
+    #ball = predictor.predict(ball)
 
     # here we will pick tactics and call the functions
 
