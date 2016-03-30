@@ -25,7 +25,7 @@ def PIDx(x_d,x):
 
     # integrator anti-windup
     #if ki~=0,signal
-    if abs(vars.xdot)<.1:
+    if abs(vars.xdot)< 0.1:
         vars.x_integrator = vars.x_integrator + vals.Ts/vals.ki*(u-u_unsat)
 
     return u
@@ -48,7 +48,7 @@ def PIDy(y_d,y):
 
     # integrator anti-windup
     #if ki~=0,signal
-    if abs(vars.ydot)<.1:
+    if abs(vars.ydot)< 0.1:
         vars.y_integrator = vars.y_integrator + vals.Ts/vals.ki*(u-u_unsat)
 
     return u
@@ -71,7 +71,7 @@ def PIDw(w_d,w):
 
     # integrator anti-windup
     #if ki~=0,signal
-    if abs(vars.ydot)<.1:
+    if abs(vars.ydot)< 0.1:
         vars.w_integrator = vars.w_integrator + vals.Ts/vals.ki_t*(u-u_unsat)
 
     return u
@@ -98,14 +98,14 @@ class pVars:
 
 class pidVals:
     def __init__(self):
-        self.kp = 1.0      # Proportional gain
-        self.ki = 0.01   # Integral gain
-        self.kd = 0.7    # Derivative gain
-        self.kp_t = 0.5      # Proportional gain
-        self.ki_t = 0.01   # Integral gain
-        self.kd_t = 0.4    # Derivative gain
+        self.kp = 1.0       # Proportional gain
+        self.ki = 0.01      # Integral gain
+        self.kd = 0.7       # Derivative gain
+        self.kp_t = 0.5     # Proportional gain
+        self.ki_t = 0.01    # Integral gain
+        self.kd_t = 0.4     # Derivative gain
         self.Ts = 0.1
-        self.tau = 0.05    #dirty derivative
+        self.tau = 0.05     # dirty derivative
         self.limit = 30000
         # self.t     = 0
 
