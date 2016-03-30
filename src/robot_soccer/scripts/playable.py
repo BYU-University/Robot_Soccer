@@ -12,7 +12,7 @@ import kick
 from robot_soccer.scripts import velchangers
 from robot_soccer.scripts.MotionSkills import MotionSkills
 
-CENTER = Point();
+CENTER = Point()
 HEIGHT_FIELD_METER = 1.68
 MAX_SPEED = .7
 HOME_GOAL = Point(1.68,0)
