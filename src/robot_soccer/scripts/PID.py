@@ -15,10 +15,10 @@ def PIDx(x_d,x):
     # update integral of error
     var.x_integrator = var.x_integrator + (vals.Ts/2)*(var.x_error+var.x_error_d1)
     # update derivative of x
-    var.xdot = (2*vals.tau-vals.Ts)/(2*vals.tau+vals.Ts)*var.xdot + 2/(2*vals.tau+vals.Ts)*(x-x_d1)
+    var.xdot = (2*vals.tau-vals.Ts)/(2*vals.tau+vals.Ts)*var.xdot + 2/(2*vals.tau+vals.Ts)*(x-var.x_d1)
     # update delayed variables for next time through the loop
     var.x_error_d1 = var.x_error
-    x_d1 = x
+    var.x_d1 = x
 
     # compute the pid control signal
     u_unsat = vals.kp*var.x_error + vals.ki*var.x_integrator - vals.kd*var.xdot
@@ -38,10 +38,10 @@ def PIDy(y_d,y):
     # update integral of error
     var.y_integrator = var.y_integrator + (vals.Ts/2)*(var.y_error+var.y_error_d1)
     # update derivative of y
-    var.ydot = (2*vals.tau-vals.Ts)/(2*vals.tau+vals.Ts)*var.ydot + 2/(2*vals.tau+vals.Ts)*(y-y_d1)
+    var.ydot = (2*vals.tau-vals.Ts)/(2*vals.tau+vals.Ts)*var.ydot + 2/(2*vals.tau+vals.Ts)*(y-var.y_d1)
     # update delayed variables for next time through the loop
     var.y_error_d1 = var.y_error
-    y_d1 = y
+    var.y_d1 = y
 
     # compute the pid control signal
     u_unsat = vals.kp*var.y_error + vals.ki*var.y_integrator - vals.kd*var.ydot
@@ -61,10 +61,10 @@ def PIDw(w_d,w):
     # update integral of error
     var.w_integrator = var.w_integrator + (vals.Ts/2)*(var.w_error+var.w_error_d1)
     # update derivative of w
-    var.wdot = (2*vals.tau-vals.Ts)/(2*vals.tau+vals.Ts)*var.wdot + 2/(2*vals.tau+vals.Ts)*(w-w_d1)
+    var.wdot = (2*vals.tau-vals.Ts)/(2*vals.tau+vals.Ts)*var.wdot + 2/(2*vals.tau+vals.Ts)*(w-var.w_d1)
     # update delayed variables for next time through the loop
     var.w_error_d1 = var.w_error
-    w_d1 = w
+    var.w_d1 = w
 
     # compute the pid control signal
     u_unsat = vals.kp_t*var.w_error + vals.ki_t*var.w_integrator - vals.kd_t*var.wdot
