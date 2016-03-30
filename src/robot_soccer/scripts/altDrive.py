@@ -29,6 +29,10 @@ def velDrive(x, y, a_d, r):
     OMEGA = P.M3*rotate*commands
     print('OMEGA')
     print(OMEGA)
+    print('P.M3')
+    print(P.M3)
+    print('rotate')
+    print(rotate)
     # use the trims to correct the motor operation
     #OMEGA = np.dot(OMEGA,trims)
 
