@@ -20,9 +20,9 @@ class pVars():
 
 class pidVals():
     def __init__(self):
-        self.kp = 5.0       # Proportional gain
-        self.ki = 0.7      # Integral gain
-        self.kd = 3.3       # Derivative gain
+        self.kp = 0.1       # Proportional gain
+        self.ki = 0.007      # Integral gain
+        self.kd = 0.03       # Derivative gain
         self.kp_t = 0.0001     # Proportional gain
         self.ki_t = 0.00000008    # Integral gain
         self.kd_t = 0.000001     # Derivative gain
