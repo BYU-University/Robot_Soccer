@@ -35,9 +35,9 @@ def velDrive(x, y, a_d, r):
     OMEGAasINT = np.matrix([[0], [0], [0]])
     print('OMEGAasINT')
     print(OMEGAasINT)
-    OMEGAasINT[0] = int(round(OMEGA[0] * 10))
-    OMEGAasINT[1] = int(round(OMEGA[1] * 10))
-    OMEGAasINT[2] = int(round(OMEGA[2] * 10))
+    OMEGAasINT[0] = int(round(OMEGA[0]))
+    OMEGAasINT[1] = int(round(OMEGA[1]))
+    OMEGAasINT[2] = int(round(OMEGA[2]))
     print('OMEGAasINT')
     print(OMEGAasINT)
 
@@ -48,4 +48,6 @@ def velDrive(x, y, a_d, r):
 def stop():
     robo.DutyM1M2(128, 0, 0)
     robo.DutyM1M2(129, 0, 0)
+
+
 

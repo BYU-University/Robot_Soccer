@@ -28,5 +28,5 @@ class pidVals():
         self.kd_t = 1.0     # Derivative gain
         self.Ts = 0.1
         self.tau = 0.05     # dirty derivative
-        self.limit = 30000
+        self.limit = 32767
         # self.t     = 0
