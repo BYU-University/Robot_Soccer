@@ -10,8 +10,8 @@ import Point
 import math
 import time
 import kick
-from robot_soccer.scripts import velchangers
-from robot_soccer.scripts.MotionSkills import MotionSkills
+import velchangers
+import MotionSkills
 
 CENTER = Point()
 HEIGHT_FIELD_METER = 1.68
