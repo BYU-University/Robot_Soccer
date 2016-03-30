@@ -1,6 +1,7 @@
 import numpy as np
 import roboclaw as r
 from classes import P
+import PID
 
 # This is an alternative way to drive the motors based on velocity and PWM for each motor
 # PWM values range from -32767 to +32767 (eg. +-100% duty).
@@ -12,7 +13,7 @@ def velDrive(x, y, a_d, r):
 #
     # can run predictor and path planning here for more accuracy
 
-    directionANDangle = (r, x, y, a_d)   # PID control
+    directionANDangle = PID(r, x, y, a_d)   # PID control
     print('vector from PID machine')
     print(directionANDangle)
 
