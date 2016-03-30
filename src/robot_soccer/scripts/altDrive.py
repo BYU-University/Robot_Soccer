@@ -1,4 +1,4 @@
-from controller import *
+from controller_jamaine import *
 import numpy as np
 
 # This is an alternative way to drive the motors based on velocity and PWM for each motor
