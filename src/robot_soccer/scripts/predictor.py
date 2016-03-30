@@ -1,5 +1,6 @@
 from strategies import *
 
+
 def predict(ball_now):   # This should predict ball position to correct camera latency
     px = (G.ballPast[0]-ball_now[0])+ball_now
     if m.fabs(px) > 1.65:

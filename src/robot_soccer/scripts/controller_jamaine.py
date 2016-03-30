@@ -3,7 +3,8 @@ import rospy
 from robot_soccer.msg import convertedCoordinates
 from PID import *
 import strategies_jamaine
-
+from storage import *
+from PID import *
 
 
 #this code is an interface between humans and the robot
@@ -13,14 +14,10 @@ import strategies_jamaine
 K = kTimer()
 P = param()
 G = gameInfo()
-vars = pVars()
+var = pVars()
 vals = pidVals()
 
-#go = 0
-#pygame.init()
-#pygame.display.set_mode((400, 400))
-#pygame.key.set_repeat(10, 10)
-#
+
 def run_init(data):
     # debbuging = strategies.strategy_init(data)
     debbuging = strategies_jamaine.strategy_init(data)
