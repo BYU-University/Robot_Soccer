@@ -127,7 +127,6 @@ def getBall(bret, ball, goal):
         goStart(bret)
     else:
         vel.goXYOmega(-robotX,-robotY,toGoal)
-        print "Is not kicking  kicking :",kickX,kickY
 
     kickX = abs(ball[0]-bret[0])
     kickY = abs(ball[1]-bret[1])
