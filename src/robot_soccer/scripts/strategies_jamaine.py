@@ -4,7 +4,7 @@ import kickTime as k
 from controller import *
 import predictor
 
-
+#
 def strategy_init(data):
     xb = data.ball_x
     yb = data.ball_y
