@@ -5,7 +5,7 @@ import mat
 
 
 DEBUG = True
-cap = .5
+cap = .9
 
 
 def radianToQpps(radian):
