@@ -13,7 +13,7 @@ import strategies_jamaine
 K = kTimer()
 P = param()
 G = gameInfo()
-vars = pVars()
+var = Vars()
 vals = pidVals()
 
 #go = 0
