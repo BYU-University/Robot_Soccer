@@ -48,6 +48,6 @@ def velDrive(x, y, a_d, r):
 def stop():
     robo.DutyM1M2(128, 0, 0)
     robo.DutyM1M2(129, 0, 0)
-h
+
 
 
