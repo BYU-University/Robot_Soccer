@@ -2,6 +2,7 @@ import math as m
 import plays_jamaine as p
 import kickTime as k
 import predictor
+from classes import *
 
 
 def strategy_init(data):
