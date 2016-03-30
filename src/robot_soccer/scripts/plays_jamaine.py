@@ -14,7 +14,7 @@ def goToBall(r, b):
     vx = -P.control_k_vx*(r[0]-b[0])
     vy = -P.control_k_vy*(r[1]-b[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
-    omega = P.control_k_phi*(r[2] - theta_d)
+    omega = -P.control_k_phi*(r[2] - theta_d)
     #vel.goXYOmega(vx, vy, omega)
     ad.velDrive(vx, vy, omega, r)
 
@@ -22,10 +22,10 @@ def goToBall(r, b):
 def goToGoal(r):
     g = P.goal
     #vx =
-    vx = P.control_k_vx*(r[0]-g[0])
-    vy = P.control_k_vy*(r[1]-g[1])
+    vx = -P.control_k_vx*(r[0]-g[0])
+    vy = -P.control_k_vy*(r[1]-g[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[1])
-    omega = P.control_k_phi*(r[2] - theta_d)
+    omega = -P.control_k_phi*(r[2] - theta_d)
     vel.goXYOmega(vx, vy, omega)
 
 
