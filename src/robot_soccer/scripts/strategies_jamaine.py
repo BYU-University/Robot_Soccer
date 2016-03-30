@@ -25,7 +25,7 @@ def strategy_init(data):
 
     if jamaineToBall < .01:
         p.goToGoal(jamaine)
-        print('Get the ball!')
+        print('Put it in the net')
 
     elif G.reset == True:       # resets the robots
         p.goToStartForward(jamaine)
@@ -35,7 +35,7 @@ def strategy_init(data):
 
     else:
         p.goToBall(jamaine, ball)
-        print('Put it in the net!')
+        print('Get the ball')
 
     # G.ballPast = ball
 
