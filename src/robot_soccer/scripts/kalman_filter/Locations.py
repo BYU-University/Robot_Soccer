@@ -21,12 +21,14 @@ class BallLocation:
 class Locations:
     def __init__(self):
         self.timestamp = 0
-        self.home1 = 0
+        self.home1_x = 0
+        self.home1_y = 0
         # self.home2 = RobotLocation()
         #self.away1 = RobotLocation()
         # self.away2 = RobotLocation()
-        self.ball = 0
-        
+        self.ball_x = 0
+        self.ball_y = 0
+
     def setTimestamp(self,timestamp):
         self.timestamp = timestamp;
         # self.home1.timestamp = 0 # timestamp

@@ -1,9 +1,7 @@
 import time
-from velchangers import *
+#from velchangers import *
 import velchangers
-import math
 from numpy import matrix
-#from kalman_filter.Sample import *
 from param import *
 from Point import Point
 
@@ -28,15 +26,15 @@ class Command:
     
     def run(self):
         self.start = round(time.time(),2)
-        velchange.goXYOmegaTheta(self.vel_x, self.vel_y, self.omega, self.theta)
+        velchangers.goXYOmegaTheta(self.vel_x, self.vel_y, self.omega, self.theta)
     
     def launch(self):
         self.start = round(time.time(),2)
         self.stop = round(self.start+self.runTime,2)
-        velchange.goXYOmegaTheta(self.vel_x, self.vel_y, self.omega, self.theta)
+        velchangers.goXYOmegaTheta(self.vel_x, self.vel_y, self.omega, self.theta)
         while(time.time() < self.stop):
             pass
-        velchange.goXYOmega(0,0,0)
+        velchangers.goXYOmega(0,0,0)
         
 class MotionSkills:
     def __init__(self):
@@ -112,8 +110,8 @@ class MotionSkills:
     @staticmethod
     #behind_x is the allowed distance behind the ball the robot can go while still rushing the ball
     def isPointInFrontOfRobot(robotLoc,point,param_x = .5, param_y = .04):
-        refPoint = Point(point.x-robotLoc.x,point.y - robotLoc.y)
-        rotatedPoint = MotionSkills.rotatePointByAngle(refPoint, robotLoc.theta)
+        refPoint = Point(point.x-robotLoc[0],point.y - robotLoc[1])
+        rotatedPoint = MotionSkills.rotatePointByAngle(refPoint, robotLoc[2])
         
         if rotatedPoint.x > 0 and rotatedPoint.x < param_x and rotatedPoint.y < param_y and rotatedPoint.y > -param_y:
             return True
@@ -138,12 +136,12 @@ class MotionSkills:
         
     @staticmethod
     def isBallBehindRobot(robotLoc, ball):
-      distRobot_x = (HOME_GOAL.x - robotLoc.x)
-      distRobot_y = (HOME_GOAL.y - robotLoc.y)
+      distRobot_x = (HOME_GOAL.x - robotLoc[0])
+      distRobot_y = (HOME_GOAL.y - robotLoc[1])
       distRobotToGoal = math.sqrt(distRobot_x**2+distRobot_y**2)
       
-      distBall_x = (HOME_GOAL.x - robotLoc.x)
-      distBall_y = (HOME_GOAL.y - robotLoc.y)
+      distBall_x = (HOME_GOAL.x - robotLoc[0])
+      distBall_y = (HOME_GOAL.y - robotLoc[1])
       distBallToGoal = math.sqrt(distBall_x**2+distBall_y**2)
       
       if distRobotToGoal < distBallToGoal:

@@ -61,6 +61,22 @@ def goXYOmega(x,y,Omega):
   SpeedM2(128,s2)
   SpeedM1(129,s3)
 
+def goXYOmegaTheta(x,y,omega,theta,limit=False):
+  if limit:
+    total = math.sqrt(float(x**2+y**2))
+    if total > cap:
+      scale = cap / total
+      x = x * scale
+      y = y * scale
+  v1,v2,v3 = mat.getWheelVelTheta(x,y,omega,theta)
+  s1 = radianToQpps(v1)
+  s2 = radianToQpps(v2)
+  s3 = radianToQpps(v3)
+  SetM1Speed(128,s1)
+  SetM2Speed(128,s2)
+  SetM1Speed(129,s3)
+
+
 '''
 def goXYOmegaAccel(x,y,theta):
   v1,v2,v3 = mat.getWheelVel(x,y,theta)

@@ -75,6 +75,15 @@ def getRobotXYOmega(x,y,omega):
   desired = R(omega)*desired
   return desired
 
+
+def getWheelVelTheta(x,y,omega,theta):
+  desired = getRobotXYOmega(x, y, omega, theta)
+
+  result = M*desired
+
+  return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]
+
+
 def getRobotXYOmegaTheta(x,y,omega,theta):
 
   desired = matrix( [[x],
