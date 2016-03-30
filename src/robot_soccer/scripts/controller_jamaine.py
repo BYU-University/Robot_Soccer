@@ -2,8 +2,7 @@
 import rospy
 from roboclaw import *
 from robot_soccer.msg import convertedCoordinates
-from PID import pidVals
-from PID import pVars
+from PID import *
 import strategies_jamaine
 from storage import *
 import calibratepid as c

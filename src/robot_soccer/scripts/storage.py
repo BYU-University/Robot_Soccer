@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-class kalStore:
+class kalStore():
     def __init__(self):
 
         self.xhat = 0
@@ -9,7 +9,7 @@ class kalStore:
         self.S = 0
         self.S_delayed = 0
 
-class gameInfo:
+class gameInfo():
     def __init__(self):
         self.score = [0, 0]  # home and away score
         self.reset = False   # Flag for making it return to the home positions
@@ -18,7 +18,7 @@ class gameInfo:
         self.late = .001        # camera latency - consider making dynamic
 
 
-class kTimer:
+class kTimer():
     def __init__(self):
         self.count = 0    # delay timer (cycles through code)
         self.bZ = .11     # buffer zone
@@ -28,7 +28,7 @@ class kTimer:
         self.cL = 200    # count limit to reset
 
 
-class lpf:
+class lpf():
     def __init__(self):
         self.position
         self.position_delayed
@@ -38,7 +38,7 @@ class lpf:
         self.a2
 
 
-class param:
+class param():
     def __init__(self):
         # number of robots per team
         self.num_robots = 2
