@@ -23,9 +23,9 @@ class pidVals():
         self.kp = 5.0       # Proportional gain
         self.ki = 0.7      # Integral gain
         self.kd = 3.3       # Derivative gain
-        self.kp_t = 0.001     # Proportional gain
-        self.ki_t = 0.00008    # Integral gain
-        self.kd_t = 0.0001     # Derivative gain
+        self.kp_t = 0.0001     # Proportional gain
+        self.ki_t = 0.000008    # Integral gain
+        self.kd_t = 0.00001     # Derivative gain
         self.Ts = 0.1
         self.tau = 0.05     # dirty derivative
         self.limit = 30000
