@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from mock import self
+
 import rospy
 from roboclaw import *
 from robot_soccer.msg import convertedCoordinates
@@ -16,7 +18,7 @@ K = kTimer
 P = param
 G = gameInfo
 #var = pVars.__init__(self)
-vals = pidVals()
+vals = pidVals(self)
 
 
 def run_init(data):
