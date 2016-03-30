@@ -3,7 +3,7 @@ import rospy
 from robot_soccer.msg import convertedCoordinates
 from PID import *
 import strategies_jamaine
-import storage
+from storage import *
 
 
 #this code is an interface between humans and the robot
