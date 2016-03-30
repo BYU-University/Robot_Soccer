@@ -32,12 +32,14 @@ def velDrive(x, y, a_d, r):
     # use the trims to correct the motor operation
     #OMEGA = np.dot(OMEGA,trims)
 
-    intmega = np.matrix([[0], [0], [0]])
-    intmega[0] = int(round(OMEGA[0] * 1000))
-    intmega[1] = int(round(OMEGA[1] * 1000))
-    intmega[2] = int(round(OMEGA[2] * 1000))
-    print('intmega')
-    print(intmega)
+    OMEGAasINT = np.matrix([[0], [0], [0]])
+    print('OMEGAasINT')
+    print(OMEGAasINT)
+    OMEGAasINT[0] = int(round(OMEGA[0] * 1000))
+    OMEGAasINT[1] = int(round(OMEGA[1] * 1000))
+    OMEGAasINT[2] = int(round(OMEGA[2] * 1000))
+    print('OMEGAasINT')
+    print(OMEGAasINT)
 
     robo.DutyM1M2(128, intmega[0], intmega[1])
     robo.DutyM1M2(129, intmega[2], 0)
