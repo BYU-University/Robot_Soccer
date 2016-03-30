@@ -4,13 +4,13 @@ import kickTime as k
 from controller import *
 import predictor
 
-#
+
 def strategy_init(data):
     xb = data.ball_x
     yb = data.ball_y
-    xr = data.home1_x
-    yr = data.home1_y
-    tr = data.home1_theta
+    xr = data.home2_x
+    yr = data.home2_y
+    tr = data.home2_theta
 
     jamaine = [xr, yr, tr]
     ball = [xb, yb]
