@@ -32,7 +32,7 @@ def velDrive(x, y, a_d, r):
     # use the trims to correct the motor operation
     #OMEGA = np.dot(OMEGA,trims)
 
-    OMEGAasINT = np.matrix([[20000], [20000], [0]])
+    OMEGAasINT = np.matrix([[-20000], [20000], [0]])
     #print('OMEGAasINT')
     #print(OMEGAasINT)
     #OMEGAasINT[0] = int(round(OMEGA[0]))
