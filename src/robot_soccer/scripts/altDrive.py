@@ -1,5 +1,6 @@
-from controller_jamaine import *
 import numpy as np
+import roboclaw as r
+from controller_jamaine import P
 
 # This is an alternative way to drive the motors based on velocity and PWM for each motor
 # PWM values range from -32767 to +32767 (eg. +-100% duty).
@@ -36,11 +37,11 @@ def velDrive(x, y, a_d, r):
     print('intmega')
     print(intmega)
 
-    DutyM1M2(128, intmega[0], intmega[1])
-    DutyM1M2(129, intmega[2], 0)
+    r.DutyM1M2(128, intmega[0], intmega[1])
+    r.DutyM1M2(129, intmega[2], 0)
 
 
 def stop():
-    DutyM1M2(128, 0, 0)
-    DutyM1M2(129, 0, 0)
+    r.DutyM1M2(128, 0, 0)
+    r.DutyM1M2(129, 0, 0)
 
