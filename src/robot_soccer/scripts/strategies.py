@@ -36,7 +36,7 @@ def strategy_init(data):
     #time.sleep(10)
     #p.goCenter(data)
     #time.sleep(5)
-    p.getBall(bret,ball,goal)
+    p.getBall(bret,ball,goal,)
 
 
 
