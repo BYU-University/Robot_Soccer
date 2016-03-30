@@ -13,6 +13,8 @@ def velDrive(x, y, a_d, r):
     # can run predictor and path planning here for more accuracy
 
     directionANDangle = PID(r, x, y, a_d)   # PID control
+    print('vector from PID machine')
+    print(directionANDangle)
 
     commands = np.matrix([directionANDangle])
 
@@ -28,9 +30,9 @@ def velDrive(x, y, a_d, r):
     #OMEGA = np.dot(OMEGA,trims)
 
     intmega = np.matrix([[0], [0], [0]])
-    intmega[0] = int(round(OMEGA[0] * 750))
-    intmega[1] = int(round(OMEGA[1] * 750))
-    intmega[2] = int(round(OMEGA[2] * 750))
+    intmega[0] = int(round(OMEGA[0] * 1000))
+    intmega[1] = int(round(OMEGA[1] * 1000))
+    intmega[2] = int(round(OMEGA[2] * 1000))
     print('intmega')
     print(intmega)
 
