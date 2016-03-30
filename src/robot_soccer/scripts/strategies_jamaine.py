@@ -1,7 +1,6 @@
 import math as m
 import plays as p
 import kickTime as k
-from controller_jamaine import *
 import predictor
 
 
