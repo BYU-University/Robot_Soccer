@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-from mock import self
-
 import rospy
 from roboclaw import *
 from robot_soccer.msg import convertedCoordinates
