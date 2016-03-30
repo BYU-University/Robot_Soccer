@@ -22,6 +22,8 @@ def velDrive(x, y, a_d, r):
     rotate = np.matrix([[np.cos(r[2]), np.sin(r[2]), 0.0],
                         [-np.sin(r[2]), np.cos(r[2]), 0.0],
                         [0.0, 0.0, 1.0]])
+    print('commands')
+    print(commands)
 
     # individual motor commands we may need a control gain
     OMEGA = P.M3*rotate*commands
