@@ -1,8 +1,8 @@
 import math as m
-import plays as p
+import plays_jamaine as p
 import kickTime as k
-from controller_jamaine import *
 import predictor
+from classes import *
 
 
 def strategy_init(data):
@@ -17,7 +17,7 @@ def strategy_init(data):
     jamaineToBall = m.sqrt((ball[0]-jamaine[0])**2+(ball[1]-jamaine[1])**2)
     jamaineToGoal = m.sqrt((P.goal[0]-jamaine[0])**2+(P.goal[1]-jamaine[1])**2)
 
-    ball = predictor.predict(ball)
+    #ball = predictor.predict(ball)
 
     # here we will pick tactics and call the functions
 
@@ -25,6 +25,7 @@ def strategy_init(data):
 
     if jamaineToBall < .01:
         p.goToGoal(jamaine)
+        print('Put it in the net')
 
     elif G.reset == True:       # resets the robots
         p.goToStartForward(jamaine)
@@ -34,6 +35,7 @@ def strategy_init(data):
 
     else:
         p.goToBall(jamaine, ball)
+        print('Get the ball')
 
     # G.ballPast = ball
 

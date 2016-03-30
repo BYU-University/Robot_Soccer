@@ -1,25 +1,19 @@
 #!/usr/bin/env python
 import rospy
+from roboclaw import *
 from robot_soccer.msg import convertedCoordinates
-from PID import *
 import strategies_jamaine
-from storage import *
+import calibratepid as c
 
 
 #this code is an interface between humans and the robot
 #it will call the motor functions and calibration and allow
 #human input to start and stop the robot
 
-K = kTimer
-P = param
-G = gameInfo
-var = pVars
-vals = pidVals
-
 
 def run_init(data):
     # debbuging = strategies.strategy_init(data)
-    debbuging = strategies_jamaine.strategy_init(data)
+    strategies_jamaine.strategy_init(data)
     #rospy.loginfo("information for debuging",debbuging)
 def mainController():
     # In ROS, nodes are uniquely named. If two nodes with the same
