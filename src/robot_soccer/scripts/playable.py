@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import rospy
 from robot_soccer.msg import convertedCoordinates
 import calibratepid as c
