@@ -28,8 +28,6 @@ def velDrive(x, y, a_d, r):
     print P.M3
     print 'rotate'
     print rotate
-    print 'OMEGA'
-    print OMEGA
 
     # individual motor commands we may need a control gain
     OMEGA = P.M3*rotate*commands
