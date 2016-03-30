@@ -11,8 +11,8 @@ from classes import *
 
 def goToBall(r, b):
     g = P.goal
-    vx = (r[0]-b[0])
-    vy = (r[1]-b[1])
+    vx = -(r[0]-b[0])
+    vy = -(r[1]-b[1])
     theta_d = m.atan2(g[1]-r[1], g[0]-r[0])
     omega = -(r[2] - theta_d)
     #vel.goXYOmega(vx, vy, omega)
