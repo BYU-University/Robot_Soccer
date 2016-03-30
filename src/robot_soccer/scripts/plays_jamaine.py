@@ -4,6 +4,7 @@ from controller_jamaine import *
 import altDrive as ad
 import math
 import kick
+from classes import *
 
 # This is where we store our different plays
 
