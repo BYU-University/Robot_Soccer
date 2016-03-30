@@ -17,7 +17,7 @@ def velDrive(x, y, a_d, r):
     print('vector from PID machine')
     print(directionANDangle)
 
-    commands = np.matrix([directionANDangle])
+    commands = np.matrix([[directionANDangle[0]], [directionANDangle[1]], [directionANDangle[2]]])
 
     rotate = np.matrix([[np.cos(r[2]), np.sin(r[2]), 0.0],
                         [-np.sin(r[2]), np.cos(r[2]), 0.0],
