@@ -41,8 +41,8 @@ def velDrive(x, y, a_d, r):
     print('OMEGAasINT')
     print(OMEGAasINT)
 
-    robo.DutyM1M2(128, intmega[0], intmega[1])
-    robo.DutyM1M2(129, intmega[2], 0)
+    robo.DutyM1M2(128, OMEGAasINT[0], OMEGAasINT[1])
+    robo.DutyM1M2(129, OMEGAasINT[2], 0)
 
 
 def stop():
