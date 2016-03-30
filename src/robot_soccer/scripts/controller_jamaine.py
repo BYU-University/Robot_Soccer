@@ -28,8 +28,8 @@ vals = pidVals()
 #pygame.key.set_repeat(10, 10)
 #
 def run_init(data):
-    debbuging = strategies.strategy_init(data)
-    # debbuging = strategies_jamaine.strategy_init(data)
+    # debbuging = strategies.strategy_init(data)
+    debbuging = strategies_jamaine.strategy_init(data)
     #rospy.loginfo("information for debuging",debbuging)
 def mainController():
     # In ROS, nodes are uniquely named. If two nodes with the same
@@ -55,32 +55,3 @@ if __name__ == '__main__':
     except:
         global _SERIAL_ERR
         _SERIAL_ERR = True
-
-
-'''
- if go == 0:
-	# wait for keyboard initialization
-    for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-		    sys.exit()
-	    keys=pygame.key.get_pressed()
-
-        # starts robot function
-	    if keys[K_ENTER]:
-		    print('Begin Roboboogie')
-		    go = 1
-
-		# quit the program
-	    if keys[K_ESCAPE]:
-		    print('The robots are dead!')
-		    pygame.quit()
-
- if go != 0:
-	for event in pygame.event.get():
-
-        # quit the program
-	    if keys[K_ESCAPE]:
-		    print('The robots are dead!')
-		    #pygame.quit()
-			go = 0
-'''

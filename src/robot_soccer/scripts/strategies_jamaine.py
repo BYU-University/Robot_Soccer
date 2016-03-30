@@ -36,7 +36,41 @@ def strategy_init(data):
     #time.sleep(10)
     #p.goCenter(data)
     #time.sleep(5)
-    p.getBall(bret,ball,goal)
+    #p.getBall(bret,ball,goal)
+
+    k.kickTime(bretToGoal, bretToBall)
+
+    if bretToBall < .01:
+        p.goToGoal(bret)
+    #    if data.home1_x > 1.6 and data.home1_y < -0.01:
+    #        p.goCenter(data)  # reset robot to go center field
+    #        time.sleep(5)
+    # if jamaineToBall < 0.02:
+    #    kick.kick()
+    #    time.sleep(0.5)
+
+    # reset robot positions
+    # elif keys[K_SPACE]:
+    #   print('Start positions!')
+    #   # p.goToStartDefender(jamaine)
+	#   p.goToStartForward(bret)
+
+    elif G.reset == True:       # resets the robots
+        p.goToStartForward(bret)
+        # p.goToStartDefender(jamaine)
+
+    elif G.pause == True:      # pauses the game
+        p.holdPosition()
+
+    else:
+        p.goToBall(bret, ball)
+        #p.getBall(data)
+        #p.goToStartDefender(jamaine)
+        #p.defendBall(jamaine,ball)
+    #p.getBall(data)
+
+    # predictor.predict(ball)
+    # G.ballPast = ball
 
 
 
@@ -72,3 +106,15 @@ def strategy_init(data):
         #p.defendBall(jamaine,ball)
     #p.getBall(data)
 '''
+
+def reset():
+    G.reset = True
+
+
+def pause():
+    G.pause = True
+
+
+def go():
+    G.pause = False
+    G.reset = False
