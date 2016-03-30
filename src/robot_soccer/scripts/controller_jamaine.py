@@ -16,7 +16,7 @@ K = kTimer
 P = param
 G = gameInfo
 #var = pVars.__init__(self)
-vals = pidVals
+vals = pidVals()
 
 
 def run_init(data):
