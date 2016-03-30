@@ -7,17 +7,13 @@ lpf_alpha = 0.7
 dirty_derivative_gain = P.camera_sample_rate/5
 camera_sample_rate = 10*control_sample_rate
 
-def ball = utility_kalman_filter_ball(ball, t, P)
-
-'''
-    persistent xhateye(2)
-    persistent xhat_delayed
-    persistent S
-    persistent S_delayed
-'''
-
-    if t == 0:  # initialize filter
-        kS.xhat = np.matrix([
+class kal():
+    def __init__(self):
+        self.xhateye(2)
+        self.xhat_delayed
+        self.S
+        self.S_delayed
+        self.kS_xhat = np.matrix([
             [0],               # initial guess at x-position of ball
             [0],               # initial guess at y-position of ball
             [0],               # initial guess at x-velocity of ball
@@ -27,8 +23,8 @@ def ball = utility_kalman_filter_ball(ball, t, P)
             [0],               # initial guess at x-jerk of ball
             [0]                # initial guess at y-jerk of ball
             ])
-        kS.xhat_delayed = kS.xhat
-        S = np.diag([
+        self.kS_xhat_delayed = kS.xhat
+        self.S = np.matrix([
             [P.field_width/2, 0, 0, 0, 0, 0, 0, 0], # initial variance of x-position of ball
             [0, P.field_width/2, 0, 0, 0, 0, 0, 0], # initial variance of y-position of ball
             [0, 0, .01, 0, 0, 0, 0, 0],             # initial variance of x-velocity of ball
@@ -38,43 +34,45 @@ def ball = utility_kalman_filter_ball(ball, t, P)
             [0, 0, 0, 0, 0, 0, .0001, 0],           # initial variance of x-jerk of ball
             [0, 0, 0, 0, 0, 0, 0, .0001]            # initial variance of y-jerk of ball
             ])
-        S_delayed=S
+        self.S_delayed=self.S
 
-    # prediction step between measurements
-    N = 10
-    for i=1:N:
-        kS.xhat = kS.xhat + (P.control_sample_rate/N)*P.A_ball*kS.xhat
-        kS.S = kS.S + (P.control_sample_rate/N)*(P.A_ball*S+S*P.A_ball'+P.Q_ball)
+    def ball = utility_kalman_filter_ball(ball, t, P)
 
-    # correction step at measurement
-    if ball.camera_flag, # only update when the camera flag is one indicating a new measurement
-        # case 1 does not compensate for camera delay
-        # case 2 compensates for fixed camera delay
-        #switch 2
-        #    case 1:
-        #        y = ball.position_camera; # actual measurement
-        #        y_pred = P.C_ball*xhat;  # predicted measurement
-        #        L = S*P.C_ball'/(P.R_ball+P.C_ball*S*P.C_ball')
-        #        S = (eye(8)-L*P.C_ball)*S
-        #        xhat = xhat + L*(y-y_pred)
-        #    case 2,
-                y = ball.position_camera; # actual measuremnt
-                y_pred = P.C_ball*kS.xhat_delayed;  # predicted measurement
-                L = kS.S_delayed*P.C_ball'/(P.R_ball+P.C_ball*S_delayed*P.C_ball')
-                S_delayed = (eye(8)-L*P.C_ball)*kS.S_delayed
-                kS.xhat_delayed = kS.xhat_delayed + L*(y-y_pred)
-                for i=1:N*(P.camera_sample_rate/P.control_sample_rate),
-                    kS.xhat_delayed = kS.xhat_delayed + (P.control_sample_rate/N)*(P.A_ball*kS.xhat_delayed)
-                    kS.S_delayed = kS.S_delayed + (P.control_sample_rate/N)*(P.A_ball*kS.S_delayed+kS.S_delayed*P.A_ball'+P.Q_ball)
-                kS.xhat = kS.xhat_delayed
-                kS.S    = kS.S_delayed
+        # prediction step between measurements
+        N = 10
+        for i=1:N:
+            kS.xhat = kS.xhat + (P.control_sample_rate/N)*P.A_ball*kS.xhat
+            kS.S = kS.S + (P.control_sample_rate/N)*(P.A_ball*S+S*P.A_ball'+P.Q_ball)
 
-    % output current estimate of state
-    ball.position     = kS.xhat(1:2)
-    ball.velocity     = kS.xhat(3:4)
-    ball.acceleration = kS.xhat(5:6)
-    ball.jerk         = kS.xhat(7:8)
-    ball.S            = kS.S
+        # correction step at measurement
+        if ball.camera_flag, # only update when the camera flag is one indicating a new measurement
+            # case 1 does not compensate for camera delay
+            # case 2 compensates for fixed camera delay
+            #switch 2
+            #    case 1:
+            #        y = ball.position_camera; # actual measurement
+            #        y_pred = P.C_ball*xhat;  # predicted measurement
+            #        L = S*P.C_ball'/(P.R_ball+P.C_ball*S*P.C_ball')
+            #        S = (eye(8)-L*P.C_ball)*S
+            #        xhat = xhat + L*(y-y_pred)
+            #    case 2,
+                    y = ball.position_camera; # actual measuremnt
+                    y_pred = P.C_ball*kS.xhat_delayed;  # predicted measurement
+                    L = kS.S_delayed*P.C_ball'/(P.R_ball+P.C_ball*S_delayed*P.C_ball')
+                    S_delayed = (eye(8)-L*P.C_ball)*kS.S_delayed
+                    kS.xhat_delayed = kS.xhat_delayed + L*(y-y_pred)
+                    for i=1:N*(P.camera_sample_rate/P.control_sample_rate),
+                        kS.xhat_delayed = kS.xhat_delayed + (P.control_sample_rate/N)*(P.A_ball*kS.xhat_delayed)
+                        kS.S_delayed = kS.S_delayed + (P.control_sample_rate/N)*(P.A_ball*kS.S_delayed+kS.S_delayed*P.A_ball'+P.Q_ball)
+                    kS.xhat = kS.xhat_delayed
+                    kS.S    = kS.S_delayed
+
+        # output current estimate of state
+        ball.position     = kS.xhat(1:2)
+        ball.velocity     = kS.xhat(3:4)
+        ball.acceleration = kS.xhat(5:6)
+        ball.jerk         = kS.xhat(7:8)
+        ball.S            = kS.S
 
 
 #------------------------------------------
