@@ -4,7 +4,8 @@ from mock import self
 import rospy
 from roboclaw import *
 from robot_soccer.msg import convertedCoordinates
-from PID import *
+from PID import pidVals
+from PID import pVars
 import strategies_jamaine
 from storage import *
 import calibratepid as c
@@ -14,16 +15,18 @@ import calibratepid as c
 #it will call the motor functions and calibration and allow
 #human input to start and stop the robot
 
-K = kTimer
-P = param
-G = gameInfo
+K = kTimer()
+P = param()
+G = gameInfo()
+var = pVars()
+vals = pidVals()
 #var = pVars.__init__(self)
-vals = pidVals().kd
+#vals = pidVals().letgoRobot()
 
 
 def run_init(data):
     # debbuging = strategies.strategy_init(data)
-    debbuging = strategies_jamaine.strategy_init(data)
+    strategies_jamaine.strategy_init(data)
     #rospy.loginfo("information for debuging",debbuging)
 def mainController():
     # In ROS, nodes are uniquely named. If two nodes with the same
