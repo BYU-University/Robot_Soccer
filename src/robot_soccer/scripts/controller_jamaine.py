@@ -3,9 +3,9 @@ import rospy
 from robot_soccer.msg import convertedCoordinates
 from PID import *
 import strategies_jamaine
+import storage
 
 
-#
 #this code is an interface between humans and the robot
 #it will call the motor functions and calibration and allow
 #human input to start and stop the robot
@@ -16,11 +16,7 @@ G = gameInfo()
 var = pVars()
 vals = pidVals()
 
-#go = 0
-#pygame.init()
-#pygame.display.set_mode((400, 400))
-#pygame.key.set_repeat(10, 10)
-#
+
 def run_init(data):
     # debbuging = strategies.strategy_init(data)
     debbuging = strategies_jamaine.strategy_init(data)
