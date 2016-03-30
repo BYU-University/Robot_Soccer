@@ -26,7 +26,7 @@ def PIDx(x_d,x):
 
     # integrator anti-windup
     #if ki~=0,signal
-    if abs(var.xdot)< 0.1:
+    if abs(var.xdot)< 1:
         var.x_integrator = var.x_integrator + vals.Ts/vals.ki*(u-u_unsat)
 
     return u
@@ -49,7 +49,7 @@ def PIDy(y_d,y):
 
     # integrator anti-windup
     #if ki~=0,signal
-    if abs(var.ydot)< 0.1:
+    if abs(var.ydot)< 1:
         var.y_integrator = var.y_integrator + vals.Ts/vals.ki*(u-u_unsat)
 
     return u
@@ -72,7 +72,7 @@ def PIDw(w_d,w):
 
     # integrator anti-windup
     #if ki~=0,signal
-    if abs(var.ydot)< 0.1:
+    if abs(var.ydot)< 1:
         var.w_integrator = var.w_integrator + vals.Ts/vals.ki_t*(u-u_unsat)
 
     return u
