@@ -1,10 +1,9 @@
-
 from storage import *
-from PID import *
-
+from PIDclassVars import *
 
 K = kTimer()
 P = param()
 G = gameInfo()
 var = pVars()
 vals = pidVals()
+
