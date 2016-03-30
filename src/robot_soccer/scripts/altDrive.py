@@ -1,5 +1,5 @@
 import numpy as np
-import roboclaw as r
+import roboclaw as robo
 from classes import P
 from PID import PID
 
@@ -10,7 +10,7 @@ from PID import PID
 
 
 def velDrive(x, y, a_d, r):
-#
+
     # can run predictor and path planning here for more accuracy
 
     directionANDangle = PID(r, x, y, a_d)   # PID control
@@ -39,11 +39,11 @@ def velDrive(x, y, a_d, r):
     print('intmega')
     print(intmega)
 
-    r.DutyM1M2(128, intmega[0], intmega[1])
-    r.DutyM1M2(129, intmega[2], 0)
+    robo.DutyM1M2(128, intmega[0], intmega[1])
+    robo.DutyM1M2(129, intmega[2], 0)
 
 
 def stop():
-    r.DutyM1M2(128, 0, 0)
-    r.DutyM1M2(129, 0, 0)
+    robo.DutyM1M2(128, 0, 0)
+    robo.DutyM1M2(129, 0, 0)
 
