@@ -13,3 +13,5 @@ float64 away2_y
 float64 away2_theta
 float64 ball_x
 float64 ball_y
+float64 field_width
+float64 field_height

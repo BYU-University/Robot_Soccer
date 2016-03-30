@@ -83,7 +83,7 @@ def goCenter(data):
 #here we do homeX - 1.35 we go to home goal
 #here we fo homeX + 1.35 we go to away goal
 def goToGoal(bret):
-    distGoalX = 1.56
+    distGoalX = 1.75
     #distGoaly = data.home1_y
 
     goX = bret[0]+distGoalX#data.home1_x+distGoalX
@@ -106,24 +106,26 @@ def goTopoint(x,y,t):
     vel.goXYOmega(x,y,t)
 
 
-def getBall(bret, ball, goal):
+def getBall(bret, ball, field):
     robotX = ball[0]-bret[0]    #has to be balllocation - robotLocation
     robotY = ball[1]-bret[1]
-    #g = P.goal
-
+    fieldX = field[0]/2
+    fieldY = field[1]/2
     oldPosX = robotX
     oldPosY = robotY
 
     if robotX == 0:
         robotX = .01
-    xgoal = goal[0]-bret[0]
+
+    xgoal = fieldX-bret[0]
     if xgoal == 0:
         xgoal = .01
 
 
-    toGoal = float(math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(goal[1]-bret[1])**2))+bret[2])
+    toGoal = float(math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(fieldY-bret[1])**2))+bret[2])
     #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
-    if ball[0] > goal[0] or ball[0] < -goal[0]:
+    goalX = fieldX - 0.08
+    if ball[0] > goalX or ball[0] < -goalX:
         goStart(bret)
     else:
         vel.goXYOmega(-robotX,-robotY,toGoal)
@@ -131,7 +133,7 @@ def getBall(bret, ball, goal):
     kickX = abs(ball[0]-bret[0])
     kickY = abs(ball[1]-bret[1])
 
-    if ((kickX < 0.09 and kickX > 0) and (kickY < 0.05 and kickY > 0)):
+    if ((kickX < 0.09 and kickX > 0) and (kickY < 0.045 and kickY > 0)):
         print "Is kicking positive :",kickX,kickY
         kick.kick()
         kickX =0.0
@@ -139,7 +141,7 @@ def getBall(bret, ball, goal):
 
         print "Reseting kicker :",kickX,kickY
     else:
-        count =0;
+        count =0
 
 
 def holdPosition():
