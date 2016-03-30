@@ -1,7 +1,7 @@
 import numpy as np
 import roboclaw as r
 from classes import P
-import PID
+from PID import PID
 
 # This is an alternative way to drive the motors based on velocity and PWM for each motor
 # PWM values range from -32767 to +32767 (eg. +-100% duty).
