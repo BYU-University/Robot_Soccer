@@ -122,9 +122,9 @@ class playable:
                 point = Point(self.ball.x,self.ball.y)
                 # if robot above  ball
                 if self.ball.y < self.robotHome1.y:
-                    point.y = self.ball.y + DIS_BEHIND_BALL
-                else:
                     point.y = self.ball.y - DIS_BEHIND_BALL
+                else:
+                    point.y = self.ball.y + DIS_BEHIND_BALL
                 #if abs(point.y) > float(HEIGHT_FIELD_METER):
                  #       point.y = float(HEIGHT_FIELD_METER - 0.02)
                         #print "valor muito grande",point.x,point.y
