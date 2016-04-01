@@ -2,6 +2,7 @@ import velchangers as vel
 from strategies import *
 from controller import *
 import altDrive as ad
+import kick
 
 
 # This is where we store our different plays
@@ -105,6 +106,46 @@ def goHomeGoal(bret):
 
 def goTopoint(x,y,t):
     vel.goXYOmega(x,y,t)
+
+
+
+def getBall(bret, ball, field):
+    robotX = ball[0]-bret[0]    #has to be balllocation - robotLocation
+    robotY = ball[1]-bret[1]
+    fieldX = field[0]/2
+    fieldY = field[1]/2
+    oldPosX = robotX
+    oldPosY = robotY
+
+    if robotX == 0:
+        robotX = .01
+
+    xgoal = fieldX-bret[0]
+    if xgoal == 0:
+        xgoal = .01
+
+
+    toGoal = float(math.acos(float(xgoal)/math.sqrt(float(xgoal)**2+float(fieldY-bret[1])**2))+bret[2])
+    #rospy.loginfo("toBall and toGoal : %f, %f" %(toBall,toGoal))
+    goalX = fieldX - 0.08
+    if ball[0] > goalX or ball[0] < -goalX:
+        goStart(bret)
+    else:
+        vel.goXYOmega(-robotX,-robotY,toGoal)
+
+    kickX = abs(ball[0]-bret[0])
+    kickY = abs(ball[1]-bret[1])
+
+    if ((kickX < 0.09 and kickX > 0) and (kickY < 0.045 and kickY > 0)):
+        print "Is kicking positive :",kickX,kickY
+        kick.kick()
+        kickX =0.0
+        kickY=0.0
+
+        print "Reseting kicker :",kickX,kickY
+    else:
+        count =0
+
 
 
 def holdPosition():

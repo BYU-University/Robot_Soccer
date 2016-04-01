@@ -26,7 +26,7 @@ print r2x
 print r2y
 print r3x
 print r3y
-
+print "finish printing the directions"
 s1theta = r1theta - math.pi/2
 s1x = math.cos(s1theta)
 s1y = math.sin(s1theta)
@@ -66,6 +66,13 @@ print "this is the M value:", M
 #here starts the defs
 
 #this return a tuple with x, y, omega(or theta)
+def getRobotXYOmega(x,y,omega,theta):
+  desired = matrix( [[x],
+                     [y],
+                     [omega]] )
+  desired = R(theta)*desired
+  return desired
+'''
 def getRobotXYOmega(x,y,omega):
   #for now, I changed omega=0
   omegaZero = 0
@@ -74,7 +81,7 @@ def getRobotXYOmega(x,y,omega):
                      [omegaZero]] )
   desired = R(omega)*desired
   return desired
-
+'''
 
 def getWheelVelTheta(x,y,omega,theta):
   desired = getRobotXYOmega(x, y, omega, theta)

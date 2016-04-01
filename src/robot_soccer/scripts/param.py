@@ -14,23 +14,13 @@ degreeToRadian = lambda x: x/180.0 * math.pi
 radianToDegree = lambda x: int(x * 180.0 / math.pi)
 
 def getTime():
-  
   return int((time.time()-1420000000)*100.0)
 
 
-#CENTER = Point()
-HEIGHT_FIELD_METER = 1.68
+CENTER = Point()
 #MAX_SPEED = .7
 HOME_GOAL = Point(1.68,0)
-AWAY_GOAL = Point(1.68,0)
-#DIS_BEHIND_BALL = .3
-#SCALE_VEL = 5.0
-#SCALE_OMEGA = 3.0
-#MIN_SPEED = .1
-#MIN_DELTA = .1
-#USH_SPEED = .3
-#CIRCLE_SPEED = .3
-
+AWAY_GOAL = Point(-1.68,0)
 
 MAX_SPEED = .7
 MIN_SPEED = .1
@@ -42,12 +32,9 @@ CIRCLE_SPEED = .3
 
 SPEED_ROBOT = .6 # part of deprecated function.
 SPEED_ROTATION = 1.0 # part of deprecated function.
-DIS_BEHIND_BALL = .3
-CENTER = Point();
-
-HEIGHT_FIELD = 500
-#HEIGHT_FIELD_METER = pixelToMeter(HEIGHT_FIELD)
-WIDTH_FIELD = 700
+DIS_BEHIND_BALL = .08
+HEIGHT_FIELD_METER = 1.35
+WIDTH_FIELD = 1.70
 GUI_MARGIN = 10
 
 HEIGHT_GOAL = 100
