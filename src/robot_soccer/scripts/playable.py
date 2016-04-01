@@ -114,11 +114,11 @@ class playable:
                 self.go_direction(behindTheBallPoint)
                 self.state = State.check
             else:
-                print "INSIDE THE GETBEHIND:",self.ball.x,self.ball.y
+                print "INSIDTHE GETBEHIND:",self.ball.x,self.ball.y
                 # Robot is behind the ball but don't know yet the Y
                 # This gets a point beside the ball perpendicular to the line of the ball and the goal
                 # point = getPointBesideBall(self.robotLocation, self.ball.point, DIS_BEHIND_BALL)
-                point = Point(self.ball)
+                point = Point(self.ball.x,self.ball.y)
                 print "Values for the ball",point.x,point.y
                 # if robot above  ball
                 if self.ball.y < self.robotHome1.y:
