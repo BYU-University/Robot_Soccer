@@ -102,7 +102,7 @@ class playable:
 
         # check if ball is behind robot
         if self.state == State.getBehindBall:
-            # ball is behind the Robot
+            #ball is behind the Robot
             if MotionSkills.isBallBehindRobot(self.robotHome1, self.ball):
                 #robot has to be behind the ball ....and ball front robot
                 behindTheBallPoint = MotionSkills.getPointBehindBall(self.ball)
