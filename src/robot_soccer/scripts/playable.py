@@ -208,7 +208,7 @@ class playable:
         angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
         self.vel_x = -math.cos(angle) * MAX_SPEED
         self.vel_y = math.sin(angle) * MAX_SPEED
-        des_angle = MotionSkills.angleBetweenPoints(self.ball, HOME_GOAL)
+        des_angle = MotionSkills.angleBetweenPoints(self.ball, AWAY_GOAL)
         delta_angle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta, des_angle)
         if abs(delta_angle) < .1:
             self.omega = 0
