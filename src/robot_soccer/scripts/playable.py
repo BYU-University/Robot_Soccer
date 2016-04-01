@@ -96,6 +96,8 @@ class playable:
                     self.state == State.stop
                 else:
                     self.state = State.check
+            if abs(self.ball.x) < WIDTH_FIELD:
+                self.state == State.check
 
         if self.state == State.rushGoal:
             # self.speed = RUSH_SPEED
