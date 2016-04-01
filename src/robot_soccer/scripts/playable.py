@@ -103,7 +103,7 @@ class playable:
             # self.speed = RUSH_SPEED
             # self.go_to_point(HOME_GOAL.x, HOME_GOAL.y, HOME_GOAL)
             #Maybe here we need to have HOME_GOAL
-            print "AWAY Values: ",AWAY_GOAL.x,AWAY_GOAL.y
+            #print "AWAY Values: ",AWAY_GOAL.x,AWAY_GOAL.y
             self.go_direction(HOME_GOAL)
             if getTime() >= self.stopRushingGoalTime:
                 kick.kick()
@@ -112,15 +112,14 @@ class playable:
         # check if ball is behind robot
         if self.state == State.getBehindBall:
             #ball is behind the Robot
-            print "PLAY VALUES:", self.ball.x,self.ball.y
+            #print "PLAY VALUES:", self.ball.x,self.ball.y
             if MotionSkills.isBallBehindRobot(self.robotHome1, self.ball):
                 #robot has to be behind the ball ....and ball front robot
-                print "INSIDTHE GETBEHIND:",self.ball.x,self.ball.y
+                #print "INSIDTHE GETBEHIND:",self.ball.x,self.ball.y
                 # Robot is behind the ball but don't know yet the Y
                 # This gets a point beside the ball perpendicular to the line of the ball and the goal
                 # point = getPointBesideBall(self.robotLocation, self.ball.point, DIS_BEHIND_BALL)
                 point = Point(self.ball.x,self.ball.y)
-                print "Values for the ball",point.x,point.y
                 # if robot above  ball
                 if self.ball.y < self.robotHome1.y:
                     point.y = self.ball.y + DIS_BEHIND_BALL
@@ -129,7 +128,6 @@ class playable:
                 if abs(point.y) > float(HEIGHT_FIELD_METER):
                         point.y = float(HEIGHT_FIELD_METER - 0.02)
                         #print "valor muito grande",point.x,point.y
-                print " POINT values: ",point.x,point.y
                 self.go_direction(point)
             else:
                 behindTheBallPoint = MotionSkills.getPointBehindBall(self.ball)
@@ -166,7 +164,7 @@ class playable:
 
         bestDelta = math.atan2(math.sin(delta_angle), math.cos(delta_angle)) * SCALE_OMEGA
         # print bestDelta
-        print " Check SPEED MAG and Vel_x, Vel_y ",mag,self.vel_x,self.vel_y
+        #print " Check SPEED MAG and Vel_x, Vel_y ",mag,self.vel_x,self.vel_y
         if mag >= MAX_SPEED:
             self.vel_x = (MAX_SPEED / mag) * self.vel_x
             self.vel_y = (MAX_SPEED / mag) * self.vel_y
@@ -199,18 +197,14 @@ class playable:
         #test only
         #self.robotHome1(1.3,1,2)
         self.robotHome1(data.home1_x,data.home1_y,data.home1_theta)
-        #print "test for printing robotHome1 ", (self.robotHome1.x)
         #self.ball.x = 1
         #elf.ball.y = 0.4
         self.ball.x = data.ball_x
         self.ball.y = data.ball_y
-        print "BALL INIT: ",self.ball.x,self.ball.y
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome1.x)**2+(self.ball.y-self.robotHome1.y)**2)
-        #print 'ballX:%f ballY:%f x: %f  y: %f  theta: %f' % (self.ball.x, self.ball.y, self.robotHome1.x, self.robotHome1.y, self.robotHome1.theta)
 
     def go_direction(self, point):
         print "X and Y", point.x,point.y
-        print "robotHome coordinates",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
         angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
         self.vel_x = -math.cos(angle) * MAX_SPEED
         self.vel_y = math.sin(angle) * MAX_SPEED
