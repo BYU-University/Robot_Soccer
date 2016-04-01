@@ -82,7 +82,7 @@ class playable:
         print "STATEMACHINE = ",self.state
         if self.state == State.check:
             self.state = State.getBehindBall
-            if abs(self.robotHome1.x) > HOME_GOAL.x:
+            if abs(self.robotHome1.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
                 self.state = State.returnToPlay
             elif (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.5, 0.04 + abs(
                         MAX_SPEED / 4))):  # This offset compensates for the momentum
