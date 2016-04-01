@@ -75,7 +75,6 @@ class playable:
             # self.gameState = GameState
     '''
     def play(self,data):
-        print "play function"
         self.updateLocations(data)
         self.commandRoboclaws()
         # self.state == State.
@@ -90,8 +89,8 @@ class playable:
                 self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
 
         if self.state == State.returnToPlay:
-            self.go_to_point(CENTER.x-STARTPOINTHOME, CENTER.y, HOME_GOAL)
-            if abs(self.robotHome1.x) < .3 and abs(self.robotHome1.y) < .3:
+            self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, AWAY_GOAL)
+            if abs(self.robotHome1.x) < .4 and abs(self.robotHome1.y) < .45:
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
                     self.state == State.stop
                 else:
@@ -186,7 +185,6 @@ class playable:
           self.go_to_point(CENTER.x, CENTER.y, HOME_GOAL)
     '''
     def updateLocations(self,data):
-        print "updateFunction function"
         #test only
         #self.robotHome1(1.3,1,2)
         self.robotHome1(data.home1_x,data.home1_y,data.home1_theta)
