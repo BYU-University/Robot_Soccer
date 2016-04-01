@@ -96,6 +96,7 @@ class playable:
             # self.speed = RUSH_SPEED
             # self.go_to_point(HOME_GOAL.x, HOME_GOAL.y, HOME_GOAL)
             #Maybe here we need to have HOME_GOAL
+            print "AWAY Values: ",AWAY_GOAL.x,AWAY_GOAL.y
             self.go_direction(AWAY_GOAL)
             if getTime() >= self.stopRushingGoalTime:
                 kick.kick()
@@ -107,6 +108,7 @@ class playable:
             if MotionSkills.isBallBehindRobot(self.robotHome1, self.ball):
                 #robot has to be behind the ball ....and ball front robot
                 behindTheBallPoint = MotionSkills.getPointBehindBall(self.ball)
+                print "behindTheBallPoint Values", behindTheBallPoint.x,behindTheBallPoint.y
                 self.go_direction(behindTheBallPoint)
                 self.state = State.check
             else:
@@ -119,8 +121,9 @@ class playable:
                     point.y = self.ball.y + DIS_BEHIND_BALL
                 else:
                     point.y = self.ball.y - DIS_BEHIND_BALL
-                if abs(point.y) > HEIGHT_FIELD_METER:
-                        point.y = HEIGHT_FIELD_METER - 0.07
+                if abs(point.y) > float(HEIGHT_FIELD_METER):
+                        point.y = float(HEIGHT_FIELD_METER - 0.07)
+                print " POINT values: ",point.x,point.y
                 self.go_direction(point)
 
     def go_to_point(self, x, y, lookAtPoint=None):
@@ -152,7 +155,7 @@ class playable:
         self.sendCommand(vektor_x, vektor_y, bestDelta, self.robotHome1.theta)
 
 
-
+    '''
     def executionLoop(self, scheduler):
         scheduler.enter(.05, 1, self.executionLoop, (scheduler,))
         self.gameState == GameState.play
@@ -163,10 +166,10 @@ class playable:
                 # self.sendCommand(0,0,0);
                 self.stopped = True;
         elif self.gameState == GameState.center:
-            self.updateLocations()
+            self.updateLocations(data)
         if abs(self.robotHome1.x) > .1 or abs(self.robotHome1.y) > .1 or abs(self.robotHome1.theta) > .1:
-            self.go_to_point(CENTER.x, CENTER.y, HOME_GOAL)
-
+          self.go_to_point(CENTER.x, CENTER.y, HOME_GOAL)
+    '''
     def updateLocations(self,data):
         print "updateFunction function"
         #test only
