@@ -92,11 +92,11 @@ class playable:
             self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, AWAY_GOAL)
             if abs(self.robotHome1.x) < .4 and abs(self.robotHome1.y) < .45:
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
-                    self.state == State.stop
+                    self.state = State.stop
                 else:
                     self.state = State.check
             if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
-                self.state == State.check
+                self.state = State.check
 
         if self.state == State.rushGoal:
             # self.speed = RUSH_SPEED
