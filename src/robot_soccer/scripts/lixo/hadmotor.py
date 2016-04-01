@@ -1,14 +1,14 @@
-#!/usr/bin/python
-import roboclaw as r
-import functools
+#!/usr/bin/env python
+import robot_soccer.scripts.roboclaw as r
+from functools import partial
 #import roboclaw_read as rr 
 import time
 import math
 WF=0x80
 WB=0x81
 ALLWHEELS=3
-_SPEED_MAX = 127
-_SPEED_MIN = 0
+SPEED_MAX = 127
+SPEED_MIN = 0
 
 M1 = 0
 M2 = 1
@@ -32,17 +32,27 @@ def __dummy(*args):
 
 
 def _getFunction(func_str, wheel_id):
+	"""Get Function
+	"""
+	# If there was a serial error, it probably wasn't open
+	# so don't return an actual roboclaw command, but a dummy function
 	if _SERIAL_ERR:
 		return __dummy
+
 	# Based on the wheel_id, get the correct roboclaw address and wheel
 	wheel_str = _RC[wheel_id]['wheel']
 	addr = _RC[wheel_id]['addr']
+
 	# Using the func_str build the correct roboclaw method
 	func_str = func_str.format(wheel_str)
+
 	# Go get the correct method from the 'r' module
 	func = getattr(r, func_str)
-	return partial(func, addr)
 	
+	return partial(func,addr)
+	
+
+
 def spin(speed,speed2):
         r.SpeedM1(WF,speed)
         r.SpeedM2(WF,speed)
@@ -59,17 +69,33 @@ def slowspin(speed,speed2):
 #	rr.displayspeed()
 	
 def stop():
-   for wheel_id in range(ALLWHEELS):
-	Forward(wheel_id, 0)
-	Speed(wheel_id, 0)
+   ForwardM1(WF,0)
+   ForwardM2(WF,0)
+   ForwardM1(WB,0)
 
-def Forward(wheel_id, speed):
-	func = _getFunction('Forward{}', wheel_id)
-	return func(speed)
+def calibrateRoboclaws():
+    p = int(65536 * 4)
+    i = int(65536 * 2)
+    d = int(65536 * 6)
+    #last good calibration readings
+    voltage = 16.9 # 16.7   # 15.7   # 15.9   # 15.9   # 15.8   # 16.5   # 16.5   # 15.9   # 15.9   # 15.5   # 15.3   # 16.6   # 15.5
+    qqps_m1 = 142977 # 141606 # 118234 # 129122 # 136502 # 140181 # 146772 # 130185 # 146330 # 149353 # 137669 # 141136 # 148132 # 149287
+    qqps_m2 = 178091 # 187808 # 139632 # 159086 # 164265 # 164244 # 177244 # 180669 # 180616 # 166407 # 172434 # 165175 # 168984 # 169069
+    qqps_m3 = 195319 # 175863 # 130377 # 154211 # 171489 # 165285 # 183906 # 181536 # 175021 # 170281 # 159700 # 161999 # 165146 # 164071
 
-def Backward(wheel_id, speed):
-	func = _getFunction('Backward{}', wheel_id)
-	return func(speed)
+    read_v = ReadMainBatteryVoltage(0x80)
+    read_1 = read_v[0]/10
+    if (read_1 == 0):
+	read_1 = 1
+    scale = lambda x: int(x*voltage/read_1)
+    
+    speedM1 = scale(qqps_m1)
+    speedM2 = scale(qqps_m2)
+    speedM3 = scale(qqps_m3)
+    
+    SetM1pidq(0x80,p,i,d,speedM1)
+    SetM2pidq(0x80,p,i,d,speedM2)
+    SetM1pidq(0x81,p,i,d,speedM3)
 
 
 def left(speed):
@@ -100,17 +126,6 @@ def back(speed):
         time.sleep(2)
         stop()
 
-def ReadSpeed(wheel_id):
-	func = _getFunction('ReadSpeed{}', wheel_id)
-	return func()
-
-def ResetEncoders(wheel_id):
-	func = _getFunction('ResetEncoders', wheel_id)
-	return func()
-
-def ReadEnc(wheel_id):
-	func = _getFunction('ReadEnc{}', wheel_id)
-	return func()
 	
 
 def quad(speed):
@@ -145,7 +160,17 @@ def quad(speed):
 def init(set_PID=True):
 	try:
 		r.Open('/dev/ttySAC0', 460800)
+		#quad(20)
+		#time.sleep(5)
+		#quad(0)
+		#stop()
+		
 	except:
 		global _SERIAL_ERR
 		_SERIAL_ERR = True
+
+
+if __name__ == '__main__':
+	init(True)
+
 
