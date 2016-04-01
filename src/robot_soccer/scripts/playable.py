@@ -116,7 +116,7 @@ class playable:
                 # This gets a point beside the ball perpendicular to the line of the ball and the goal
                 # point = getPointBesideBall(self.robotLocation, self.ball.point, DIS_BEHIND_BALL)
                 point = Point(self.ball)
-                # if robot above ball
+                # if robot above  ball
                 if self.ball.y < self.robotHome1.y:
                     point.y = self.ball.y + DIS_BEHIND_BALL
                 else:
