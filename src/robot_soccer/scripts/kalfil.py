@@ -1,20 +1,17 @@
 #utility - kalman filter for ball
 import param as P
 import numpy as np
-u
+
 
 
 class kal():
     def __init__(self):
         # parameters for ball Kalman filter
-        self.camera_sample_rate = 0
-        self.control_sample_rate = 0.01
+        self.camera_sample_rate = 30.0
+        self.control_sample_rate = 30.0
         self.dirty_derivative_gain = self.camera_sample_rate/5
         self.camera_sample_rate = 10*self.control_sample_rate
-        self.camera_sigma_ball = 0.01
-
-
-
+        self.camera_sigma_ball = 0.005
 
         self.A_ball = np.matrix([[0, 0, 1, 0, 0, 0, 0, 0],
                                  [0, 0, 0, 1, 0, 0, 0, 0],
@@ -72,8 +69,7 @@ class kal():
 
         self.R_ball = np.matrix([[self.camera_sigma_ball**2, 0], [0, self.camera_sigma_ball**2]])
 
-
-    def  kal_fil_x_y(self, ball, t, P):
+    def kal_fil_x_y(self, ball, t, P):
 
         # prediction step between measurements
         N = 3
