@@ -56,7 +56,7 @@ class MotionSkills:
 
     @staticmethod    
     def angleBetweenPoints(firstPoint,secondPoint):
-        angle = math.atan2(secondPoint.y-firstPoint.y,secondPoint.x-firstPoint.x)
+        angle = math.atan2(float(secondPoint.y-firstPoint.y),float(secondPoint.x-firstPoint.x))
         return angle
         
     @staticmethod
