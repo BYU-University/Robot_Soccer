@@ -73,9 +73,9 @@ class playable:
             # self.testState = TestState.check
             # self.gameState = GameState
 
-    def play(self):
+    def play(self,data):
         print "play function"
-        self.updateLocations()
+        self.updateLocations(data)
         self.commandRoboclaws()
         # self.state == State.
         if self.state == State.check:
@@ -167,16 +167,16 @@ class playable:
         if abs(self.robotHome1.x) > .1 or abs(self.robotHome1.y) > .1 or abs(self.robotHome1.theta) > .1:
             self.go_to_point(CENTER.x, CENTER.y, HOME_GOAL)
 
-    def updateLocations(self):
+    def updateLocations(self,data):
         print "updateFunction function"
         #test only
         #self.robotHome1(1.3,1,2)
-        self.robotHome1(self.home1_x,self.home1_y,self.home1_theta)
+        self.robotHome1(data.home1_x,data.home1_y,data.home1_theta)
         print "test for printing robotHome1 ", (self.robotHome1.x)
         #self.ball.x = 1
         #elf.ball.y = 0.4
-        self.ball.x = self.ball_x
-        self.ball.y = self.ball_y
+        self.ball.x = data.ball_x
+        self.ball.y = data.ball_y
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome1.x)**2+(self.ball.y-self.robotHome1.y)**2)
         #print 'ballX:%f ballY:%f x: %f  y: %f  theta: %f' % (self.ball.x, self.ball.y, self.robotHome1.x, self.robotHome1.y, self.robotHome1.theta)
 
