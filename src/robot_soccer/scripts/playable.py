@@ -127,8 +127,8 @@ class playable:
                 else:
                     point.y = self.ball.y - DIS_BEHIND_BALL
                 if abs(point.y) > float(HEIGHT_FIELD_METER):
-                        point.y = float(HEIGHT_FIELD_METER - 0.05)
-                        print "valor muito grande",point.x,point.y
+                        point.y = float(HEIGHT_FIELD_METER - 0.02)
+                        #print "valor muito grande",point.x,point.y
                 print " POINT values: ",point.x,point.y
                 self.go_direction(point)
             else:
@@ -166,6 +166,7 @@ class playable:
 
         bestDelta = math.atan2(math.sin(delta_angle), math.cos(delta_angle)) * SCALE_OMEGA
         # print bestDelta
+        print " Check SPEED MAG and Vel_x, Vel_y ",mag,self.vel_x,self.vel_y
         if mag >= MAX_SPEED:
             self.vel_x = (MAX_SPEED / mag) * self.vel_x
             self.vel_y = (MAX_SPEED / mag) * self.vel_y
@@ -220,6 +221,21 @@ class playable:
         else:
             self.omega = delta_angle
         self.newCommand = True
+
+    def go_direction2(self, point):
+        print "X and Y", point.x,point.y
+        print "robotHome coordinates",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
+        angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
+        self.vel_x = math.cos(angle) * MAX_SPEED
+        self.vel_y = math.sin(angle) * MAX_SPEED
+        des_angle = MotionSkills.angleBetweenPoints(self.ball, HOME_GOAL)
+        delta_angle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta, des_angle)
+        if abs(delta_angle) < .1:
+            self.omega = 0
+        else:
+            self.omega = delta_angle * 3.0
+        self.newCommand = True
+
 
     def commandRoboclaws(self):
         print "values of vel_x,vel_y,Omega,Theta:", self.vel_x, self.vel_y, self.omega, self.robotHome1.theta

@@ -23,8 +23,8 @@ HOME_GOAL = Point(1.68,0)
 AWAY_GOAL = Point(-1.68,0)
 
 MAX_SPEED = .7
-MIN_SPEED = .1
-MIN_DELTA = .1
+MIN_SPEED = .2
+MIN_DELTA = .3
 SCALE_VEL = 5.0
 SCALE_OMEGA = 3.0
 RUSH_SPEED = .3
@@ -32,7 +32,7 @@ CIRCLE_SPEED = .3
 
 SPEED_ROBOT = .6 # part of deprecated function.
 SPEED_ROTATION = 1.0 # part of deprecated function.
-DIS_BEHIND_BALL = .3
+DIS_BEHIND_BALL = .19
 HEIGHT_FIELD_METER = 1.14
 WIDTH_FIELD = 1.70
 GUI_MARGIN = 10
