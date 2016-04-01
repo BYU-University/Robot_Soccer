@@ -78,7 +78,7 @@ class playable:
         self.updateLocations(data)
         self.commandRoboclaws()
         # self.state == State.
-        print "PLAY VALUES:", self.ball.x,self.ball.y
+        print "STATEMACHINE = ",self.state
         if self.state == State.check:
             self.state = State.getBehindBall
             if self.robotHome1.x > HOME_GOAL.x or self.robotHome1.x < AWAY_GOAL.x:
