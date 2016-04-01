@@ -127,6 +127,7 @@ class playable:
                     point.y = self.ball.y - DIS_BEHIND_BALL
                 if abs(point.y) > float(HEIGHT_FIELD_METER):
                         point.y = float(HEIGHT_FIELD_METER - 0.07)
+                        print "valor muito grande",point.x,point.y
                 print " POINT values: ",point.x,point.y
                 self.go_direction(point)
 
