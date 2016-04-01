@@ -92,7 +92,7 @@ class playable:
             print"HOMERobot: ",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
             self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, AWAY_GOAL)
 
-            if (abs(self.robotHome1.x)+STARTPOINTHOME) < (STARTPOINTHOME+.28) and abs(self.robotHome1.y) < .1:
+            if (abs(self.robotHome1.x)+STARTPOINTHOME) < (STARTPOINTHOME+.32) and abs(self.robotHome1.y) < .15:
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
                     self.state = State.stop
                 else:
@@ -104,7 +104,7 @@ class playable:
             # self.go_to_point(HOME_GOAL.x, HOME_GOAL.y, HOME_GOAL)
             #Maybe here we need to have HOME_GOAL
             print "AWAY Values: ",AWAY_GOAL.x,AWAY_GOAL.y
-            self.go_direction(AWAY_GOAL)
+            self.go_direction(HOME_GOAL)
             if getTime() >= self.stopRushingGoalTime:
                 kick.kick()
                 self.state = State.check
