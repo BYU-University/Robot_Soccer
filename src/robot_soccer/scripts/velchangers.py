@@ -72,9 +72,9 @@ def goXYOmegaTheta(x,y,omega,theta,limit=False):
   s1 = radianToQpps(v1)
   s2 = radianToQpps(v2)
   s3 = radianToQpps(v3)
-  SetM1Speed(128,s1)
-  SetM2Speed(128,s2)
-  SetM1Speed(129,s3)
+  SpeedM1(128,s1)
+  SpeedM2(128,s2)
+  SpeedM1(129,s3)
 
 
 '''
