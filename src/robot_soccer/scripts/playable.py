@@ -90,7 +90,7 @@ class playable:
 
         if self.state == State.returnToPlay:
             print"HOMERobot: ",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
-            self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, AWAY_GOAL)
+            self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, HOME_GOAL)
 
             if (abs(self.robotHome1.x)+STARTPOINTHOME) < (STARTPOINTHOME+.32) and abs(self.robotHome1.y) < .15:
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
