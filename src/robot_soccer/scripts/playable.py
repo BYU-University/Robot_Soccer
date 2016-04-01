@@ -91,7 +91,7 @@ class playable:
         if self.state == State.returnToPlay:
             print"HOMERobot: ",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
             self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, AWAY_GOAL)
-            if abs(self.robotHome1.x) < .4 and abs(self.robotHome1.y) < .2:
+            if abs(self.robotHome1.x) < .38 and abs(self.robotHome1.y) < .1:
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
                     self.state = State.stop
                 else:
@@ -140,7 +140,7 @@ class playable:
             self.vel_x = 0
             self.vel_y = 0
             self.omega = 0
-            print "StopPosition",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
+            #print "StopPosition",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
             if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
                 self.state = State.check
             else:
