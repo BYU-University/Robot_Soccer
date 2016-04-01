@@ -211,7 +211,7 @@ class playable:
     def go_direction(self, point):
         print "X and Y", point.x,point.y
         print "robotHome coordinates",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
-        angle = float(MotionSkills.angleBetweenPoints(self.robotHome1, point))/2
+        angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
         self.vel_x = math.cos(angle) * MAX_SPEED
         self.vel_y = math.sin(angle) * MAX_SPEED
         des_angle = MotionSkills.angleBetweenPoints(self.ball, HOME_GOAL)
