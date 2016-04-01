@@ -104,7 +104,7 @@ class playable:
             # self.go_to_point(HOME_GOAL.x, HOME_GOAL.y, HOME_GOAL)
             #Maybe here we need to have HOME_GOAL
             print "AWAY Values: ",AWAY_GOAL.x,AWAY_GOAL.y
-            self.go_direction(AWAY_GOAL)
+            self.go_direction(HOME_GOAL)
             if getTime() >= self.stopRushingGoalTime:
                 kick.kick()
                 self.state = State.check
@@ -212,7 +212,7 @@ class playable:
         print "X and Y", point.x,point.y
         print "robotHome coordinates",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
         angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
-        self.vel_x = math.cos(angle) * MAX_SPEED
+        self.vel_x = -math.cos(angle) * MAX_SPEED
         self.vel_y = math.sin(angle) * MAX_SPEED
         des_angle = MotionSkills.angleBetweenPoints(self.ball, HOME_GOAL)
         delta_angle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta, des_angle)
