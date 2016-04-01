@@ -22,6 +22,10 @@ class BallLocation():
     self.y = y
     #self.magnitude = magnitude
     #self.angle = angle
+  def __call__(self,x,y):
+    self.x =x
+    self.y = y
+
 
 class Locations():
     def __init__(self):

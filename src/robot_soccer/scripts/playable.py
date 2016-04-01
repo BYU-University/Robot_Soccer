@@ -176,11 +176,12 @@ class playable:
         #test only
         #self.robotHome1(1.3,1,2)
         self.robotHome1(data.home1_x,data.home1_y,data.home1_theta)
-        print "test for printing robotHome1 ", (self.robotHome1.x)
+        #print "test for printing robotHome1 ", (self.robotHome1.x)
         #self.ball.x = 1
         #elf.ball.y = 0.4
         self.ball.x = data.ball_x
         self.ball.y = data.ball_y
+        print "BALL INIT: ",self.ball.x,self.ball.y
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome1.x)**2+(self.ball.y-self.robotHome1.y)**2)
         #print 'ballX:%f ballY:%f x: %f  y: %f  theta: %f' % (self.ball.x, self.ball.y, self.robotHome1.x, self.robotHome1.y, self.robotHome1.theta)
 
