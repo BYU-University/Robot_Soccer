@@ -90,7 +90,7 @@ class playable:
 
         if self.state == State.returnToPlay:
             self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, AWAY_GOAL)
-            if abs(self.robotHome1.x) < .1 and abs(self.robotHome1.y) < .09:
+            if abs(self.robotHome1.x) < .15 and abs(self.robotHome1.y) < .13:
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
                     self.state = State.stop
                 else:
