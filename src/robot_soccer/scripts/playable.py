@@ -122,9 +122,9 @@ class playable:
                 point = Point(self.ball.x,self.ball.y)
                 # if robot above  ball
                 if self.ball.y < self.robotHome1.y:
-                    point.y = self.ball.y - DIS_BEHIND_BALL
-                else:
                     point.y = self.ball.y + DIS_BEHIND_BALL
+                else:
+                    point.y = self.ball.y - DIS_BEHIND_BALL
                 #if abs(point.y) > float(HEIGHT_FIELD_METER):
                  #       point.y = float(HEIGHT_FIELD_METER - 0.02)
                         #print "valor muito grande",point.x,point.y
@@ -209,7 +209,7 @@ class playable:
         angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
         self.vel_x = -math.cos(angle) * MAX_SPEED
         self.vel_y = math.sin(angle) * MAX_SPEED
-        des_angle = MotionSkills.angleBetweenPoints(self.ball, AWAY_GOAL)
+        des_angle = MotionSkills.angleBetweenPoints(self.ball, HOME_GOAL)
         delta_angle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta, des_angle)
         if abs(delta_angle) < .1:
             self.omega = 0
