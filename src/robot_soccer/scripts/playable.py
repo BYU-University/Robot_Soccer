@@ -203,9 +203,9 @@ class playable:
     #    strategies.strategy_init(data)
 
     def go(self):
-     rospy.init_node('mainController', anonymous=True)
+     rospy.init_node('go', anonymous=True)
      print "go function"
-     rospy.Subscriber('coordinates', convertedCoordinates, play)#updateLocations)
+     rospy.Subscriber('coordinates', convertedCoordinates, winner.play)#updateLocations)
 
     # s = sched.scheduler(time.time, time.sleep)
     # s.enter(0,1,self.executionLoop,(s,))
