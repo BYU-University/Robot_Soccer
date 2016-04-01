@@ -140,6 +140,7 @@ class playable:
             self.vel_x = 0
             self.vel_y = 0
             self.omega = 0
+            print "StopPosition",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
             if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
                 self.state = State.check
             else:
