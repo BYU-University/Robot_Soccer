@@ -104,7 +104,7 @@ class playable:
             # self.go_to_point(HOME_GOAL.x, HOME_GOAL.y, HOME_GOAL)
             #Maybe here we need to have HOME_GOAL
             print "AWAY Values: ",AWAY_GOAL.x,AWAY_GOAL.y
-            self.go_direction(HOME_GOAL)
+            self.go_direction(AWAY_GOAL)
             if getTime() >= self.stopRushingGoalTime:
                 kick.kick()
                 self.state = State.check
