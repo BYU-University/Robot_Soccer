@@ -235,8 +235,9 @@ class playable:
     def commandRoboclaws(self):
         correctX = float(-self.vel_x)
         correctY = float(-self.vel_y)
+
         print "values of vel_x,vel_y,Omega,Theta: ", correctX, correctY, self.omega, self.robotHome1.theta
-        velchangers.goXYOmegaTheta(correctX, correctY, self.omega, self.robotHome1.theta)
+        velchangers.goXYOmegaTheta(correctX, correctY, -self.omega, -self.robotHome1.theta)
 
         # def run_init(data):
 
