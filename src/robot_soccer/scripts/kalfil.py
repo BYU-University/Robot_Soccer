@@ -8,7 +8,7 @@ class kal():
     def __init__(self):
         # parameters for ball Kalman filter
         self.camera_sample_rate = 30.0
-        self.control_sample_rate = 30.0
+        self.control_sample_rate = 30.0                         #check with Renato
         self.dirty_derivative_gain = self.camera_sample_rate/5
         self.camera_sample_rate = 10*self.control_sample_rate
         self.camera_sigma_ball = 0.005
