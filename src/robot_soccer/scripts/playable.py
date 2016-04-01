@@ -145,10 +145,10 @@ class playable:
         desired_x = x
         desired_y = y
 
-        vektor_x = (desired_x - self.robotHome1.x) * SCALE_VEL
-        vektor_y = (desired_y - self.robotHome1.y) * SCALE_VEL
+        self.vel_x = (desired_x - self.robotHome1.x) * SCALE_VEL
+        self.vel_y = (desired_y - self.robotHome1.y) * SCALE_VEL
 
-        mag = math.sqrt(vektor_x ** 2 + vektor_y ** 2)
+        mag = math.sqrt(self.vel_x ** 2 + self.vel_y ** 2)
         angle = math.atan2(lookAtPoint.y - self.robotHome1.y, lookAtPoint.x - self.robotHome1.x)
 
         delta_angle = angle - self.robotHome1.theta
@@ -156,15 +156,16 @@ class playable:
         bestDelta = math.atan2(math.sin(delta_angle), math.cos(delta_angle)) * SCALE_OMEGA
         # print bestDelta
         if mag >= MAX_SPEED:
-            vektor_x = (MAX_SPEED / mag) * vektor_x
-            vektor_y = (MAX_SPEED / mag) * vektor_y
+            self.vel_x = (MAX_SPEED / mag) * self.vel_x
+            self.vel_y = (MAX_SPEED / mag) * self.vel_y
         elif mag < MIN_SPEED:
-            vektor_x = 0
-            vektor_y = 0
+            self.vel_x = 0#vektor_x = 0
+            self.vel_y = 0#vektor_y = 0
 
         if bestDelta < MIN_DELTA and bestDelta > -MIN_DELTA:
             bestDelta = 0
-        self.sendCommand(vektor_x, vektor_y, bestDelta, self.robotHome1.theta)
+            self.omega = bestDelta
+        #self.sendCommand(vektor_x, vektor_y, bestDelta, self.robotHome1.theta)
 
 
     '''
