@@ -95,8 +95,7 @@ class playable:
                     self.state = State.stop
                 else:
                     self.state = State.check
-            if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
-                self.state = State.check
+
 
         if self.state == State.rushGoal:
             # self.speed = RUSH_SPEED
@@ -140,6 +139,11 @@ class playable:
             self.vel_x = 0
             self.vel_y = 0
             self.omega = 0
+            if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
+                self.state = State.check
+            else:
+                self.state = State.stop
+
 
     def go_to_point(self, x, y, lookAtPoint=None):
         # print "go_to_point"
