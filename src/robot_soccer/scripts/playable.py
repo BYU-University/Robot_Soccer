@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# import rospy
-# from robot_soccer.msg import convertedCoordinates
-# import calibratepid as c
-# from roboclaw import *
+import rospy
+from robot_soccer.msg import convertedCoordinates
+import calibratepid as c
+from roboclaw import *
 import kick
 import velchangers
 from MotionSkills import *
