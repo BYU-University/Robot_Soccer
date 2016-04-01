@@ -208,7 +208,7 @@ class playable:
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome1.x)**2+(self.ball.y-self.robotHome1.y)**2)
         #print 'ballX:%f ballY:%f x: %f  y: %f  theta: %f' % (self.ball.x, self.ball.y, self.robotHome1.x, self.robotHome1.y, self.robotHome1.theta)
 
-    def go_direction(self, point):
+    def go_direction2(self, point):
         print "X and Y", point.x,point.y
         print "robotHome coordinates",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
         angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
@@ -222,7 +222,7 @@ class playable:
             self.omega = delta_angle
         self.newCommand = True
 
-    def go_direction2(self, point):
+    def go_direction(self, point):
         print "X and Y", point.x,point.y
         print "robotHome coordinates",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
         angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
