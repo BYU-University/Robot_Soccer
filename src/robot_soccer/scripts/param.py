@@ -32,7 +32,7 @@ CIRCLE_SPEED = .3
 
 SPEED_ROBOT = .6 # part of deprecated function.
 SPEED_ROTATION = 1.0 # part of deprecated function.
-DIS_BEHIND_BALL = 1.1
+DIS_BEHIND_BALL = .3
 HEIGHT_FIELD_METER = 1.14
 WIDTH_FIELD = 1.70
 GUI_MARGIN = 10

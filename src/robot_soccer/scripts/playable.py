@@ -91,7 +91,8 @@ class playable:
         if self.state == State.returnToPlay:
             print"HOMERobot: ",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
             self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, AWAY_GOAL)
-            if (abs(self.robotHome1.x)+STARTPOINTHOME) < (STARTPOINTHOME+.18) and abs(self.robotHome1.y) < .1:
+
+            if (abs(self.robotHome1.x)+STARTPOINTHOME) < (STARTPOINTHOME+.28) and abs(self.robotHome1.y) < .1:
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
                     self.state = State.stop
                 else:
@@ -114,11 +115,6 @@ class playable:
             print "PLAY VALUES:", self.ball.x,self.ball.y
             if MotionSkills.isBallBehindRobot(self.robotHome1, self.ball):
                 #robot has to be behind the ball ....and ball front robot
-                behindTheBallPoint = MotionSkills.getPointBehindBall(self.ball)
-                print "behindTheBallPoint Values", behindTheBallPoint.x,behindTheBallPoint.y
-                self.go_direction(behindTheBallPoint)
-                self.state = State.check
-            else:
                 print "INSIDTHE GETBEHIND:",self.ball.x,self.ball.y
                 # Robot is behind the ball but don't know yet the Y
                 # This gets a point beside the ball perpendicular to the line of the ball and the goal
@@ -135,6 +131,12 @@ class playable:
                         print "valor muito grande",point.x,point.y
                 print " POINT values: ",point.x,point.y
                 self.go_direction(point)
+            else:
+                behindTheBallPoint = MotionSkills.getPointBehindBall(self.ball)
+                print "behindTheBallPoint Values", behindTheBallPoint.x,behindTheBallPoint.y
+                self.go_direction(behindTheBallPoint)
+                self.state = State.check
+
 
         if self.state == State.stop:
             self.vel_x = 0
