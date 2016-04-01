@@ -135,9 +135,11 @@ class playable:
                         print "valor muito grande",point.x,point.y
                 print " POINT values: ",point.x,point.y
                 self.go_direction(point)
-        if self.state == State.stop:
-            self.robotHome1(0,0,0)
 
+        if self.state == State.stop:
+            self.vel_x = 0
+            self.vel_y = 0
+            self.omega = 0
 
     def go_to_point(self, x, y, lookAtPoint=None):
         # print "go_to_point"
