@@ -11,14 +11,14 @@ from param import *
 from enum import Enum
 from Point import *
 
-
+'''
 class GameState(Enum):
     stop = 1
     play = 2
     center = 3
     startPosition = 4
     test = 5
-
+'''
 
 class State(Enum):
     rushGoal = 1
@@ -26,6 +26,7 @@ class State(Enum):
     rotateToAngleBehindBall = 3
     check = 4
     returnToPlay = 5
+    stop = 6
 
 
 # class TestState(Enum):
@@ -51,9 +52,9 @@ class playable:
         self.vel_x = 0.0
         self.vel_y = 0.0
         self.omega = 0.0
-        self.gameState = GameState.stop
+        #self.gameState = GameState.stop
         self.stopped = True
-
+    '''
     def executeCommCenterCommand(self, req):
         if req.comm == 1:
             self.gameState = GameState.stop
@@ -72,7 +73,7 @@ class playable:
             # elif req.comm == 5:
             # self.testState = TestState.check
             # self.gameState = GameState
-
+    '''
     def play(self,data):
         print "play function"
         self.updateLocations(data)
@@ -91,7 +92,10 @@ class playable:
         if self.state == State.returnToPlay:
             self.go_to_point(CENTER.x, CENTER.y, HOME_GOAL)
             if abs(self.robotHome1.x) < .1 and abs(self.robotHome1.y) < .1:
-                self.state = State.check
+                if abs(self.ball.x) > WIDTH_FIELD:
+                    self.state == State.stop
+                else:
+                    self.state = State.check
 
         if self.state == State.rushGoal:
             # self.speed = RUSH_SPEED
@@ -130,6 +134,9 @@ class playable:
                         print "valor muito grande",point.x,point.y
                 print " POINT values: ",point.x,point.y
                 self.go_direction(point)
+        if self.state == State.stop:
+            self.robotHome1(0,0,0)
+
 
     def go_to_point(self, x, y, lookAtPoint=None):
         # print "go_to_point"
