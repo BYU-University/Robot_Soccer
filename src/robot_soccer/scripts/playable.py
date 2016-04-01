@@ -128,7 +128,8 @@ class playable:
                 if abs(point.y) > float(HEIGHT_FIELD_METER):
                         point.y = float(HEIGHT_FIELD_METER - 0.02)
                         #print "valor muito grande",point.x,point.y
-                self.go_direction(point)
+                #self.go_direction(point)
+                self.go_to_point(point.x,point.y)
             else:
                 behindTheBallPoint = MotionSkills.getPointBehindBall(self.ball)
                 print "behindTheBallPoint Values", behindTheBallPoint.x,behindTheBallPoint.y
