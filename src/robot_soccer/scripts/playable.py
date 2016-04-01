@@ -74,6 +74,7 @@ class playable:
             # self.gameState = GameState
 
     def play(self):
+        print "play function"
         self.updateLocations()
         self.commandRoboclaws()
         # self.state == State.
@@ -167,6 +168,7 @@ class playable:
             self.go_to_point(CENTER.x, CENTER.y, HOME_GOAL)
 
     def updateLocations(self):
+        print "updateFunction function"
         #test only
         #self.robotHome1(1.3,1,2)
         self.robotHome1(self.home1_x,self.home1_y,self.home1_theta)
@@ -202,7 +204,7 @@ class playable:
 
     def go(self):
      rospy.init_node('mainController', anonymous=True)
-
+     print "go function"
      rospy.Subscriber('coordinates', convertedCoordinates, play)#updateLocations)
 
     # s = sched.scheduler(time.time, time.sleep)
