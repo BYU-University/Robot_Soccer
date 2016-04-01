@@ -90,8 +90,8 @@ class playable:
                 self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
 
         if self.state == State.returnToPlay:
-            self.go_to_point(CENTER.x, CENTER.y, HOME_GOAL)
-            if abs(self.robotHome1.x) < .1 and abs(self.robotHome1.y) < .1:
+            self.go_to_point(CENTER.x-STARTPOINTHOME, CENTER.y, HOME_GOAL)
+            if abs(self.robotHome1.x) < .3 and abs(self.robotHome1.y) < .3:
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
                     self.state == State.stop
                 else:
