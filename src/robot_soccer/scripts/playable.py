@@ -182,7 +182,7 @@ class playable:
         #omega = angular_command.omega
 
 
-        des_angle = MotionSkills.angleBetweenPoints(self.ball, HOME_GOAL)
+        des_angle = MotionSkills.angleBetweenPoints(self.ball, AWAY_GOAL)
         delta_angle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta, des_angle)
 
         if(anglediff <= RADIAN5 and anglediff >= -RADIAN5):
