@@ -155,11 +155,11 @@ class playable:
         if self.state == State.getBehindBall:
             self.go_to_point_behind_ball()
 
-        angular_command = MotionSkills.go_to_angle(self.robotHome1, AWAY_GOAL)
-        velchangers.goXYOmega(0,0,angular_command.omega)
-        time.sleep(angular_command.runTime)
+        #angular_command = MotionSkills.go_to_angle(self.robotHome1, AWAY_GOAL)
+        #velchangers.goXYOmega(0,0,angular_command.omega)
+        #time.sleep(angular_command.runTime)
 
-        velchangers.goXYOmega(0,0,0)
+        #velchangers.goXYOmega(0,0,0)
 
     def go_to_point_behind_ball(self):
         robot_point = Point(self.robotHome1.x, self.robotHome1.y)
@@ -185,8 +185,10 @@ class playable:
 
         if(anglediff <= RADIAN5 and anglediff >= -RADIAN5):
             omega = 0
-
-        velchangers.goXYOmegaTheta(command.vel_x, command.vel_y, omega, self.robotHome1.theta)
+        self.vel_x = command.vel_x
+        self.vel_y = command.vel_y
+        self.omega = omega
+        #velchangers.goXYOmegaTheta(command.vel_x, command.vel_y, omega, self.robotHome1.theta)
         time.sleep(DELAY)
 
 
@@ -284,6 +286,8 @@ class playable:
 
         print "values of vel_x,vel_y,Omega,Theta: ", correctX, correctY, self.omega, self.robotHome1.theta
         velchangers.goXYOmegaTheta(correctX, correctY, self.omega, self.robotHome1.theta)
+
+
 
         # def run_init(data):
 
