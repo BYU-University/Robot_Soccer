@@ -181,11 +181,15 @@ class playable:
         angular_command = MotionSkills.go_to_angle(self.robotHome1, AWAY_GOAL)
         omega = angular_command.omega
 
-        #if(anglediff <= RADIAN180 and anglediff >= -RADIAN180):
-        #    omega = 0
+
+        des_angle = MotionSkills.angleBetweenPoints(self.ball, HOME_GOAL)
+        delta_angle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta, des_angle)
+
+        if(anglediff <= RADIAN5 and anglediff >= -RADIAN5):
+            omega = 0
         self.vel_x = command.vel_x
         self.vel_y = command.vel_y
-        self.omega = omega
+        self.omega = delta_angle
         #velchangers.goXYOmegaTheta(command.vel_x, command.vel_y, omega, self.robotHome1.theta)
         time.sleep(DELAY)
 

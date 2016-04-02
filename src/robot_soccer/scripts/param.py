@@ -32,7 +32,7 @@ CIRCLE_SPEED = .3
 
 RADIAN180 = 3.14
 RADIAN360 = 6.28
-RADIAN5 = 0.087
+RADIAN5 = .087
 DELAY = 0.01
 
 SPEED_ROBOT = .64 # part of deprecated function.
