@@ -226,7 +226,7 @@ def calibration(p,i,d,speedM):
 		SetM2VelocityPID(128,p,i,d,speedM)
 		SetM1VelocityPID(129,p,i,d,speedM)
 
-def setSeed(speed):
+def setSpeed(speed):
 	SpeedM1(128,speed)
 	SpeedM2(128,speed)
-	#SpeedM1(129,speed)
+	SpeedM1(129,speed)
