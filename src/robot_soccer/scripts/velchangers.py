@@ -42,7 +42,7 @@ def goXYOmega(x,y,omega,limit=False):
 '''
 
 #function to use. This functions will get current info to go...
-def goXYOmega(x,y,Omega):
+def goXYOmega1(x,y,Omega):
   #if limit:
   total = math.sqrt(float(x**2+y**2))
   if total > cap:
@@ -60,6 +60,26 @@ def goXYOmega(x,y,Omega):
   SpeedM1(128,s1)
   SpeedM2(128,s2)
   SpeedM1(129,s3)
+
+def goXYOmega(x,y,Omega):
+  #if limit:
+  total = math.sqrt(float(x**2+y**2))
+  if total > cap:
+   scale = cap / total
+   #print "this is the scale",scale
+   x = x *scale
+   y = y *scale
+  v1,v2,v3 = mat.getWheelVel(x,y,Omega)
+  s1 = radianToQpps(v1)
+  s2 = radianToQpps(v2)
+  s3 = radianToQpps(v3)
+  print "values for v2,v2,v3: ",v1,v2,v3
+  print "....."
+  print "values for s1,s2,s2 for speed: ",s1,s2,s3
+  SpeedM1(128,s1)
+  SpeedM2(128,s2)
+  SpeedM1(129,s3)
+
 
 def goXYOmegaTheta(x,y,omega,theta,limit=False):
   if limit:
