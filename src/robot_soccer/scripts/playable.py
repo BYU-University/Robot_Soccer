@@ -44,7 +44,6 @@ class Rotate(Enum):
 class playable:
     def __init__(self):
         self.ball = Locations.Locations().ball
-        self.point = Point()
         self.robotHome1 = Locations.Locations().home1
         self.distanceToBall = 0
         self.state = State.check
@@ -126,16 +125,16 @@ class playable:
                 # Robot is behind the ball but don't know yet the Y
                 # This gets a point beside the ball perpendicular to the line of the ball and the goal
                 #point = getPointBesideBall(self.robotLocation, self.ball.point, DIS_BEHIND_BALL)
-                self.point(self.ball.x,self.ball.y)
+                point = Point(self.ball.x,self.ball.y)
                 # if robot above  ball
                 if self.ball.y < self.robotHome1.y:
-                    self.point.y = self.ball.y + DIS_BEHIND_BALL
+                    point.y = self.ball.y + DIS_BEHIND_BALL
                 else:
-                    self.point.y = self.ball.y - DIS_BEHIND_BALL
-                if abs(self.point.y) > float(HEIGHT_FIELD_METER):
-                        self.point.y = float(HEIGHT_FIELD_METER - 0.02)
-                        print "valor muito grande",self.point.x,self.point.y
-                self.go_direction(self.point)
+                    point.y = self.ball.y - DIS_BEHIND_BALL
+                if abs(point.y) > float(HEIGHT_FIELD_METER):
+                        point.y = float(HEIGHT_FIELD_METER - 0.02)
+                        print "valor muito grande",point.x,point.y
+                self.go_direction(point)
                 #self.go_to_point(point.x,point.y)
             else:
                 behindTheBallPoint = MotionSkills.getPointBehindBall(self.ball)
@@ -175,7 +174,8 @@ class playable:
 
         self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
         desiredAngle = MotionSkills.angleBetweenPoints(robot_point, AWAY_GOAL)
-        targetAngle = MotionSkills.angleBetweenPoints(self.point(self.robotHome1.x, self.robotHome1.y), self.desiredPoint)
+        pointP = Point(self.robotHome1.x, self.robotHome1.y)
+        targetAngle = MotionSkills.angleBetweenPoints((pointP, self.robotHome1.y), self.desiredPoint)
 
         anglediff = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
 
