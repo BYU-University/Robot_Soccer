@@ -48,7 +48,7 @@ class MotionSkills:
         runTime = length/SPEED_ROBOT
         vel_x = math.cos(angle)*SPEED_ROBOT
         vel_y = math.sin(angle)*SPEED_ROBOT
-        return Command(vel_x, vel_y, 0, currentRobotState.pos_theta_est, runTime)
+        return Command(vel_x, vel_y, 0, currentRobotState.theta, runTime)
     
     @staticmethod
     def disBetweenPoints(point1,point2):
@@ -73,7 +73,7 @@ class MotionSkills:
     
     @staticmethod
     def go_to_angle(currentRobotState, lookToPoint):
-        currentAngle = currentRobotState.pos_theta_est
+        currentAngle = currentRobotState.theta
         point = Point(currentRobotState.x,currentRobotState.y)
         desiredAngle = MotionSkills.angleBetweenPoints(point, lookToPoint)
         delta =  MotionSkills.deltaBetweenAngles(currentAngle, desiredAngle)
