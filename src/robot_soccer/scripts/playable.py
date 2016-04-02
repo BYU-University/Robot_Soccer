@@ -174,8 +174,8 @@ class playable:
 
         self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
         desiredAngle = MotionSkills.angleBetweenPoints(robot_point, AWAY_GOAL)
-
-        targetAngle = MotionSkills.angleBetweenPoints(Point.Point(self.robotHome1.x, self.robotHome1.y), self.desiredPoint)
+        point = Point()
+        targetAngle = MotionSkills.angleBetweenPoints(point(self.robotHome1.x, self.robotHome1.y), self.desiredPoint)
 
         anglediff = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
 
