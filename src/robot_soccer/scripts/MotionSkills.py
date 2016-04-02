@@ -41,10 +41,10 @@ class MotionSkills:
         
     @staticmethod
     def go_to_point(currentRobotState, desiredPoint, percentage = 0):
-        length = math.sqrt((desiredPoint.x-currentRobotState.pos_x_est)**2+(desiredPoint.y-currentRobotState.pos_y_est)**2)
+        length = math.sqrt((desiredPoint.x-currentRobotState.x)**2+(desiredPoint.y-currentRobotState.y)**2)
         if percentage != 0:
           length = length * percentage
-        angle = math.atan2(desiredPoint.y-currentRobotState.pos_y_est,desiredPoint.x-currentRobotState.pos_x_est)
+        angle = math.atan2(desiredPoint.y-currentRobotState.y,desiredPoint.x-currentRobotState.x)
         runTime = length/SPEED_ROBOT
         vel_x = math.cos(angle)*SPEED_ROBOT
         vel_y = math.sin(angle)*SPEED_ROBOT
@@ -74,7 +74,7 @@ class MotionSkills:
     @staticmethod
     def go_to_angle(currentRobotState, lookToPoint):
         currentAngle = currentRobotState.pos_theta_est
-        point = Point(currentRobotState.pos_x_est,currentRobotState.pos_y_est)
+        point = Point(currentRobotState.x,currentRobotState.y)
         desiredAngle = MotionSkills.angleBetweenPoints(point, lookToPoint)
         delta =  MotionSkills.deltaBetweenAngles(currentAngle, desiredAngle)
         runTime = abs(delta/SPEED_ROTATION)
