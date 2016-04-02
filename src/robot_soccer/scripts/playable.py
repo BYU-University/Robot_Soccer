@@ -173,9 +173,10 @@ class playable:
 
 
         self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
-        desiredAngle = MotionSkills.angleBetweenPoints(robot_point, AWAY_GOAL)
+        #desiredAngle = MotionSkills.angleBetweenPoints(robot_point, AWAY_GOAL)
         pointP = Point(self.robotHome1.x, self.robotHome1.y)
         targetAngle = MotionSkills.angleBetweenPoints(pointP, self.desiredPoint)
+
 
         anglediff = (self.robotHome1.theta + targetAngle + RADIAN180) % RADIAN360 + RADIAN180
         print "MEu Angulo", anglediff
@@ -184,7 +185,7 @@ class playable:
         angular_command = MotionSkills.go_to_angle(self.robotHome1, AWAY_GOAL)
         omega = angular_command.omega
         print "Meu Omega", omega
-        if(anglediff <= RADIAN5 and anglediff >= -RADIAN5):
+        if(anglediff <= RADIAN180 and anglediff >= -RADIAN180):
             omega = 0
         self.vel_x = command.vel_x
         self.vel_y = command.vel_y
