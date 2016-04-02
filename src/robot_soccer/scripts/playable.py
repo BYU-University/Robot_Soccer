@@ -79,7 +79,7 @@ class playable:
     def play(self,data):
         self.updateLocations(data)
 
-        #self.commandRoboclaws()
+        self.commandRoboclaws()
         # self.state == State.
         print "STATEMACHINE = ",self.state
         if self.state == State.check:
