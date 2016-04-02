@@ -163,8 +163,8 @@ class playable:
 
     def go_to_point_behind_ball(self):
         robot_point = Point(self.robotHome1.x, self.robotHome1.y)
-        #desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
-        desiredAngle = MotionSkills.angleBetweenPoints(robot_point, AWAY_GOAL)
+        #desiredPoint = MotionSkills.getPointBehindBall(self.ball, HOME_GOAL)
+        desiredAngle = MotionSkills.angleBetweenPoints(robot_point, HOME_GOAL)
 
     # print "angle", param.radianToDegree(team1_robot_state.pos_theta_est)
     # print "desiredAngle", param.radianToDegree(desiredAngle)
@@ -172,15 +172,15 @@ class playable:
 
 
 
-        self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
-        desiredAngle = MotionSkills.angleBetweenPoints(robot_point, AWAY_GOAL)
+        self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, HOME_GOAL)
+        desiredAngle = MotionSkills.angleBetweenPoints(robot_point, HOME_GOAL)
         pointP = Point(self.robotHome1.x, self.robotHome1.y)
         targetAngle = MotionSkills.angleBetweenPoints(pointP, self.desiredPoint)
 
         anglediff = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
 
         command = MotionSkills.go_to_point(self.robotHome1, self.desiredPoint)
-        angular_command = MotionSkills.go_to_angle(self.robotHome1, AWAY_GOAL)
+        angular_command = MotionSkills.go_to_angle(self.robotHome1, HOME_GOAL)
         omega = angular_command.omega
 
         if(anglediff <= RADIAN5 and anglediff >= -RADIAN5):
@@ -249,7 +249,7 @@ class playable:
         self.ball.x = data.ball_x
         self.ball.y = data.ball_y
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome1.x)**2+(self.ball.y-self.robotHome1.y)**2)
-        self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
+        self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, HOME_GOAL)
         print "Distance to ball: ",self.distanceToBall
 
     def go_direction(self, point):
