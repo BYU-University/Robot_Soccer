@@ -171,7 +171,7 @@ class playable:
 
 
 
-        self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, HOME_GOAL)
+        self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
         pointP = Point(self.robotHome1.x, self.robotHome1.y)
         targetAngle = MotionSkills.angleBetweenPoints(pointP, self.desiredPoint)
 
