@@ -183,10 +183,10 @@ class playable:
 
         command = MotionSkills.go_to_point(self.robotHome1, self.desiredPoint)
         angular_command = MotionSkills.go_to_angle(self.robotHome1, AWAY_GOAL)
-        omega = angular_command.omega
+        omega = angular_command.omega - desiredAngle
         print "Meu Omega", omega
-        if(anglediff <= RADIAN180 and anglediff >= -RADIAN180):
-            omega = 0
+        #if(anglediff <= RADIAN180 and anglediff >= -RADIAN180):
+        #    omega = 0
         self.vel_x = command.vel_x
         self.vel_y = command.vel_y
         self.omega = omega
