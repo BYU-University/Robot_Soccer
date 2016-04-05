@@ -14,17 +14,16 @@ from Point import *
 
 class State(Enum):
     rushGoal = 1
-    getBehindBall = 2
-    rotateToAngleBehindBall = 3
+    defenseGoal = 3
     check = 4
-    returnToPlay = 5
+    returnToGollie = 5
     stop = 6
-
 
 class playable:
     def __init__(self):
         self.ball = Locations.Locations().ball
         self.robotHome1 = Locations.Locations().home1
+        self.robotHome2 = Locations.Locations().home2
         self.distanceToBall = 0
         self.state = State.check
         self.stopRushingGoalTime = 0
@@ -43,31 +42,30 @@ class playable:
         if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
             self.state = State.check
         else:
-            self.state = State.returnToPlay
+            self.state = State.returnToGollie
 
 #Check State
         if self.state == State.check:
-            if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
-                (self.robotHome1.y > (self.desiredPoint.y + 0.05) or self.robotHome1.y < (self.desiredPoint.y - 0.05)):
-                self.state = State.getBehindBall
+            if (self.robotHome2.x > (self.desiredPoint.x + 0.05) or self.robotHome2.x < (self.desiredPoint.x - 0.05)) or \
+                (self.robotHome2.y > (self.desiredPoint.y + 0.05) or self.robotHome2.y < (self.desiredPoint.y - 0.05)):
+                self.state = State.defenseGoal
 
-            if abs(self.robotHome1.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
-                self.state = State.returnToPlay
+            if abs(self.robotHome2.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
+                self.state = State.returnToGollie
 
-            elif (self.robotHome1.x > (AWAY_GOAL.x+ 0.4)) or \
-            (self.robotHome1.y > (AWAY_GOAL.y + 0.3) or self.robotHome1.y < (AWAY_GOAL.y - 0.3)):
-            #elif (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.5, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
+            elif (self.robotHome2.x > (self.desiredPoint.x + 0.05) and self.robotHome2.x < (self.desiredPoint.x - 0.05)) and \
+                (self.robotHome2.y > (self.desiredPoint.y + 0.1) and self.robotHome2.y < (self.desiredPoint.y - 0.1)):
+            #elif (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.5, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
                 self.state = State.rushGoal  # rush goal
                 self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
 
-#Return To Play State
-        if self.state == State.returnToPlay:
-            print"HOMERobot: ",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
-            self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, HOME_GOAL)
-
-            if (self.robotHome1.x + STARTPOINTHOME) > (STARTPOINTHOME - 0.2) and (self.robotHome1.x + STARTPOINTHOME) \
-                    < (STARTPOINTHOME + 0.2) and (self.robotHome1.y + STARTPOINTHOME) > (STARTPOINTHOME - 0.22) and (self.robotHome1.y) \
-                    < (STARTPOINTHOME + 0.22):
+#Return to Gollie State
+        if self.state == State.returnToGollie:
+            print"HOMERobot: ",self.robotHome2.x,self.robotHome2.y,self.robotHome2.theta
+            self.go_to_point(CENTER.x+STARTPOINTGOAL, CENTER.y, HOME_GOAL)
+            if (self.robotHome2.x + STARTPOINTGOAL) > (STARTPOINTGOAL - 0.2) and (self.robotHome2.x + STARTPOINTGOAL) \
+                    < (STARTPOINTGOAL + 0.2) and (self.robotHome2.y + STARTPOINTGOAL) > (STARTPOINTGOAL - 0.2) and (self.robotHome2.y) \
+                    < (STARTPOINTGOAL + 0.2):
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
                     self.state = State.stop
                 else:
@@ -85,46 +83,60 @@ class playable:
         if self.state == State.stop:
             self.stop_robot()
 
-#GetBehindBall State
-        if self.state == State.getBehindBall:
-            self.go_to_point_behind_ball()
+#DefenseGoal State
+        if self.state == State.defenseGoal:
+            self.defense()
             self.state = State.check
 
 
 # Here are the functions for the state machine
     def rush_goal(self):
         point_desired = AWAY_GOAL
-        #if  (self.robotHome1.x > (point_desired.x + 0.4)) or \
-         #   (self.robotHome1.y > (point_desired.y + 0.3) or self.robotHome1.y < (point_desired.y - 0.3)):
-
-        targetAngle = MotionSkills.angleBetweenPoints(Point.Point(self.robotHome1.x, self.robotHome1.y), point_desired)
-        angle_fix = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
-        angular_command = MotionSkills.go_to_angle(self.robotHome1, HOME_GOAL)
+        #if  (self.robotHome2.x > (point_desired.x + 0.4)) or \
+         #   (self.robotHome2.y > (point_desired.y + 0.3) or self.robotHome2.y < (point_desired.y - 0.3)):
+        targetAngle = MotionSkills.angleBetweenPoints(Point.Point(self.robotHome2.x, self.robotHome2.y), point_desired)
+        angle_fix = (self.robotHome2.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
+        angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
         omega = angular_command.omega
         if(angle_fix <= RADIAN5 and angle_fix >= -RADIAN5):
             omega = 0
-        command = MotionSkills.go_to_point(self.robotHome1, point_desired)
+        command = MotionSkills.go_to_point(self.robotHome2, point_desired)
         self.vel_x = command.vel_x
         self.vel_y = command.vel_y
         self.omega = omega
         time.sleep(DELAY)
 
+    def defense(self):
+    # keep robot within the bounds of the goal
+        if self.desiredPoint.y > HOME_GOAL.y + 0.4:
+            self.desiredPoint.y = HOME_GOAL.y + 0.4
+        elif self.desiredPoint.y < HOME_GOAL.y - 0.4:
+            self.desiredPoint.y = HOME_GOAL.y - 0.4
+    # move to the self.desiredPoint
+        if(self.robotHome2.x > (self.desiredPoint.x + 0.1) or self.robotHome2.x < (self.desiredPoint.x - 0.1)) or \
+            (self.robotHome2.y > (self.desiredPoint.y + 0.1) or self.robotHome2.y < (self.desiredPoint.y - 0.1)):
+            command = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
+            angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
+            omega = angular_command.omega
+        self.vel_x = command.vel_x
+        self.vel_y = command.vel_y
+        self.omega = omega
+        time.sleep(DELAY)
 
     def stop_robot(self):
         self.vel_x = 0
         self.vel_y = 0
         self.omega = 0
-        #print "StopPosition",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
+        #print "StopPosition",self.robotHome2.x,self.robotHome2.y,self.robotHome2.theta
 
 
     def go_to_point_behind_ball(self):
-        robot_point = Point(self.robotHome1.x, self.robotHome1.y)
         self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
-        pointP = Point(self.robotHome1.x, self.robotHome1.y)
+        pointP = Point(self.robotHome2.x, self.robotHome2.y)
         targetAngle = MotionSkills.angleBetweenPoints(pointP, self.desiredPoint)
-        fix_angle = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
-        get_speed = MotionSkills.go_to_point(self.robotHome1, self.desiredPoint)
-        angular_get_speed = MotionSkills.go_to_angle(self.robotHome1, HOME_GOAL)
+        fix_angle = (self.robotHome2.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
+        get_speed = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
+        angular_get_speed = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
         omega = angular_get_speed.omega
         if(fix_angle <= RADIAN5 and fix_angle >= -RADIAN5):
             omega = 0
@@ -141,17 +153,15 @@ class playable:
         desired_x = x
         desired_y = y
 
-        self.vel_x = (desired_x - self.robotHome1.x) * SCALE_VEL
-        self.vel_y = (desired_y - self.robotHome1.y) * SCALE_VEL
+        self.vel_x = (desired_x - self.robotHome2.x) * SCALE_VEL
+        self.vel_y = (desired_y - self.robotHome2.y) * SCALE_VEL
 
         mag = math.sqrt(self.vel_x ** 2 + self.vel_y ** 2)
-        angle = math.atan2(lookAtPoint.y - self.robotHome1.y, lookAtPoint.x - self.robotHome1.x)
+        angle = math.atan2(lookAtPoint.y - self.robotHome2.y, lookAtPoint.x - self.robotHome2.x)
 
-        delta_angle = angle - self.robotHome1.theta
+        delta_angle = angle - self.robotHome2.theta
 
         bestDelta = math.atan2(math.sin(delta_angle), math.cos(delta_angle)) * SCALE_OMEGA
-        # print bestDelta
-        #print " Check SPEED MAG and Vel_x, Vel_y ",mag,self.vel_x,self.vel_y
         if mag >= MAX_SPEED:
             self.vel_x = (MAX_SPEED / mag) * self.vel_x
             self.vel_y = (MAX_SPEED / mag) * self.vel_y
@@ -164,26 +174,13 @@ class playable:
             self.omega = bestDelta
 
     def updateLocations(self,data):
-        self.robotHome1(data.home1_x,data.home1_y,data.home1_theta)
+        self.robotHome2(data.home2_x,data.home2_y,data.home2_theta)
         self.ball.x = data.ball_x
         self.ball.y = data.ball_y
-        self.distanceToBall = math.sqrt((self.ball.x-self.robotHome1.x)**2+(self.ball.y-self.robotHome1.y)**2)
-        self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
+        self.distanceToBall = math.sqrt((self.ball.x-self.robotHome2.x)**2+(self.ball.y-self.robotHome2.y)**2)
+        self.desiredPoint = Point(HOME_GOAL.x - 0.32 , self.ball.y)
         print "Distance to ball: ",self.distanceToBall
         print "Desired Point Behind Ball: ",self.desiredPoint
-
-    def go_direction(self, point):
-        print "X and Y", point.x,point.y
-        angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
-        self.vel_x = math.cos(angle) * MAX_SPEED
-        self.vel_y = math.sin(angle) * MAX_SPEED
-        des_angle = MotionSkills.angleBetweenPoints(self.ball, HOME_GOAL)
-        delta_angle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta, des_angle)
-        if abs(delta_angle) < .1:
-            self.omega = 0
-        else:
-            self.omega = delta_angle
-        self.newCommand = True
 
     def go_direction2(self, point):
         print "X and Y", point.x,point.y
@@ -203,8 +200,8 @@ class playable:
     def commandRoboclaws(self):
         correctX = float(-self.vel_x)
         correctY = float(-self.vel_y)
-        print "values of vel_x,vel_y,Omega,Theta: ", correctX, correctY, self.omega, self.robotHome1.theta
-        velchangers.goXYOmegaTheta(correctX, correctY, self.omega, self.robotHome1.theta)
+        print "values of vel_x,vel_y,Omega,Theta: ", correctX, correctY, self.omega, self.robotHome2.theta
+        velchangers.goXYOmegaTheta(correctX, correctY, self.omega, self.robotHome2.theta)
 
     def go(self):
      rospy.init_node('go', anonymous=True)
@@ -213,9 +210,9 @@ class playable:
      rospy.spin()
 
 
+
 if __name__ == '__main__':
     try:
-
         Open('/dev/ttySAC0', 38400)
         c.setvelocity()
         winner = playable()
