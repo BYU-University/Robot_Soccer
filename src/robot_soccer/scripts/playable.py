@@ -94,7 +94,7 @@ class playable:
             print"HOMERobot: ",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
             self.go_to_point(CENTER.x+STARTPOINTHOME, CENTER.y, HOME_GOAL)
 
-            if (self.robotHome1.x - STARTPOINTHOME) > (STARTPOINTHOME - 0.20) and (self.robotHome1.x + STARTPOINTHOME) \
+            if (self.robotHome1.x - STARTPOINTHOME) > (STARTPOINTHOME - 0.36) and (self.robotHome1.x + STARTPOINTHOME) \
                     < (STARTPOINTHOME + 0.36) and (self.robotHome1.y + STARTPOINTHOME) > (STARTPOINTHOME - 0.22) and (self.robotHome1.y) \
                     < (STARTPOINTHOME + 0.22):
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
