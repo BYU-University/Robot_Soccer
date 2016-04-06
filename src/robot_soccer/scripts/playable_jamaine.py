@@ -10,6 +10,7 @@ import Locations
 from param import *
 from enum import Enum
 from Point import *
+#from Tkinter import *
 
 
 class State(Enum):

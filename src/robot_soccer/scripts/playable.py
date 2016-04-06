@@ -19,6 +19,7 @@ class State(Enum):
     check = 4
     returnToPlay = 5
     stop = 6
+    wait = 7
 
 
 class playable:
@@ -35,12 +36,29 @@ class playable:
         self.desiredPoint = 0.0
         self.stopped = True
 
+    def key(self):
+        keyPressed = self.event.char
+        if keyPressed == 's':
+            self.state = State.stop
+            self.stop_robot()
+        elif keyPressed == 'g':
+            self.state = State.check
+        elif keyPressed == 'c':
+            self.state = State.returnToPlay
+        else:
+            self.state = State.wait
+        print "pressed", repr(self.event.char)
+
+
 #Here starts the state machine
     def play(self,data):
         self.updateLocations(data)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
-        if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
+        if self.event.char == 's':
+            self.state = State.wait
+            self.key()
+        elif abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
             self.state = State.check
         else:
             self.state = State.returnToPlay
