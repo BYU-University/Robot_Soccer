@@ -259,6 +259,7 @@ if __name__ == '__main__':
             ForwardM1(128,25)
             ForwardM1(129,30)
             time.sleep(1.3)
+            kick.kick()
             BackwardM2(128,25)
             BackwardM1(129,20)
             time.sleep(1.3)
@@ -266,6 +267,7 @@ if __name__ == '__main__':
             BackwardM1(129,20)
             BackwardM1(128,20)
             time.sleep(1)
+
 
         #winner = playable()
         print "START...................."
