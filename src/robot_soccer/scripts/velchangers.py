@@ -42,7 +42,7 @@ def goXYOmega(x,y,omega,limit=False):
 '''
 
 #function to use. This functions will get current info to go...
-def goXYOmegaTheta(x,y,Omega, theta):
+def goXYOmegaTheta(x,y,omega,theta,limit=False):
   #if limit:
   total = math.sqrt(float(x**2+y**2))
   if total > cap:
@@ -51,7 +51,7 @@ def goXYOmegaTheta(x,y,Omega, theta):
    x = x *scale
    y = y *scale
    theta = theta
-  v1,v2,v3 = mat.getWheelVelOmega(x,y,Omega)
+  v1,v2,v3 = mat.getWheelVelOmega(x,y,omega)
   s1 = radianToQpps(v1)
   s2 = radianToQpps(v2)
   s3 = radianToQpps(v3)
