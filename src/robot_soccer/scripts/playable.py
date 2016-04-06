@@ -244,7 +244,7 @@ class playable:
     def go(self):
      rospy.init_node('go', anonymous=True)
      print "go function"
-     self.root.bind_all("<key>", key)
+     self.root.bind("<key>", self.key)
      self.root.withdaw()
      #self.root.mainloop()
      #ent = tk.Entry(self.root)
