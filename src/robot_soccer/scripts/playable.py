@@ -10,6 +10,7 @@ import Locations
 from param import *
 from enum import Enum
 from Point import *
+import readchar
 
 
 class State(Enum):
@@ -35,30 +36,30 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
-        self.event = None
+        self.keyPressed = None
 
     def key(self):
-        keyPressed = self.event.char
-        if keyPressed == 's':
+        self.keyPressed = readchar.readkey()
+        if self.keyPressed == 's':
             self.state = State.stop
             self.stop_robot()
-        elif keyPressed == 'g':
+        elif self.keyPressed == 'g':
             self.state = State.check
-        elif keyPressed == 'c':
+        elif self.keyPressed == 'c':
             self.state = State.returnToPlay
         else:
             self.state = State.wait
-        print "pressed", repr(self.event.char)
+        print "pressed", repr(self.keyPressed)
 
 
 #Here starts the state machine
     def play(self,data):
         self.updateLocations(data)
         self.commandRoboclaws()
+        self.key()
         print "STATEMACHINE = ",self.state
-        if self.event.char == 's':
+        if self.keyPressed == 's':
             self.state = State.wait
-            self.key()
         elif abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
             self.state = State.check
         else:
