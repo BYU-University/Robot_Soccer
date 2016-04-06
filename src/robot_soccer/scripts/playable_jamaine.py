@@ -250,10 +250,26 @@ if __name__ == '__main__':
         #pygame.init()
         #pygame.display.set_mode((400, 400))
         #pygame.key.set_repeat(10, 10)
-        c.setvelocity()
-        winner = playable()
+        #c.setvelocity()
+        while True:
+            ForwardM1(128,20)
+            ForwardM2(128,20)
+            ForwardM1(128,20)
+            time.sleep(1)
+            ForwardM1(128,25)
+            ForwardM1(129,30)
+            time.sleep(1.3)
+            BackwardM2(128,25)
+            BackwardM1(129,20)
+            time.sleep(1.3)
+            BackwardM2(128,20)
+            BackwardM1(129,20)
+            BackwardM1(128,20)
+            time.sleep(1)
+
+        #winner = playable()
         print "START...................."
-        winner.go()
+        #winner.go()
     except:
         global _SERIAL_ERR
         _SERIAL_ERR = True

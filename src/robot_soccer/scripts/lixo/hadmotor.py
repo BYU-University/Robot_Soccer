@@ -139,12 +139,12 @@ def quad(speed):
     #	r2y = int(math.sin(theta+w)*radius*speed)
 	#	r3y = int(math.sin(w)*radius*speed)
 		time.sleep(1)
-		r.ForwardM1(WF,20)
-	    r.ForwardM2(WF,20)
-		r.ForwardM1(WB,20)
-        time.sleep(1)
-		stop()
-		w=(math.pi/3)+w
+	r.ForwardM1(WF,20)
+	r.ForwardM2(WF,20)
+	r.ForwardM1(WB,20)
+    time.sleep(1)
+	stop()
+	w=(math.pi/3)+w
 		#print "speed", r1y,r2y,r3y
 		print "omega", w
 		count = count + 1
