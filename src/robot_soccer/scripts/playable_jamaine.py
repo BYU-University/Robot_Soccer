@@ -200,7 +200,7 @@ class playable:
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome2.x)**2+(self.ball.y-self.robotHome2.y)**2)
         self.desiredPoint = Point(HOME_GOAL.x - 0.32 , self.ball.y)
         print "Distance to ball: ",self.distanceToBall
-        print "Desired Point Behind Ball: ",self.desiredPoint
+        print "Desired Point Behind Ball: ",self.desiredPoint.x, self.desiredPoint.y
 
     def go_direction2(self, point):
         print "X and Y", point.x,point.y
