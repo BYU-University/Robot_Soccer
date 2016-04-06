@@ -2,8 +2,6 @@
 import param as P
 import numpy as np
 
-
-
 class kal():
     def __init__(self):
         # parameters for ball Kalman filter
