@@ -95,7 +95,7 @@ class playable:
         #if  (self.robotHome2.x > (point_desired.x + 0.4)) or \
          #   (self.robotHome2.y > (point_desired.y + 0.3) or self.robotHome2.y < (point_desired.y - 0.3)):
         targetAngle = MotionSkills.angleBetweenPoints(Point.Point(self.robotHome2.x, self.robotHome2.y), point_desired)
-        angle_fix = (self.robotHome2.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
+        angle_fix = (self.robotHome2.theta - targetAngle + RADIAN180) # RADIAN360 - RADIAN180
         angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
         omega = angular_command.omega
         if(angle_fix <= RADIAN5 and angle_fix >= -RADIAN5):
@@ -134,7 +134,7 @@ class playable:
         self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
         pointP = Point(self.robotHome2.x, self.robotHome2.y)
         targetAngle = MotionSkills.angleBetweenPoints(pointP, self.desiredPoint)
-        fix_angle = (self.robotHome2.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
+        fix_angle = (self.robotHome2.theta - targetAngle + RADIAN180) # RADIAN360 - RADIAN180
         get_speed = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
         angular_get_speed = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
         omega = angular_get_speed.omega
@@ -144,6 +144,25 @@ class playable:
         self.vel_y = get_speed.vel_y
         self.omega = omega #delta_angle
         time.sleep(DELAY)
+
+    def arg_def(self):
+        if (math.sqrt((self.desiredPoint.x+HOME_GOAL.x)**2+(self.desiredPoint.y+HOME_GOAL.y)**2)> .3): # if the ball gets too close, charge the ball and clear it
+    # keep robot within the bounds of the goal
+        if self.desiredPoint.y > HOME_GOAL.y + 0.4:
+            self.desiredPoint.y = HOME_GOAL.y + 0.4
+        elif self.desiredPoint.y < HOME_GOAL.y - 0.4:
+            self.desiredPoint.y = HOME_GOAL.y - 0.4
+    # move to the self.desiredPoint
+        if(self.robotHome2.x > (self.desiredPoint.x + 0.1) or self.robotHome2.x < (self.desiredPoint.x - 0.1)) or \
+            (self.robotHome2.y > (self.desiredPoint.y + 0.1) or self.robotHome2.y < (self.desiredPoint.y - 0.1)):
+            command = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
+            angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
+            omega = angular_command.omega
+        self.vel_x = command.vel_x
+        self.vel_y = command.vel_y
+        self.omega = omega
+        time.sleep(DELAY)
+
 
 
     def go_to_point(self, x, y, lookAtPoint=None):
