@@ -71,7 +71,7 @@ class playable:
         if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
             self.state = State.check
         else:
-            self.state = State.returnToPlay
+            self.state = State.check
 
 #Check State
         if self.state == State.check:
@@ -84,7 +84,7 @@ class playable:
 
             #if (self.robotHome1.x > (AWAY_GOAL.x+ 0.4)) and \
             #(self.robotHome1.y > (AWAY_GOAL.y + 0.3) and self.robotHome1.y < (AWAY_GOAL.y - 0.3)):
-            if (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.5, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
+            if (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.5, 0.09 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
                 self.state = State.rushGoal  # rush goal
                 self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
 
@@ -99,6 +99,7 @@ class playable:
                 if abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
                     self.state = State.stop
                 else:
+                    time.sleep(5)
                     self.state = State.check
 
 #RushGoal State

@@ -106,7 +106,7 @@ class MotionSkills:
 
     @staticmethod
     #behind_x is the allowed distance behind the ball the robot can go while still rushing the ball
-    def isPointInFrontOfRobot(robotLoc,point,param_x = .5, param_y = .04):
+    def isPointInFrontOfRobot(robotLoc,point,param_x =None, param_y = None):
         refPoint = Point(point.x-robotLoc.x,point.y - robotLoc.y)
         rotatedPoint = MotionSkills.rotatePointByAngle(refPoint, robotLoc.theta)
         
