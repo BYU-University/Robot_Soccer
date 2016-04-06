@@ -41,8 +41,8 @@ class playable:
 
 #key for stop
     def key(self, event):
-        if event.keysym == 'q':
-            self.root.destroy()
+        #if event.keysym == 'q':
+        #    self.root.destroy()
         keyPressed = event.char
         if keyPressed == 's':
             self.state = State.stop
