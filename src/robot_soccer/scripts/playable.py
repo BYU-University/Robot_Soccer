@@ -37,7 +37,6 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
-        self.event.char = 'q'
         self.root = tk.Tk()
 
 #key for stop
@@ -58,7 +57,6 @@ class playable:
 
 #Here starts the state machine
     def play(self,data):
-        self.root.bind_all("<key>", key)
         self.updateLocations(data)
         self.commandRoboclaws()
         #readchar.readkey():
@@ -246,8 +244,8 @@ class playable:
     def go(self):
      rospy.init_node('go', anonymous=True)
      print "go function"
-
-     #self.root.withdaw()
+     self.root.bind_all("<key>", key)
+     self.root.withdaw()
      #self.root.mainloop()
      #ent = tk.Entry(self.root)
      #ent.bind_all("<key>", key_in)
