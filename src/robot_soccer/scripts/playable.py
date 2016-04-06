@@ -11,7 +11,7 @@ from param import *
 from enum import Enum
 from Point import *
 import readchar
-from Tkinter import *
+import Tkinter as tk
 
 
 class State(Enum):
@@ -37,29 +37,13 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
-        self.event = None
+        self.event.char = 'q'
+        self.root = tk.Tk()
 
-    def key(self):
-        self.keyPressed = readchar.readkey()
-        if self.keyPressed == 's':
-            self.state = State.stop
-            self.stop_robot()
-        elif self.keyPressed == 'g':
-            self.state = State.check
-        elif self.keyPressed == 'c':
-            self.state = State.returnToPlay
-        else:
-            self.state = State.wait
-        print "pressed", self.keyPressed
-
-
-#Here starts the state machine
-    def play(self,data):
-        self.updateLocations(data)
-        self.commandRoboclaws()
-        #readchar.readkey():
-        #self.keyPressed = readchar.readkey()
-        keyPressed = self.event.char
+    def key(self, event):
+        if event.keysym == 'Escape':
+            self.root.destroy()
+        keyPressed = event.char
         if keyPressed == 's':
             self.state = State.stop
             self.stop_robot()
@@ -67,8 +51,27 @@ class playable:
             self.state = State.check
         elif keyPressed == 'r':
             self.state = State.returnToPlay
+        else:
+            print keyPressed
         print "pressed", keyPressed
+
+#Here starts the state machine
+    def play(self,data):
+        self.updateLocations(data)
+        self.commandRoboclaws()
+        #readchar.readkey():
+        #self.keyPressed = readchar.readkey()
+        #keyPressed = self.event.char
+        #if keyPressed == 's':
+        #    self.state = State.stop
+        #    self.stop_robot()
+        #elif keyPressed == 'g':
+        #    self.state = State.check
+        #elif keyPressed == 'r':
+        #    self.state = State.returnToPlay
+        #print "pressed", keyPressed
             #self.key()
+
         print "STATEMACHINE = ",self.state
         #if self.keyPressed == 's':
         #    self.state = State.wait
@@ -241,6 +244,11 @@ class playable:
     def go(self):
      rospy.init_node('go', anonymous=True)
      print "go function"
+     self.root.bind_all("<key>", key)
+     self.root.withdaw()
+     #ent = tk.Entry(self.root)
+     #ent.bind_all("<key>", key_in)
+
      rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
      rospy.spin()
 
