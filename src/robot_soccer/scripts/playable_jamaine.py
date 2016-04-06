@@ -149,10 +149,10 @@ class playable:
     def arg_def(self):
         if (math.sqrt((self.desiredPoint.x+HOME_GOAL.x)**2+(self.desiredPoint.y+HOME_GOAL.y)**2)> .3): # if the ball gets too close, charge the ball and clear it
     # keep robot within the bounds of the goal
-        if self.desiredPoint.y > HOME_GOAL.y + 0.4:
-            self.desiredPoint.y = HOME_GOAL.y + 0.4
-        elif self.desiredPoint.y < HOME_GOAL.y - 0.4:
-            self.desiredPoint.y = HOME_GOAL.y - 0.4
+            if self.desiredPoint.y > HOME_GOAL.y + 0.4:
+                self.desiredPoint.y = HOME_GOAL.y + 0.4
+            elif self.desiredPoint.y < HOME_GOAL.y - 0.4:
+                self.desiredPoint.y = HOME_GOAL.y - 0.4
     # move to the self.desiredPoint
         if(self.robotHome2.x > (self.desiredPoint.x + 0.1) or self.robotHome2.x < (self.desiredPoint.x - 0.1)) or \
             (self.robotHome2.y > (self.desiredPoint.y + 0.1) or self.robotHome2.y < (self.desiredPoint.y - 0.1)):
