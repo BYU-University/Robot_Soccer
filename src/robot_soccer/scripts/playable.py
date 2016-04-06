@@ -58,6 +58,7 @@ class playable:
 
 #Here starts the state machine
     def play(self,data):
+        self.root.bind_all("<key>", key)
         self.updateLocations(data)
         self.commandRoboclaws()
         #readchar.readkey():
@@ -245,9 +246,9 @@ class playable:
     def go(self):
      rospy.init_node('go', anonymous=True)
      print "go function"
-     self.root.bind_all("<key>", key)
-     self.root.withdaw()
-     self.root.mainloop()
+
+     #self.root.withdaw()
+     #self.root.mainloop()
      #ent = tk.Entry(self.root)
      #ent.bind_all("<key>", key_in)
 
