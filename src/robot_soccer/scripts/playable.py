@@ -117,7 +117,7 @@ class playable:
         #if  (self.robotHome1.x > (point_desired.x + 0.4)) or \
          #   (self.robotHome1.y > (point_desired.y + 0.3) or self.robotHome1.y < (point_desired.y - 0.3)):
 
-        targetAngle = MotionSkills.angleBetweenPoints(Point.Point(self.robotHome1.x, self.robotHome1.y), point_desired)
+        targetAngle = MotionSkills.angleBetweenPoints(Point(self.robotHome1.x, self.robotHome1.y), point_desired)
         angle_fix = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
         angular_command = MotionSkills.go_to_angle(self.robotHome1, HOME_GOAL)
         omega = angular_command.omega
