@@ -107,9 +107,12 @@ class playable:
         if self.state == State.rushGoal:
             #self.rush_goal()
             self.go_direction(AWAY_GOAL)
+            if self.distanceToBall < 0.1:
+                kick.kick()
             print "this is getime: ", getTime()
             if getTime() >= self.stopRushingGoalTime:
                 kick.kick()
+            else:
                 self.state = State.check
 
 #Stop State
