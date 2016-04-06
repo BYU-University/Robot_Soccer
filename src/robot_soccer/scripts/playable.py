@@ -49,7 +49,7 @@ class playable:
             self.state = State.returnToPlay
         else:
             self.state = State.wait
-        print "pressed", repr(self.keyPressed)
+        print "pressed", self.keyPressed
 
 
 #Here starts the state machine
@@ -190,7 +190,7 @@ class playable:
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome1.x)**2+(self.ball.y-self.robotHome1.y)**2)
         self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
         print "Distance to ball: ",self.distanceToBall
-        print "Desired Point Behind Ball: ",self.desiredPoint
+        print "Desired Point Behind Ball: ",self.desiredPoint.x,self.desiredPoint.y
 
     def go_direction(self, point):
         print "X and Y", point.x,point.y
