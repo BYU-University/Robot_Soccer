@@ -42,7 +42,7 @@ class playable:
 
 #key for stop
     def key(self, event):
-        if event.keysym == 'Escape':
+        if event.keysym == 'q':
             self.root.destroy()
         keyPressed = event.char
         if keyPressed == 's':
@@ -247,6 +247,7 @@ class playable:
      print "go function"
      self.root.bind_all("<key>", key)
      self.root.withdaw()
+     self.root.mainloop()
      #ent = tk.Entry(self.root)
      #ent.bind_all("<key>", key_in)
 
