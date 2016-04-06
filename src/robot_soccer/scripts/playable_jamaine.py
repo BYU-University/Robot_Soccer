@@ -10,8 +10,8 @@ import Locations
 from param import *
 from enum import Enum
 from Point import *
-import pygame
-from pygame.locals import *
+#import pygame
+#from pygame.locals import *
 #from Tkinter import *
 
 

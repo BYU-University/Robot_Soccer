@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-import robot_soccer.scripts.roboclaw as r
+
 from functools import partial
-#import roboclaw_read as rr 
+import roboclaw as r
 import time
 import math
 WF=0x80
@@ -14,6 +14,7 @@ M1 = 0
 M2 = 1
 M3 = 2
 radius=2 #radius from center to center wheel
+count=0
 #w=0
 #theta = -math.pi/3.0
 #r1y = math.sin(theta -w)*r*speed
@@ -21,9 +22,9 @@ radius=2 #radius from center to center wheel
 #r3y = math.sin(w)*r*speed
 
 _RC = [
-		{ 'addr': 0x80, 'wheel': 'M1' }, # M1
-		{ 'addr': 0x81, 'wheel': 'M1' }, # M2
-		{ 'addr': 0x80, 'wheel': 'M2' }, # M3
+		{ 'addr': 128, 'wheel': 'M1' }, # M1
+		{ 'addr': 129, 'wheel': 'M1' }, # M2
+		{ 'addr': 128, 'wheel': 'M2' }, # M3
 	 ]
 _SERIAL_ERR = False
 
@@ -69,9 +70,9 @@ def slowspin(speed,speed2):
 #	rr.displayspeed()
 	
 def stop():
-   ForwardM1(WF,0)
-   ForwardM2(WF,0)
-   ForwardM1(WB,0)
+   r.ForwardM1(WF,0)
+   r.ForwardM2(WF,0)
+   r.ForwardM1(WB,0)
 
 def calibrateRoboclaws():
     p = int(65536 * 4)
@@ -83,7 +84,7 @@ def calibrateRoboclaws():
     qqps_m2 = 178091 # 187808 # 139632 # 159086 # 164265 # 164244 # 177244 # 180669 # 180616 # 166407 # 172434 # 165175 # 168984 # 169069
     qqps_m3 = 195319 # 175863 # 130377 # 154211 # 171489 # 165285 # 183906 # 181536 # 175021 # 170281 # 159700 # 161999 # 165146 # 164071
 
-    read_v = ReadMainBatteryVoltage(0x80)
+    read_v = r.ReadMainBatteryVoltage(0x80)
     read_1 = read_v[0]/10
     if (read_1 == 0):
 	read_1 = 1
@@ -93,9 +94,9 @@ def calibrateRoboclaws():
     speedM2 = scale(qqps_m2)
     speedM3 = scale(qqps_m3)
     
-    SetM1pidq(0x80,p,i,d,speedM1)
-    SetM2pidq(0x80,p,i,d,speedM2)
-    SetM1pidq(0x81,p,i,d,speedM3)
+    r.SetM1VelocityPID(0x80,p,i,d,speedM1)
+    r.SetM2VelocityPID(0x80,p,i,d,speedM2)
+    r.SetM1VelocityPID(0x81,p,i,d,speedM3)
 
 
 def left(speed):
@@ -113,54 +114,48 @@ def left(speed):
 	stop()
 
 def back(speed):
-        r.BackwardM1(WF,speed)
-        r.BackwardM2(WF,speed)
-        time.sleep(4)
-        r.BackwardM1(WF,speed-10)
-        r.BackwardM2(WF,speed-10)
-        r.BackwardM1(WB,speed+5)
-        time.sleep(1)
-        r.ForwardM1(WB,0)
-        r.ForwardM1(WF,speed)
-        r.ForwardM2(WF,speed)
-        time.sleep(2)
-        stop()
+    r.BackwardM1(WF,speed)
+    r.BackwardM2(WF,speed)
+    time.sleep(4)
+    r.BackwardM1(WF,speed-10)
+    r.BackwardM2(WF,speed-10)
+    r.BackwardM1(WB,speed+5)
+    time.sleep(1)
+    r.ForwardM1(WB,0)
+    r.ForwardM1(WF,speed)
+    r.ForwardM2(WF,speed)
+    time.sleep(2)
+    stop()
 
 	
 
 def quad(speed):
-	w=0
 	theta = -math.pi/3
 	count = 0
-	n=2
 	w=0
 	neg=-1
-	while count<8:
-		r1y = int(math.sin(theta-w)*radius*speed)
-	#	r1y=(r1*r1)/2
-        	r2y = int(math.sin(theta+w)*radius*speed*neg)
-	#	r2y=(r2*r2)/2
-	        r3y = int(math.sin(w)*radius*speed)
-	#	r3y=(r3*r3)/2
-	#	stop()
-	#	time.sleep(1)
-		r.ForwardM1(WF,r1y)
-	        r.ForwardM2(WF,r2y)
-		r.ForwardM1(WB,r3y)
-        	time.sleep(1)
+	while count < 8:
+	#	r1y = int(math.sin(theta-w)*radius*speed)
+    #	r2y = int(math.sin(theta+w)*radius*speed)
+	#	r3y = int(math.sin(w)*radius*speed)
+		time.sleep(1)
+		r.ForwardM1(WF,20)
+	    r.ForwardM2(WF,20)
+		r.ForwardM1(WB,20)
+        time.sleep(1)
 		stop()
 		w=(math.pi/3)+w
-		print "speed", r1y,r2y,r3y
+		#print "speed", r1y,r2y,r3y
 		print "omega", w
-		count=count+1
+		count = count + 1
 		stop()
-	return count
+
 
 
 def init(set_PID=True):
 	try:
-		r.Open('/dev/ttySAC0', 460800)
-		#quad(20)
+		r.Open('/dev/ttySAC0', 38400)
+		quad(20)
 		#time.sleep(5)
 		#quad(0)
 		#stop()
