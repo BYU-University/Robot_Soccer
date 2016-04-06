@@ -40,6 +40,7 @@ class playable:
         self.event.char = 'q'
         self.root = tk.Tk()
 
+#key for stop
     def key(self, event):
         if event.keysym == 'Escape':
             self.root.destroy()
