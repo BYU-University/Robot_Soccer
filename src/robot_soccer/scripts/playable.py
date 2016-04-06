@@ -37,7 +37,7 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
-        self.root = tk.Tk()
+
 
 #key for stop
     def key(self, event):
@@ -244,8 +244,9 @@ class playable:
     def go(self):
      rospy.init_node('go', anonymous=True)
      print "go function"
-     self.root.bind("<key>", self.key)
-     self.root.withdaw()
+     root = tk.Tk()
+     root.bind("<key>", self.key)
+     root.withdaw()
      #self.root.mainloop()
      #ent = tk.Entry(self.root)
      #ent.bind_all("<key>", key_in)
