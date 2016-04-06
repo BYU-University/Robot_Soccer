@@ -56,17 +56,18 @@ class playable:
     def play(self,data):
         self.updateLocations(data)
         self.commandRoboclaws()
-        self.keyPressed = readchar.readkey()
-        if self.keyPressed == 's':
-            self.state = State.stop
-            self.stop_robot()
-        elif self.keyPressed == 'g':
-            self.state = State.check
-        elif self.keyPressed == 'r':
-            self.state = State.returnToPlay
-        print "pressed", self.keyPressed
-        #self.key()
-        print "STATEMACHINE = ",self.state
+        if readchar.readkey():
+            self.keyPressed = readchar.readkey()
+            if self.keyPressed == 's':
+                self.state = State.stop
+                self.stop_robot()
+            elif self.keyPressed == 'g':
+                self.state = State.check
+            elif self.keyPressed == 'r':
+                self.state = State.returnToPlay
+            print "pressed", self.keyPressed
+            #self.key()
+            print "STATEMACHINE = ",self.state
         #if self.keyPressed == 's':
         #    self.state = State.wait
        #elif abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
