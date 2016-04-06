@@ -11,6 +11,7 @@ from param import *
 from enum import Enum
 from Point import *
 import readchar
+from Tkinter import *
 
 
 class State(Enum):
@@ -36,7 +37,7 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
-        self.keyPressed = None
+        self.event = None
 
     def key(self):
         self.keyPressed = readchar.readkey()
@@ -56,14 +57,25 @@ class playable:
     def play(self,data):
         self.updateLocations(data)
         self.commandRoboclaws()
-        self.key()
-        print "STATEMACHINE = ",self.state
-        if self.keyPressed == 's':
-            self.state = State.wait
-        elif abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
+        #readchar.readkey():
+        #self.keyPressed = readchar.readkey()
+        keyPressed = self.event.char
+        if keyPressed == 's':
+            self.state = State.stop
+            self.stop_robot()
+        elif keyPressed == 'g':
             self.state = State.check
-        else:
+        elif keyPressed == 'r':
             self.state = State.returnToPlay
+        print "pressed", keyPressed
+            #self.key()
+        print "STATEMACHINE = ",self.state
+        #if self.keyPressed == 's':
+        #    self.state = State.wait
+       #elif abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
+        #    self.state = State.check
+        #else:
+        #    self.state = State.returnToPlay
 
 #Check State
         if self.state == State.check:
