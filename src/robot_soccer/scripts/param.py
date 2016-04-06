@@ -37,7 +37,7 @@ DELAY = 0.01
 
 SPEED_ROBOT = .64 # part of deprecated function.
 SPEED_ROTATION = 1.0 # part of deprecated function.
-DIS_BEHIND_BALL = .02
+DIS_BEHIND_BALL = .015
 HEIGHT_FIELD_METER = 1.14
 WIDTH_FIELD = 1.63
 GUI_MARGIN = 10
