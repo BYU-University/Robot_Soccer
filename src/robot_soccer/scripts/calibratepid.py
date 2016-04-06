@@ -59,7 +59,7 @@ def stop():
   		ForwardM2(128,0)
 	  	ForwardM1(128,0)
 		ForwardM1(129,0)
- 
+
 def read(addr,motor):
 		samples = 3
   		result = 0
@@ -77,8 +77,8 @@ def read(addr,motor):
   			result = result/samples
 			print 'result = ', result
  		return result
-def go():  
-		speed = 127		
+def go():
+		speed = 127
 		#ForwardM1=0
 		speedM1Backward=0
 		speedM1Forward=0
@@ -109,7 +109,7 @@ def go():
 		ForwardM1(128,speed); #M1 forward sample 1
 		BackwardM2(128,speed); #M2 backward sample 1
 		time.sleep(0.2)
-		
+
 		speedM1Forward=speedM1Forward+read(128,1)
 		speedM2Backward=speedM2Backward+read(128,2)
 
@@ -117,7 +117,7 @@ def go():
 		time.sleep(0.1);
 
 #Left back
-		BackwardM2(128,speed); #M2 backward sample 2 
+		BackwardM2(128,speed); #M2 backward sample 2
 		ForwardM1(129,speed); #M3 forward sample 1
 		time.sleep(0.2)
 
@@ -151,7 +151,7 @@ def go():
 		speedM3Backward=speedM3Backward/2
 		speedM2Backward=speedM2Backward+read(128,1)
 		speedM2Backward=speedM2Backward/2
-		
+
 
 		stop();
 		time.sleep(0.1);
@@ -186,12 +186,12 @@ def go():
 		speedM2 = (speedM2Forward - speedM2Backward)/2
 		speedM3 = (speedM3Forward - speedM3Backward)/2
 
-		
+
 		#SetM1VelocityPID(128,p1,i1,d1,speedM1)
 		#SetM2VelocityPID(128,p2,i2,d2,speedM2)
 		#SetM1VelocityPID(129,p3,i3,d3,speedM3)
-		
-				
+
+
 
 		p1,i1,d1,q1,t1 = ReadM1VelocityPID(128)
 		print "128 M1 P=%.2f" % (p1/65536.0)
@@ -208,7 +208,7 @@ def go():
 		print "129 M1 I=%.2f" % (i3/65536.0)
 		print "129 M1 D=%.2f" % (d3/65536.0)
 		print "129 M1 QPPS=",q3
-		
+
 		print "P D=%.2f" % p
 		print "P D=%.2f" % i
 		print "P D=%.2f" % d

@@ -37,19 +37,19 @@ class playable:
         self.desiredPoint = 0.0
         self.stopped = True
 
-    def key(self):
+    #def key(self):
         #for event in pygame.event.get():
 		#if event.type == pygame.QUIT:
 		#    sys.exit()
-        keys=pygame.key.get_pressed()
-        if keys[K_SPACE]:
-            print "space bar!"
-            exit(1)
+#        keys=pygame.key.get_pressed()
+ #       if keys[K_SPACE]:
+  #          print "space bar!"
+   #         exit(1)
 
 
 #Here starts the state machine
     def play(self,data):
-        self.key()
+     #   self.key()
         self.updateLocations(data)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
@@ -247,9 +247,9 @@ class playable:
 if __name__ == '__main__':
     try:
         Open('/dev/ttySAC0', 38400)
-        pygame.init()
-        pygame.display.set_mode((400, 400))
-        pygame.key.set_repeat(10, 10)
+        #pygame.init()
+        #pygame.display.set_mode((400, 400))
+        #pygame.key.set_repeat(10, 10)
         c.setvelocity()
         winner = playable()
         print "START...................."
