@@ -35,6 +35,7 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
+        self.event = None
 
     def key(self):
         keyPressed = self.event.char
