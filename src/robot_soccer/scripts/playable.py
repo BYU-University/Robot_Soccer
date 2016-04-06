@@ -256,20 +256,12 @@ class playable:
     def go(self):
      rospy.init_node('go', anonymous=True)
      print "go function"
-     root = Tk()
-     root.bind("<key>", self.key)
-     #root.withdaw()
-     #self.root.mainloop()
-     #ent = tk.Entry(self.root)
-     #ent.bind_all("<key>", key_in)
-
      rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
      rospy.spin()
 
 
 if __name__ == '__main__':
     try:
-
         Open('/dev/ttySAC0', 38400)
         c.setvelocity()
         winner = playable()
