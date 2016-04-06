@@ -246,7 +246,7 @@ class playable:
      print "go function"
      root = tk.Tk()
      root.bind("<key>", self.key)
-     root.withdaw()
+     #root.withdaw()
      #self.root.mainloop()
      #ent = tk.Entry(self.root)
      #ent.bind_all("<key>", key_in)
