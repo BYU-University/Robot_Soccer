@@ -63,31 +63,34 @@ class playable:
             print keyPressed
         print "pressed", keyPressed
     '''
-#Here starts the state machine
+#This is the state machine
     def play(self,data):
         self.updateLocations(data)
         self.commandRoboclaws()
-        #readchar.readkey():
-        #self.keyPressed = readchar.readkey()
-        #keyPressed = self.event.char
-        #if keyPressed == 's':
-        #    self.state = State.stop
-        #    self.stop_robot()
-        #elif keyPressed == 'g':
-        #    self.state = State.check
-        #elif keyPressed == 'r':
-        #    self.state = State.returnToPlay
-        #print "pressed", keyPressed
-            #self.key()
-
         print "STATEMACHINE = ",self.state
-        #if self.keyPressed == 's':
-        #    self.state = State.wait
+        if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
+            self.state = State.check
+        else:
+            self.state = State.returnToPlay
 
-       #elif abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
-        #    self.state = State.check
-        #else:
-        #    self.state = State.returnToPlay
+        if self.state == State.check:
+            if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
+                (self.robotHome1.y > (self.desiredPoint.y + 0.05) or self.robotHome1.y < (self.desiredPoint.y - 0.05)):
+                self.state = State.getBehindBall
+
+            if abs(self.robotHome1.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
+                self.state = State.returnToPlay
+
+            elif (self.robotHome1.x > (AWAY_GOAL.x+ 0.4)) or \
+            (self.robotHome1.y > (AWAY_GOAL.y + 0.3) or self.robotHome1.y < (AWAY_GOAL.y - 0.3)):
+            #elif (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.5, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
+                self.state = State.rushGoal  # rush goal
+                self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
+               # if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
+            #(self.robotHome1.y > (self.desiredPoint.y + 0.05) or self.robotHome1.y < (self.desiredPoint.y - 0.05)):
+             #       self.state = State.getBehindBall
+              #  else:
+               #     self.state = State.rushGoal
 
 #Check State
         if self.state == State.check:
