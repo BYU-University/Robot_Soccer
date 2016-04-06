@@ -149,10 +149,10 @@ class playable:
     def arg_def(self):
         if (math.sqrt((self.desiredPoint.x+HOME_GOAL.x)**2+(self.desiredPoint.y+HOME_GOAL.y)**2)> .3): # if the ball gets too close, charge the ball and clear it
     # keep robot within the bounds of the goal
-        if self.desiredPoint.y > HOME_GOAL.y + 0.4:
-            self.desiredPoint.y = HOME_GOAL.y + 0.4
-        elif self.desiredPoint.y < HOME_GOAL.y - 0.4:
-            self.desiredPoint.y = HOME_GOAL.y - 0.4
+            if self.desiredPoint.y > HOME_GOAL.y + 0.4:
+                self.desiredPoint.y = HOME_GOAL.y + 0.4
+            elif self.desiredPoint.y < HOME_GOAL.y - 0.4:
+                self.desiredPoint.y = HOME_GOAL.y - 0.4
     # move to the self.desiredPoint
         if(self.robotHome2.x > (self.desiredPoint.x + 0.1) or self.robotHome2.x < (self.desiredPoint.x - 0.1)) or \
             (self.robotHome2.y > (self.desiredPoint.y + 0.1) or self.robotHome2.y < (self.desiredPoint.y - 0.1)):
@@ -200,7 +200,7 @@ class playable:
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome2.x)**2+(self.ball.y-self.robotHome2.y)**2)
         self.desiredPoint = Point(HOME_GOAL.x - 0.32 , self.ball.y)
         print "Distance to ball: ",self.distanceToBall
-        print "Desired Point Behind Ball: ",self.desiredPoint
+        print "Desired Point Behind Ball: ",self.desiredPoint.x, self.desiredPoint.y
 
     def go_direction2(self, point):
         print "X and Y", point.x,point.y
