@@ -11,7 +11,8 @@ from param import *
 from enum import Enum
 from Point import *
 import readchar
-import Tkinter as tk
+from Tkinter import *
+from msvcrt import getch
 
 
 class State(Enum):
@@ -43,14 +44,20 @@ class playable:
     def key(self, event):
         #if event.keysym == 'q':
         #    self.root.destroy()
+        z = getch()
+        if ord(z) == 27:
+            print "cacete de agulhaa"
         keyPressed = event.char
         if keyPressed == 's':
-            self.state = State.stop
-            self.stop_robot()
+           # self.state = State.stop
+           # self.stop_robot()
+            print "oi"
         elif keyPressed == 'g':
-            self.state = State.check
+            #self.state = State.check
+            print "ola"
         elif keyPressed == 'r':
-            self.state = State.returnToPlay
+            print 'olaola'
+           # self.state = State.returnToPlay
         else:
             print keyPressed
         print "pressed", keyPressed
@@ -244,7 +251,7 @@ class playable:
     def go(self):
      rospy.init_node('go', anonymous=True)
      print "go function"
-     root = tk.Tk()
+     root = Tk()
      root.bind("<key>", self.key)
      #root.withdaw()
      #self.root.mainloop()
