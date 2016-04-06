@@ -44,6 +44,7 @@ class playable:
         keys=pygame.key.get_pressed()
         if keys[K_SPACE]:
             print "space bar!"
+            exit(1)
 
 
 #Here starts the state machine

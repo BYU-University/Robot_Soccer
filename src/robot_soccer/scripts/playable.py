@@ -10,9 +10,9 @@ import Locations
 from param import *
 from enum import Enum
 from Point import *
-import readchar
-from Tkinter import *
-from msvcrt import getch
+#import readchar
+#from Tkinter import *
+#from msvcrt import getch
 
 
 class State(Enum):
@@ -41,10 +41,11 @@ class playable:
 
 
 #key for stop
+    '''
     def key(self, event):
         #if event.keysym == 'q':
         #    self.root.destroy()
-        z = getch()
+ #       z = getch()
         if ord(z) == 27:
             print "cacete de agulhaa"
         keyPressed = event.char
@@ -61,7 +62,7 @@ class playable:
         else:
             print keyPressed
         print "pressed", keyPressed
-
+    '''
 #Here starts the state machine
     def play(self,data):
         self.updateLocations(data)
@@ -82,6 +83,7 @@ class playable:
         print "STATEMACHINE = ",self.state
         #if self.keyPressed == 's':
         #    self.state = State.wait
+
        #elif abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
         #    self.state = State.check
         #else:
