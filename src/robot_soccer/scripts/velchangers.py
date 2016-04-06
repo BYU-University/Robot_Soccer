@@ -82,12 +82,12 @@ def goXYOmega(x,y,Omega):
 
 
 def goXYOmegaTheta(x,y,omega,theta,limit=False):
-  #if limit:
-  total = math.sqrt(float(x**2+y**2))
-  if total > cap:
-    scale = cap / total
-    x = x * scale
-    y = y * scale
+  if limit:
+    total = math.sqrt(float(x**2+y**2))
+    if total > cap:
+      scale = cap / total
+      x = x * scale
+      y = y * scale
   v1,v2,v3 = mat.getWheelVelTheta(x,y,omega,theta)
   s1 = radianToQpps(v1)
   s2 = radianToQpps(v2)

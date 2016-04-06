@@ -73,25 +73,6 @@ class playable:
         else:
             self.state = State.returnToPlay
 
-        if self.state == State.check:
-            if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
-                (self.robotHome1.y > (self.desiredPoint.y + 0.05) or self.robotHome1.y < (self.desiredPoint.y - 0.05)):
-                self.state = State.getBehindBall
-
-            if abs(self.robotHome1.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
-                self.state = State.returnToPlay
-
-            elif (self.robotHome1.x > (AWAY_GOAL.x+ 0.4)) or \
-            (self.robotHome1.y > (AWAY_GOAL.y + 0.3) or self.robotHome1.y < (AWAY_GOAL.y - 0.3)):
-            #elif (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.5, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
-                self.state = State.rushGoal  # rush goal
-                self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
-               # if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
-            #(self.robotHome1.y > (self.desiredPoint.y + 0.05) or self.robotHome1.y < (self.desiredPoint.y - 0.05)):
-             #       self.state = State.getBehindBall
-              #  else:
-               #     self.state = State.rushGoal
-
 #Check State
         if self.state == State.check:
             if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
@@ -101,8 +82,8 @@ class playable:
             if abs(self.robotHome1.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
                 self.state = State.returnToPlay
 
-            elif (self.robotHome1.x > (AWAY_GOAL.x+ 0.4)) or \
-            (self.robotHome1.y > (AWAY_GOAL.y + 0.3) or self.robotHome1.y < (AWAY_GOAL.y - 0.3)):
+            if (self.robotHome1.x > (AWAY_GOAL.x+ 0.4)) and \
+            (self.robotHome1.y > (AWAY_GOAL.y + 0.3) and self.robotHome1.y < (AWAY_GOAL.y - 0.3)):
             #elif (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.5, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
                 self.state = State.rushGoal  # rush goal
                 self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
@@ -135,7 +116,7 @@ class playable:
 #GetBehindBall State
         if self.state == State.getBehindBall:
             self.go_to_point_behind_ball()
-            self.state = State.check
+            #self.state = State.check
 
 
 # Here are the functions for the state machine
