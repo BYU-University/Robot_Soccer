@@ -10,6 +10,7 @@ import Locations
 from param import *
 from enum import Enum
 from Point import *
+import pygame
 #from Tkinter import *
 
 
@@ -35,8 +36,18 @@ class playable:
         self.desiredPoint = 0.0
         self.stopped = True
 
+    def key(self):
+        #for event in pygame.event.get():
+		#if event.type == pygame.QUIT:
+		#    sys.exit()
+        keys=pygame.key.get_pressed()
+        if keys[K_SPACE]:
+            print "space bar!"
+
+
 #Here starts the state machine
     def play(self,data):
+        self.key()
         self.updateLocations(data)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
@@ -234,6 +245,9 @@ class playable:
 if __name__ == '__main__':
     try:
         Open('/dev/ttySAC0', 38400)
+        pygame.init()
+        pygame.display.set_mode((400, 400))
+        pygame.key.set_repeat(10, 10)
         c.setvelocity()
         winner = playable()
         print "START...................."
