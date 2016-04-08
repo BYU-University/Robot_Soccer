@@ -110,7 +110,7 @@ def getRobotXYOmegaTheta(x,y,omega,theta):
   return desired
 
 def getWheelVelOmega(x,y,Omega):
-  desired = getRobotXYOmegaTest(x, y,Omega)
+  desired = getRobotXYOmegatest(x, y,Omega)
   result = M*desired
   #print "this is getRobotXYOMEGAASTuple",result
   return result.getA()[0][0], result.getA()[1][0], result.getA()[2][0]
