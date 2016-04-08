@@ -152,7 +152,7 @@ class playable:
         targetAngle = MotionSkills.angleBetweenPoints(pointP, self.desiredPoint)
         fix_angle = (self.robotHome2.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
         get_speed = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
-        angular_get_speed = MotionSkills.go_to_angle(self.robotHome2, AWAY_GOAL)
+        angular_get_speed = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
         omega = angular_get_speed.omega
         if(fix_angle <= RADIAN5 and fix_angle >= -RADIAN5):
             omega = 0
