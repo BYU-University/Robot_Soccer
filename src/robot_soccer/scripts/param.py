@@ -22,6 +22,7 @@ CENTER = Point()
 HOME_GOAL = Point(1.68,0)
 AWAY_GOAL = Point(-1.68,0)
 
+DIS_BEHIND_BALL = .2
 MAX_SPEED = 2
 MIN_SPEED = .1
 MIN_DELTA = .1
@@ -37,7 +38,7 @@ DELAY = 0.01
 
 SPEED_ROBOT = .64 # part of deprecated function.
 SPEED_ROTATION = 1.0 # part of deprecated function.
-DIS_BEHIND_BALL = .3
+
 HEIGHT_FIELD_METER = 1.14
 WIDTH_FIELD = 1.63
 GUI_MARGIN = 10

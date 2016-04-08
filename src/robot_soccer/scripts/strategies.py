@@ -26,6 +26,7 @@ def strategy_init(data):
     # here we will pick tactics and call the functions
 
     p.getBall(bret,ball,field)
+    
 
 
 
