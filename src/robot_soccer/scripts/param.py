@@ -39,7 +39,7 @@ DELAY = 0.01
 SPEED_ROBOT = .64 # part of deprecated function.
 SPEED_ROTATION = 1.0 # part of deprecated function.
 
-HEIGHT_FIELD_METER = 1.14
+HEIGHT_FIELD_METER = 1.10
 WIDTH_FIELD = 1.63
 GUI_MARGIN = 10
 STARTPOINTHOME = 0.45

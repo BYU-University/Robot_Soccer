@@ -16,11 +16,11 @@ from Point import *
 
 
 class State(Enum):
-    rushGoal = 1
+    check = 1
     getBehindBall = 2
-    rotateToAngleBehindBall = 3
-    check = 4
-    returnToPlay = 5
+    rushGoal = 3
+    returnToPlay = 4
+    scoreGoal = 5
     stop = 6
     wait = 7
 
@@ -68,26 +68,37 @@ class playable:
         self.updateLocations(data)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
-        if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
-            self.state = State.check
+        if self.state == State.scoreGoal:
+            self.score_goal()
+            if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
+                self.state = State.check
+            else:
+                self.state = State.scoreGoal
         else:
             self.state = State.check
+        #elif abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
+        #    self.state = State.returnToPlay
+        #else:
+         #   self.state = State.scoreGoal
 
 #Check State
         if self.state == State.check:
             if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
                 (self.robotHome1.y > (self.desiredPoint.y + 0.05) or self.robotHome1.y < (self.desiredPoint.y - 0.05)):
                 self.state = State.getBehindBall
+                if (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.1, 0.03 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
+                    self.state = State.rushGoal  # rush goal
+                    self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
+                    print "This is stopRuchTIme: ",self.stopRushingGoalTime
 
-            if abs(self.robotHome1.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
+
+            if abs(self.robotHome1.x) > HOME_GOAL.x and abs(self.ball.y) > HEIGHT_FIELD_METER:
                 self.state = State.returnToPlay
+            if abs(self.ball.x) > HOME_GOAL.x:
+                self.state = State.scoreGoal
 
             #if (self.robotHome1.x > (AWAY_GOAL.x+ 0.4)) and \
             #(self.robotHome1.y > (AWAY_GOAL.y + 0.3) and self.robotHome1.y < (AWAY_GOAL.y - 0.3)):
-            if (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.1, 0.03 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
-                self.state = State.rushGoal  # rush goal
-                self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
-                print "This is stopRuchTIme: ",self.stopRushingGoalTime
 
 #Return To Play State
         if self.state == State.returnToPlay:
@@ -142,6 +153,10 @@ class playable:
         self.vel_y = command.vel_y
         self.omega = omega
         time.sleep(DELAY)
+
+
+    def score_goal(self):
+        self.goStart()
 
 
     def stop_robot(self):
@@ -239,6 +254,18 @@ class playable:
         correctY = float(-self.vel_y)
         print "values of vel_x,vel_y,Omega,Theta: ", correctX, correctY, self.omega, self.robotHome1.theta
         velchangers.goXYOmegaTheta(correctX, correctY, self.omega, self.robotHome1.theta)
+
+
+    def goStart(self):
+        start = 0.45
+        print "info for debugg"
+        xposition = float(self.robotHome1.x-start)
+    #print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
+        self.vel_x = xposition
+        self.vel_y = self.robotHome1.y
+        self.omega = self.robotHome1.theta
+
+
 
     def go(self):
      rospy.init_node('go', anonymous=True)
