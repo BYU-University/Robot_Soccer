@@ -47,6 +47,7 @@ class playable:
    #         exit(1)
 
 
+
 #Here starts the state machine
     def play(self,data):
      #   self.key()
@@ -109,7 +110,7 @@ class playable:
         #if  (self.robotHome2.x > (point_desired.x + 0.4)) or \
          #   (self.robotHome2.y > (point_desired.y + 0.3) or self.robotHome2.y < (point_desired.y - 0.3)):
         targetAngle = MotionSkills.angleBetweenPoints(Point.Point(self.robotHome2.x, self.robotHome2.y), point_desired)
-        angle_fix = (self.robotHome2.theta - targetAngle + RADIAN180) # RADIAN360 - RADIAN180
+        angle_fix = (self.robotHome2.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
         angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
         omega = angular_command.omega
         if(angle_fix <= RADIAN5 and angle_fix >= -RADIAN5):
@@ -148,7 +149,7 @@ class playable:
         self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
         pointP = Point(self.robotHome2.x, self.robotHome2.y)
         targetAngle = MotionSkills.angleBetweenPoints(pointP, self.desiredPoint)
-        fix_angle = (self.robotHome2.theta - targetAngle + RADIAN180) # RADIAN360 - RADIAN180
+        fix_angle = (self.robotHome2.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
         get_speed = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
         angular_get_speed = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
         omega = angular_get_speed.omega
