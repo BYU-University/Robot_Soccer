@@ -260,11 +260,11 @@ class playable:
     def goStart(self):
         start = 0.45
         print "info for debugg"
-        xposition = float(start - self.robotHome1.x)
+        xposition = float(start + self.robotHome1.x)
     #print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
         self.vel_x = xposition
         self.vel_y = self.robotHome1.y
-        self.omega = self.robotHome1.theta
+        self.omega = 0
 
 
 
