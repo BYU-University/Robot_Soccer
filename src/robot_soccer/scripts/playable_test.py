@@ -28,7 +28,7 @@ class State(Enum):
 class playable:
     def __init__(self):
         self.ball = Locations.Locations().ball
-        self.robotHome2 = Locations.Locations().home1
+        self.robotHome2 = Locations.Locations().home2
         self.distanceToBall = 0
         self.state = State.check
         self.stopRushingGoalTime = 0
