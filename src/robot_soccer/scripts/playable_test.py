@@ -40,29 +40,7 @@ class playable:
         self.stopped = True
 
 
-#key for stop
-    '''
-    def key(self, event):
-        #if event.keysym == 'q':
-        #    self.root.destroy()
- #       z = getch()
-        if ord(z) == 27:
-            print "cacete de agulhaa"
-        keyPressed = event.char
-        if keyPressed == 's':
-           # self.state = State.stop
-           # self.stop_robot()
-            print "oi"
-        elif keyPressed == 'g':
-            #self.state = State.check
-            print "ola"
-        elif keyPressed == 'r':
-            print 'olaola'
-           # self.state = State.returnToPlay
-        else:
-            print keyPressed
-        print "pressed", keyPressed
-    '''
+
 #This is the state machine
     def play(self,data):
         self.updateLocations(data)

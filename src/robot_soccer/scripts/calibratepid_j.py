@@ -6,11 +6,11 @@ Open('/dev/ttySAC0', 38400)
 
 #this is the calc made on motor_control->tentative
 #M1speed = 100
-M1speed = 294613
+M1speed = 294613-5000
 #M2speed = 100
-M2speed = 283401
+M2speed = 283401-5000
 #M3speed = 100
-M3speed = 298275
+M3speed = 298275-5000
 p = 4.0
 i = 2.0
 #i = 0.0
