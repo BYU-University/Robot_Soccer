@@ -174,6 +174,7 @@ class playable:
         targetAngle = MotionSkills.angleBetweenPoints(pointP, self.desiredPoint)
         fix_angle = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
         get_speed = MotionSkills.go_to_point(self.robotHome1, self.desiredPoint)
+        # I had to change the angle position from AWAY_GOAL to HOME_GOAL
         angular_get_speed = MotionSkills.go_to_angle(self.robotHome1, HOME_GOAL)
         omega = angular_get_speed.omega
         if(fix_angle <= RADIAN5 and fix_angle >= -RADIAN5):
@@ -251,7 +252,7 @@ class playable:
 
 
     def commandRoboclaws(self):
-        correctX = float(-self.vel_x)
+        correctX = float(-self.vel_x)  # for some how it was going backwards. Has to fix it
         correctY = float(-self.vel_y)
         print "values of vel_x,vel_y,Omega,Theta: ", correctX, correctY, self.omega, self.robotHome1.theta
         velchangers.goXYOmegaTheta(correctX, correctY, self.omega, self.robotHome1.theta)
