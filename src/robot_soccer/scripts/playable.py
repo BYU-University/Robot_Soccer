@@ -264,12 +264,12 @@ class playable:
 
 
 
-        print "info for debugg"
-        xposition = float(start + self.robotHome1.x)
+        print "info for debugg trying to go to start point"
+        #xposition = float(start + self.robotHome1.x)
     #print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
-        self.vel_x = xposition
-        self.vel_y = self.robotHome1.y
-        self.omega = 0
+        #self.vel_x = xposition
+        #self.vel_y = self.robotHome1.y
+        #self.omega = 0
 
 
 
