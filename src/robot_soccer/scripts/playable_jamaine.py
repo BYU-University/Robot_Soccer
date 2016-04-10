@@ -40,13 +40,15 @@ class playable:
     #def key(self):
         #for event in pygame.event.get():
 		#if event.type == pygame.QUIT:
-		#    sys.exit()
+		#    sys.exit()calibratepidh
 #        keys=pygame.key.get_pressed()
  #       if keys[K_SPACE]:
   #          print "space bar!"
    #         exit(1)
 
-
+#probably enter override commands here in this part of the state machine
+    #check with Renato - we have a pause command and reset command
+    # force to "stop" and "return to goallie" states respectively
 
 #Here starts the state machine
     def play(self,data):
