@@ -72,6 +72,8 @@ class playable:
             self.back_startPoint()
             if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
                 self.state = State.check
+            elif self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
+                self.state = State.stop
             else:
                 self.state = State.goBackInit
         else:
