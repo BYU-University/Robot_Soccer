@@ -20,7 +20,7 @@ class State(Enum):
     getBehindBall = 2
     rushGoal = 3
     returnToPlay = 4
-    scoreGoal = 5
+    goBackInit = 5
     stop = 6
     wait = 7
 
@@ -68,18 +68,18 @@ class playable:
         self.updateLocations(data)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
-        if self.state == State.scoreGoal:
-            self.score_goal()
+        if self.state == State.goBackInit:
+            self.back_startPoint()
             if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
                 self.state = State.check
             else:
-                self.state = State.scoreGoal
+                self.state = State.goBackInit
         else:
             self.state = State.check
         #elif abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
         #    self.state = State.returnToPlay
         #else:
-         #   self.state = State.scoreGoal
+         #   self.state = State.goBackInit
 
 #Check State
         if self.state == State.check:
@@ -95,7 +95,7 @@ class playable:
             if abs(self.robotHome1.x) > HOME_GOAL.x and abs(self.ball.y) > HEIGHT_FIELD_METER:
                 self.state = State.returnToPlay
             if abs(self.ball.x) > HOME_GOAL.x:
-                self.state = State.scoreGoal
+                self.state = State.goBackInit
 
             #if (self.robotHome1.x > (AWAY_GOAL.x+ 0.4)) and \
             #(self.robotHome1.y > (AWAY_GOAL.y + 0.3) and self.robotHome1.y < (AWAY_GOAL.y - 0.3)):
@@ -156,7 +156,7 @@ class playable:
         time.sleep(DELAY)
 
 
-    def score_goal(self):
+    def back_startPoint(self):
         self.goStart()
 
 
@@ -260,6 +260,10 @@ class playable:
 
     def goStart(self):
         start = 0.45
+        self.go_to_point(CENTER.x+start, CENTER.y, HOME_GOAL)
+
+
+
         print "info for debugg"
         xposition = float(start + self.robotHome1.x)
     #print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
