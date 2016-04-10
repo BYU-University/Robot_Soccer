@@ -19,8 +19,8 @@ def getTime():
 
 CENTER = Point()
 #MAX_SPEED = .7
-HOME_GOAL = Point(1.68,0)
-AWAY_GOAL = Point(-1.68,0)
+HOME_GOAL = Point(1.65,0)
+AWAY_GOAL = Point(-1.66,0)
 
 DIS_BEHIND_BALL = .2
 MAX_SPEED = 1
