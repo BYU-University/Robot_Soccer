@@ -76,8 +76,14 @@ class playable:
                 self.state = State.stop
             else:
                 self.state = State.goBackInit
+        if self.state == State.stop:
+            if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
+                self.state = State.check
+            else:
+                self.state = State.stop
         else:
             self.state = State.check
+
         #elif abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
         #    self.state = State.returnToPlay
         #else:
