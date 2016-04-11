@@ -60,7 +60,7 @@ if __name__ == '__main__':
         while True:
             Open('/dev/ttySAC0', 38400)
             print "START...................."
-            print " s to spinning, f to Forward, b to Backward"
+            print " s to spinning, f to Forward, b to Backward, t to stop"
             choice = raw_input('--> ')
             if choice == 'f':
                 fowardfull()
@@ -68,7 +68,10 @@ if __name__ == '__main__':
                 spinningfull()
             if choice == 'b':
                 backwardfull()
+            if choice == 't':
+                stopall()
+
     except KeyboardInterrupt:
         #global _SERIAL_ERR
         #_SERIAL_ERR = True
-        print 'acabouuu'
+        print 'Finish'
