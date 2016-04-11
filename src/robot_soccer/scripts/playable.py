@@ -80,7 +80,8 @@ class playable:
                 self.state = State.goBackInit
         if self.state == State.stop:
             if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
-                self.state = State.check
+                self.state = State.wait
+
             else:
                 self.state = State.stop
         else:
@@ -143,6 +144,7 @@ class playable:
             #self.state = State.wait
 
 
+
 #GetBehindBall State
         if self.state == State.getBehindBall:
             self.go_to_point_behind_ball()
@@ -152,8 +154,8 @@ class playable:
         if self.state == State.wait:
             print ("choose for : get the ball(g), or what go to Center? (c)")
             print ("Dont forget to click enter After you damn letter input. Gosh!")
-            choose = input(" Robot is ready for Imput....")
-            print ( "you damn chose " + choose +" letter, Good luck")
+            choose = raw_input('--> ')
+            print  "you damn chose " + choose +" letter, Good luck"
             if choose == 'g':
                 self.state = State.check
                 #self.go()
