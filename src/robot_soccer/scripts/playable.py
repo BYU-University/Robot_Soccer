@@ -140,7 +140,7 @@ class playable:
 #Stop State
         if self.state == State.stop:
             self.stop_robot()
-            self.state = State.wait
+            #self.state = State.wait
 
 
 #GetBehindBall State
