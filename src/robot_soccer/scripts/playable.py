@@ -69,34 +69,26 @@ class playable:
         self.updateLocations(data)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
-
-        try:
-            while True:
-                if self.state == State.goBackInit:
-                    self.back_startPoint()
-                    if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
-                        self.state = State.check
-                    elif self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
-                        self.state = State.stop
-                    else:
-                        self.state = State.goBackInit
-                if self.state == State.stop:
-                    if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
-                        self.state = State.check
-                    else:
-                        self.state = State.stop
-                else:
-                    self.state = State.check
+        if self.state == State.goBackInit:
+            self.back_startPoint()
+            if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
+                self.state = State.check
+            elif self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
+                self.state = State.stop
+            else:
+                self.state = State.goBackInit
+        if self.state == State.stop:
+            if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
+                self.state = State.check
+            else:
+                self.state = State.stop
+        else:
+            self.state = State.check
 
         #elif abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
         #    self.state = State.returnToPlay
         #else:
          #   self.state = State.goBackInit
-        except KeyboardInterrupt:
-            pass
-            self.state = State.goBackInit
-            if self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
-                self.state == State.stop
 
 
 #Check State
@@ -163,6 +155,8 @@ class playable:
             print ( "you damn chose " + choose +" letter, Good luck")
             if choose == 'g':
                 self.state = State.check
+                STATEMACHINE = True
+                self.go()
             elif choose == 'c':
                 self.state = State.goBackInit
             else:
@@ -310,10 +304,18 @@ class playable:
 
 
     def go(self):
-     rospy.init_node('go', anonymous=True)
-     print "go function"
-     rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
-     rospy.spin()
+     try:
+      while STATEMACHINE:
+        rospy.init_node('go', anonymous=True)
+        print "go function"
+        rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
+        rospy.spin()
+
+     except KeyboardInterrupt:
+        pass
+        self.state = State.goBackInit
+        if self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
+            self.state == State.stop
 
 
 if __name__ == '__main__':
