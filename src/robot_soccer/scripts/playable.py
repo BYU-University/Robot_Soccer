@@ -258,7 +258,6 @@ class playable:
         self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
         print "Distance to ball: ",self.distanceToBall
         print "Desired Point Behind Ball: ",self.desiredPoint.x,self.desiredPoint.y
-
         HOME_GOAL.x = float(data.field_width/2-FIXFIELD)
         HOME_GOAL.y = float(data.field_height/2-FIXFIELD)
         print "SIZE OF THE FIELD : ", HOME_GOAL.x,HOME_GOAL.y

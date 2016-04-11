@@ -213,6 +213,8 @@ class playable:
         self.robotHome2(data.home2_x,data.home2_y,data.home2_theta)
         self.ball.x = data.ball_x
         self.ball.y = data.ball_y
+        HOME_GOAL.x = float(data.field_width/2-FIXFIELD)
+        HOME_GOAL.y = float(data.field_height/2-FIXFIELD)
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome2.x)**2+(self.ball.y-self.robotHome2.y)**2)
         self.desiredPoint = Point(HOME_GOAL.x - 0.32 , self.ball.y)
         print "Distance to ball: ",self.distanceToBall
@@ -241,7 +243,7 @@ class playable:
 
     def go(self):
      rospy.init_node('go', anonymous=True)
-     print "go function"
+     print "go Defense "
      rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
      rospy.spin()
 
@@ -253,30 +255,10 @@ if __name__ == '__main__':
         #pygame.init()
         #pygame.display.set_mode((400, 400))
         #pygame.key.set_repeat(10, 10)
-        #c.setvelocity()
-        while True:
-            ForwardM1(128,30)
-            ForwardM2(128,30)
-            ForwardM1(128,30)
-            time.sleep(0.5)
-            ForwardM1(128,35)
-            ForwardM1(129,40)
-            ForwardM2(128,0)
-            time.sleep(1.5)
-            kick.kick()
-            BackwardM2(128,35)
-            BackwardM1(129,40)
-            BackwardM1(128,0)
-            time.sleep(1.5)
-            BackwardM2(128,20)
-            BackwardM1(129,20)
-            BackwardM1(128,20)
-            time.sleep(0.5)
-
-
-        #winner = playable()
+        c.setvelocity()
+        winner = playable()
         print "START...................."
-        #winner.go()
+        winner.go()
     except:
         global _SERIAL_ERR
         _SERIAL_ERR = True
