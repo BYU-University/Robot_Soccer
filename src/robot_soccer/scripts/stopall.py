@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import roboclaw as r
 r.Open('/dev/ttySAC0', 38400)
 
