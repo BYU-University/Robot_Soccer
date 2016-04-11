@@ -312,10 +312,12 @@ class playable:
         rospy.spin()
 
      except KeyboardInterrupt:
-        pass
-        self.state = State.goBackInit
-        if self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
-            self.state == State.stop
+        #pass
+        #self.state = State.goBackInit
+        #if self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
+        self.state == State.stop
+        self.stop_robot()
+        self.commandRoboclaws()
 
 
 if __name__ == '__main__':
