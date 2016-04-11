@@ -84,6 +84,8 @@ class playable:
 
             else:
                 self.state = State.stop
+        elif self.state == State.wait:
+            self.stop_robot()
         else:
             self.state = State.check
 
@@ -152,6 +154,7 @@ class playable:
 
 #Wait state
         if self.state == State.wait:
+
             print ("choose for : get the ball(g), or what go to Center? (c)")
             print ("Dont forget to click enter After you damn letter input. Gosh!")
             choose = raw_input('--> ')
@@ -166,6 +169,7 @@ class playable:
             else:
                 print  "you damn chose NOTHING letter, Good luck"
                 self.state = State.wait
+                self.stop_robot()
 
 
 # Here are the functions for the state machine
@@ -286,7 +290,7 @@ class playable:
             self.omega = delta_angle * 3.0
         self.newCommand = True
 
-    def wait(self):
+    def waitCommand(self):
         self.goStart()
 
 
