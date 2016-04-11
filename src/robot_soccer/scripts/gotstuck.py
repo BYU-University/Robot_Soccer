@@ -6,13 +6,19 @@ from param import *
 
 
 def fowardfull():
-    ForwardM1(128,50)
-    BackwardM2(128,50)
+    ForwardM1(128,80)
+    BackwardM2(128,80)
     ForwardM1(129,0)
     time.sleep(1)
-    ForwardM1(128,0)
-    ForwardM2(128,0)
+    stopall()
+    time.sleep(0.5)
+
+def backwardfull():
+    ForwardM2(128,80)
+    BackwardM1(128,80)
     ForwardM1(129,0)
+    time.sleep(1)
+    stopall()
     time.sleep(0.5)
 
 
@@ -21,9 +27,14 @@ def spinningfull():
     ForwardM2(128,60)
     ForwardM1(129,60)
     time.sleep(1)
+    stopall()
+
+
+def stopall():
     ForwardM1(128,0)
     ForwardM2(128,0)
     ForwardM1(129,0)
+
 
 def run():
     ForwardM1(128,30)
@@ -54,6 +65,8 @@ if __name__ == '__main__':
             fowardfull()
         if choice == 's':
             spinningfull()
+        if choice == 'b':
+            backwardfull()
     except:
         global _SERIAL_ERR
         _SERIAL_ERR = True
