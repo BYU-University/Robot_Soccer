@@ -98,7 +98,7 @@ class playable:
             if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
                 (self.robotHome1.y > (self.desiredPoint.y + 0.05) or self.robotHome1.y < (self.desiredPoint.y - 0.05)):
                 self.state = State.getBehindBall
-                if (MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.1, 0.03 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
+                if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.1, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
                     self.state = State.rushGoal  # rush goal
                     self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
                     print "This is stopRuchTIme: ",self.stopRushingGoalTime
@@ -158,7 +158,7 @@ class playable:
             print  "you damn chose " + choose +" letter, Good luck"
             if choose == 'g':
                 self.state = State.check
-                self.go()
+                self.play()
             elif choose == 'c':
                 self.state = State.goBackInit
             else:
