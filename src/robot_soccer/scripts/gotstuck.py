@@ -1,22 +1,8 @@
-
-
 #!/usr/bin/env python
-import rospy
-from robot_soccer.msg import convertedCoordinates
 import calibratepid as c
 from roboclaw import *
 import kick
-import velchangers
-from MotionSkills import *
-import Locations
 from param import *
-from enum import Enum
-from Point import *
-#import readchar
-#from Tkinter import *
-#from msvcrt import getch
-
-
 
 
 def fowardfull():
