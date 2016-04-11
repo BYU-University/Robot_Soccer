@@ -157,11 +157,14 @@ class playable:
             choose = raw_input('--> ')
             print  "you damn chose " + choose +" letter, Good luck"
             if choose == 'g':
-                self.state = State.check
-                self.play()
+                #self.state = State.check
+                #self.play()
+                print  "you damn chose " + choose +" letter, Good luck"
             elif choose == 'c':
-                self.state = State.goBackInit
+                #self.state = State.goBackInit
+                print  "you damn chose " + choose +" letter, Good luck"
             else:
+                print  "you damn chose NOTHING letter, Good luck"
                 self.state = State.wait
 
 
