@@ -7,7 +7,7 @@ from param import *
 
 def fowardfull():
     ForwardM1(128,50)
-    ForwardM2(128,50)
+    ForwardM2(128,-50)
     ForwardM1(129,0)
     time.sleep(1)
     ForwardM1(128,0)
