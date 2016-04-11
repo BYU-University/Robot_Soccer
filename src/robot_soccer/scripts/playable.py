@@ -158,7 +158,7 @@ class playable:
             print  "you damn chose " + choose +" letter, Good luck"
             if choose == 'g':
                 self.state = State.check
-                #self.go()
+                self.go()
             elif choose == 'c':
                 self.state = State.goBackInit
             else:
