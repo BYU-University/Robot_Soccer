@@ -40,6 +40,7 @@ class playable:
         self.stopped = True
 
 
+
 #key for stop
     '''
     def key(self, event):
@@ -250,6 +251,10 @@ class playable:
         print "Distance to ball: ",self.distanceToBall
         print "Desired Point Behind Ball: ",self.desiredPoint.x,self.desiredPoint.y
 
+        HOME_GOAL.x = float(data.field_width/2-FIXFIELD)
+        HOME_GOAL.y = float(data.field_height/2-FIXFIELD)
+        print "SIZE OF THE FIELD : ", HOME_GOAL.x,HOME_GOAL.y
+
     def go_direction(self, point):
         print "X and Y", point.x,point.y
         angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
@@ -312,9 +317,10 @@ class playable:
         rospy.spin()
 
      except KeyboardInterrupt:
-        #pass
+        pass
         #self.state = State.goBackInit
         #if self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
+        #STATEMACHINE = False
         self.state == State.stop
         self.stop_robot()
         self.commandRoboclaws()

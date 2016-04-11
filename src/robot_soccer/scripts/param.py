@@ -19,7 +19,7 @@ def getTime():
 
 CENTER = Point()
 #MAX_SPEED = .7
-HOME_GOAL = Point(1.65,0)
+HOME_GOAL = Point()
 AWAY_GOAL = Point(-1.66,0)
 
 DIS_BEHIND_BALL = .2
@@ -36,6 +36,7 @@ RADIAN180 = 3.14
 RADIAN360 = 6.28
 RADIAN5 = .087
 DELAY = 0.01
+FIXFIELD = 0.06
 
 SPEED_ROBOT = .64 # part of deprecated function.
 SPEED_ROTATION = 1.0 # part of deprecated function.
