@@ -57,16 +57,18 @@ def run():
 
 if __name__ == '__main__':
     try:
-        Open('/dev/ttySAC0', 38400)
-        print "START...................."
-        print " s to spinning, f to Forward, b to Backward"
-        choice = raw_input('--> ')
-        if choice == 'f':
-            fowardfull()
-        if choice == 's':
-            spinningfull()
-        if choice == 'b':
-            backwardfull()
-    except:
-        global _SERIAL_ERR
-        _SERIAL_ERR = True
+        while True:
+            Open('/dev/ttySAC0', 38400)
+            print "START...................."
+            print " s to spinning, f to Forward, b to Backward"
+            choice = raw_input('--> ')
+            if choice == 'f':
+                fowardfull()
+            if choice == 's':
+                spinningfull()
+            if choice == 'b':
+                backwardfull()
+    except KeyboardInterrupt:
+        #global _SERIAL_ERR
+        #_SERIAL_ERR = True
+        print 'acabouuu'
