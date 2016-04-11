@@ -70,9 +70,9 @@ class playable:
             if abs(self.robotHome2.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
                 self.state = State.returnToGollie
 
-            elif (self.robotHome2.x > (self.desiredPoint.x + 0.05) and self.robotHome2.x < (self.desiredPoint.x - 0.05)) and \
-                (self.robotHome2.y > (self.desiredPoint.y + 0.1) and self.robotHome2.y < (self.desiredPoint.y - 0.1)):
-            #elif (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.5, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
+            #elif (self.robotHome2.x > (self.desiredPoint.x + 0.05) and self.robotHome2.x < (self.desiredPoint.x - 0.05)) and \
+            #    (self.robotHome2.y > (self.desiredPoint.y + 0.1) and self.robotHome2.y < (self.desiredPoint.y - 0.1)):
+            elif (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
                 self.state = State.rushGoal  # rush goal
                 self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
 
@@ -135,9 +135,9 @@ class playable:
             command = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
             angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
             omega = angular_command.omega
-        self.vel_x = command.vel_x
-        self.vel_y = command.vel_y
-        self.omega = omega
+            self.vel_x = command.vel_x
+            self.vel_y = command.vel_y
+            self.omega = omega
         time.sleep(DELAY)
 
     def stop_robot(self):
