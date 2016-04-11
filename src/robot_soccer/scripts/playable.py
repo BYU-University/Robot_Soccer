@@ -156,8 +156,7 @@ class playable:
             print ( "you damn chose " + choose +" letter, Good luck")
             if choose == 'g':
                 self.state = State.check
-                STATEMACHINE = True
-                self.go()
+                #self.go()
             elif choose == 'c':
                 self.state = State.goBackInit
             else:
@@ -309,21 +308,21 @@ class playable:
 
 
     def go(self):
-     try:
-      while STATEMACHINE:
+     #try:
+     # while STATEMACHINE:
         rospy.init_node('go', anonymous=True)
         print "go function"
         rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
         rospy.spin()
 
-     except KeyboardInterrupt:
-        pass
+     #except KeyboardInterrupt:
+        #pass
         #self.state = State.goBackInit
         #if self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
         #STATEMACHINE = False
-        self.state == State.stop
-        self.stop_robot()
-        self.commandRoboclaws()
+      #  self.state == State.stop
+      #  self.stop_robot()
+      #  self.commandRoboclaws()
 
 
 if __name__ == '__main__':
