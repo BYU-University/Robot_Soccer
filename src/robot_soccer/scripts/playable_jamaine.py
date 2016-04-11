@@ -58,13 +58,15 @@ class playable:
         print "STATEMACHINE = ",self.state
         if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
             self.state = State.check
-        else:
-            self.state = State.returnToGollie
+        #else:
+         #   self.state = State.returnToGollie
 
 #Check State
         if self.state == State.check:
+
             if (self.robotHome2.x > (self.desiredPoint.x + 0.05) or self.robotHome2.x < (self.desiredPoint.x - 0.05)) or \
                 (self.robotHome2.y > (self.desiredPoint.y + 0.05) or self.robotHome2.y < (self.desiredPoint.y - 0.05)):
+                print "Values for State Defense, ",self.desiredPoint.x, self.desiredPoint.y
                 self.state = State.defenseGoal
 
             if abs(self.robotHome2.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
@@ -125,6 +127,7 @@ class playable:
 
     def defense(self):
     # keep robot within the bounds of the goal
+        print "values for Home GOAL: ", HOME_GOAL.x,HOME_GOAL.y
         if self.desiredPoint.y > HOME_GOAL.y + 0.4:
             self.desiredPoint.y = HOME_GOAL.y + 0.4
         elif self.desiredPoint.y < HOME_GOAL.y - 0.4:
@@ -138,7 +141,7 @@ class playable:
             self.vel_x = command.vel_x
             self.vel_y = command.vel_y
             self.omega = omega
-        time.sleep(DELAY)
+        #time.sleep(DELAY)
 
     def stop_robot(self):
         self.vel_x = 0
