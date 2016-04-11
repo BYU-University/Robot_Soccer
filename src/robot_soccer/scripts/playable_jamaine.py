@@ -62,6 +62,7 @@ class playable:
             #self.state = State.returnToGollie
             self.state = State.defenseGoal
 
+
 #Check State
         if self.state == State.check:
 
@@ -93,11 +94,17 @@ class playable:
 
 #RushGoal State
         if self.state == State.rushGoal:
-            self.rush_goal()
-            #self.go_direction(AWAY_GOAL)
+            #self.rush_goal()
+            self.go_direction(AWAY_GOAL)
+            if self.distanceToBall < 0.12:
+                kick.kick()
+                self.state = State.check
+            print "this is getime: ", getTime()
             if getTime() >= self.stopRushingGoalTime:
                 kick.kick()
                 self.state = State.check
+            else:
+                self.state = State.rushGoal
 
 #Stop State
         if self.state == State.stop:
@@ -107,8 +114,8 @@ class playable:
         if self.state == State.defenseGoal:
             self.defense()
         if (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
-           self.state = State.rushGoal  # rush goal
-           self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
+            self.state = State.rushGoal  # rush goal
+            self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
 
             #self.state = State.check
 
@@ -133,20 +140,22 @@ class playable:
     def defense(self):
     # keep robot within the bounds of the goal
         print "values for Home GOAL: ", HOME_GOAL.x,HOME_GOAL.y
-        if self.desiredPoint.y > HOME_GOAL.y + 0.4:
-            self.desiredPoint.y = HOME_GOAL.y + 0.4
-        elif self.desiredPoint.y < HOME_GOAL.y - 0.4:
+        if self.desiredPoint.y > HOME_GOAL.y - 0.4:
             self.desiredPoint.y = HOME_GOAL.y - 0.4
+        elif self.desiredPoint.y < -HOME_GOAL.y + 0.4:
+            self.desiredPoint.y = -HOME_GOAL.y + 0.4
     # move to the self.desiredPoint
         if(self.robotHome2.x > (self.desiredPoint.x + 0.1) or self.robotHome2.x < (self.desiredPoint.x - 0.1)) or \
             (self.robotHome2.y > (self.desiredPoint.y + 0.1) or self.robotHome2.y < (self.desiredPoint.y - 0.1)):
             command = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
-            angular_command = MotionSkills.go_to_angle(self.robotHome2, AWAY_GOAL)
+            angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
             omega = angular_command.omega
             self.vel_x = command.vel_x
             self.vel_y = command.vel_y
             self.omega = omega
-        #time.sleep(DELAY)
+        else:
+            self.stop_robot()
+        time.sleep(DELAY)
 
     def stop_robot(self):
         self.vel_x = 0
