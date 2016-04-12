@@ -39,8 +39,11 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
-        self.spin = 0
         self.pause = 0
+        self.reset = 0
+        self.spin = 0
+        self.front = 0
+        self.back = 0
         self.gogo = 0
 
 #Here starts the state machine
@@ -48,17 +51,14 @@ class playable:
      #   self.key()
         self.updateLocations(data)
         self.commandRoboclaws()
-        print "STATEMACHINE = ",self.state
         if self.pause == 1:
             self.state = State.stop
         #if self.reset == 1:
         #    print "PRessed key for reset", self.reset
          #   self.state = State.goBackInit
         if self.spin == 1:
-            print "PRessed key for spin, front, back", self.spin, self.front, self.back
             self.state = State.wait
         if self.gogo == 1:
-            print "PRessed key for gogo", self.gogo
             self.state = State.check
         else:
             self.state = State.wait
@@ -131,7 +131,12 @@ class playable:
 #DefenseGoal State
         if self.state == State.defenseGoal:
             self.defense()
-            if (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
+
+            angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,HOME_GOAL)
+            deltaAngle = MotionSkills.deltaBetweenAngles(self.robotHome2.theta,angleBallGoal)
+            #if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.11, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
+            if MotionSkills.isPointInFrontOfRobot(self.robotHome2,self.ball) and abs(deltaAngle) < .12:
+            #if (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
                 self.state = State.rushGoal  # rush goal
                 self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
             else:
@@ -144,10 +149,6 @@ class playable:
     def waitCommand(self):
         if self.spin == 1:
             gt.spinningfull()
-        #elif self.front == 1:
-        #    gt.fowardfull()
-        #elif self.back == 1:
-        #    gt.backwardfull()
         else:
             self.stop_robot()
 
@@ -287,9 +288,12 @@ class playable:
 
     def signalCommand(self,info):
         self.pause = info.pause
-        #self.reset = info.reset
+        self.reset = info.reset
         self.spin = info.spin
+        self.front = info.front
+        self.back = info.back
         self.gogo = info.gogo
+
 
     def commandRoboclaws(self):
         correctX = float(-self.vel_x)
