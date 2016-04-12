@@ -22,8 +22,8 @@ class State(Enum):
     check = 2
     rushGoal = 3
     defenseGoal = 4
-    #returnToGollie = 5
-    stop = 5
+    returnToGollie = 5
+    stop = 6
 
 class playable:
     def __init__(self):
