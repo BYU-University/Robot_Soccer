@@ -80,7 +80,7 @@ class playable:
         if self.pause == 1:#self.signal.x == 1:
             self.state = State.stop
             print "This is Pause INSIDE: ", self.pause#,self.reset #self.signal.x, self.signal.y
-            print "This is PauseX INSIDE: ", self.receive.x
+            print "This is PauseX INSIDE: ", self.receive.y
         print "This is Pause and Reset outside: ", self.pause#, self.reset#self.signal.x, self.signal.y
         print "This is PauseX INSIDE: ", self.receive.x
         if self.state == State.goBackInit:
@@ -316,9 +316,9 @@ class playable:
         #self.vel_y = self.robotHome1.y
         #self.omega = 0
 
-    def signalCommand(self,receives):
-        self.pause = receives.pause
-        #self.receive.x = receives.pause
+    def signalCommand(self,pause,reset):
+        self.pause = pause
+        self.receive.y = reset
 
 
         #self.pause = signal.pause
