@@ -76,6 +76,8 @@ class playable:
 
         if self.pause == 1:
             self.state = State.stop
+            print "This is Pause and Reset INSIDE: ", self.pause, self.reset
+        print "This is Pause and Reset outside: ", self.pause, self.reset
         if self.state == State.goBackInit:
             self.back_startPoint()
             if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
