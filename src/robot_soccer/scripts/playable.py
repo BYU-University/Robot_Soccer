@@ -73,7 +73,7 @@ class playable:
     def play(self,data):
 
         self.updateLocations(data)
-        self.signalCommand()
+        #self.signalCommand()
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
 
@@ -316,9 +316,9 @@ class playable:
         #self.vel_y = self.robotHome1.y
         #self.omega = 0
 
-    def signalCommand(self,pause,reset):
-        self.pause = pause
-        self.receive.y = reset
+    def signalCommand(self,info):
+        self.pause = info.pause
+        self.receive.y = info.reset
 
 
         #self.pause = signal.pause
@@ -331,7 +331,7 @@ class playable:
         rospy.init_node('go', anonymous=True)
         print "go function"
         rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
-        rospy.Subscriber( 'signal', signal, winner.signalCommand)
+        rospy.Subscriber( 'signal', signal, self.signalCommand,queue_size=2)
         rospy.spin()
 
      #except KeyboardInterrupt:
