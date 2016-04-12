@@ -131,7 +131,7 @@ class playable:
             if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
                 (self.robotHome1.y > (self.desiredPoint.y + 0.05) or self.robotHome1.y < (self.desiredPoint.y - 0.05)):
                 self.state = State.getBehindBall
-                if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.1, 0.07 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
+                if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
                     self.state = State.rushGoal  # rush goal
                     self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
                     print "This is stopRuchTIme: ",self.stopRushingGoalTime
@@ -163,7 +163,7 @@ class playable:
         if self.state == State.rushGoal:
             #self.rush_goal()
             self.go_direction(AWAY_GOAL)
-            if self.distanceToBall < 0.12:
+            if self.distanceToBall < 0.135:
                 kick.kick()
                 self.state = State.check
             print "this is getime: ", getTime()
@@ -184,7 +184,7 @@ class playable:
 #GetBehindBall State
         if self.state == State.getBehindBall:
             self.go_to_point_behind_ball()
-            #self.state = State.check
+            self.state = State.check
 
 
 
