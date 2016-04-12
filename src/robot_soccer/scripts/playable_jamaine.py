@@ -60,6 +60,8 @@ class playable:
         if self.gogo == 1:
             print "PRessed key for gogo", self.gogo
             self.state = State.check
+        else:
+            self.state = State.wait
 
 
 
@@ -269,7 +271,7 @@ class playable:
         #print "Distance to ball: ",self.distanceToBall
         #print "Desired Point Behind Ball: ",self.desiredPoint.x, self.desiredPoint.y
 
-    def go_direction2(self, point):
+    def go_direction(self, point):
         print "X and Y", point.x,point.y
         print "robotHome coordinates",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
         angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
