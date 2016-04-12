@@ -85,10 +85,13 @@ class playable:
         if self.pause == 1:
             self.state = State.stop
         if self.reset == 1:
+            print "PRessed key for reset", self.reset
             self.state = State.goBackInit
         if self.spin == 1 or self.front == 1 or self.back == 1:
+            print "PRessed key for spin, front, back", self.spin, self.front, self.back
             self.state = State.wait
         if self.gogo == 1:
+            print "PRessed key for gogo", self.gogo
             self.state = State.check
         #else:
          #   self.state = State.wait
@@ -109,8 +112,8 @@ class playable:
                 self.state = State.stop
         #elif self.state == State.wait:
         #    self.stop_robot()
-        else:
-            self.state = State.check
+        #else:
+        #    self.state = State.check
 
         #elif abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
         #    self.state = State.returnToPlay
