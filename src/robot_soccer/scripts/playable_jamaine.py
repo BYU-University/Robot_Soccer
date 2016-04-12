@@ -153,7 +153,7 @@ class playable:
         if self.state == State.rushGoal:
             #self.rush_goal()
             self.go_direction(AWAY_GOALJAM)
-            if self.distanceToBall < 0.15:
+            if self.distanceToBall < 0.3:
                 kick.kick()
                 self.state = State.check
             print "this is getime: ", getTime()
