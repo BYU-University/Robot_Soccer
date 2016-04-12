@@ -118,15 +118,19 @@ class playable:
 #GetBehindBall State
         if self.state == State.getBehindBall:
             self.go_to_point_behind_ball()
-            #self.testState = TestState.getBehindBall
-            angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,AWAY_GOALJAM)
-            deltaAngle = MotionSkills.deltaBetweenAngles(self.robotHome2.theta,angleBallGoal)
-            #if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.11, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
-            if MotionSkills.isPointInFrontOfRobot(self.robotHome2,self.ball) and abs(deltaAngle) < .12:
-                self.state = State.rushGoal
-
+            if self.desiredPoint.x > AWAY_GOALJAM+.6:
+                self.state = State.returnToGollie
             else:
-                self.state = State.getBehindBall
+            #self.testState = TestState.getBehindBall
+                angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,AWAY_GOALJAM)
+                deltaAngle = MotionSkills.deltaBetweenAngles(self.robotHome2.theta,angleBallGoal)
+                #if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.11, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
+                if MotionSkills.isPointInFrontOfRobot(self.robotHome2,self.ball) and abs(deltaAngle) < .12:
+                    self.state = State.rushGoal
+
+                else:
+                    self.state = State.getBehindBall
+
 
 
 #Stop State
