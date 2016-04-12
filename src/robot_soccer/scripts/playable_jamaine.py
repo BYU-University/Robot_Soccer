@@ -92,7 +92,7 @@ class playable:
                 self.state = State.defenseGoal
             if abs(self.desiredPoint.x) < self.ball.x:
                 self.state = State.getBehindBall
-            if self.ball.x < AWAY_GOALJAM.y+0.50:
+            elif self.ball.x < AWAY_GOALJAM.y+0.50:
                 self.state = State.defenseGoal
 
 
