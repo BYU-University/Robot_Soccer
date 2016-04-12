@@ -4,6 +4,7 @@ from robot_soccer.msg import convertedCoordinates
 from robot_soccer.msg import signal
 import calibratepid as c
 from roboclaw import *
+import gotstuck as gt
 import kick
 import velchangers
 from MotionSkills import *
@@ -42,7 +43,11 @@ class playable:
         #self.signal = Point()
         self.pause = 0
         self.reset = 0
-        self.receive = Point()
+        self.spin = 0
+        self.fowards = 0
+        self.backwards = 0
+        self.gogo = 0
+        #self.receive = Point()
 
 
 
@@ -73,16 +78,20 @@ class playable:
     def play(self,data):
 
         self.updateLocations(data)
-        #self.signalCommand()
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
 
-        if self.pause == 1:#self.signal.x == 1:
+        if self.pause == 1:
             self.state = State.stop
-            print "This is Pause INSIDE: ", self.pause#,self.reset #self.signal.x, self.signal.y
-            print "This is PauseX INSIDE: ", self.receive.y
-        print "This is Pause and Reset outside: ", self.pause#, self.reset#self.signal.x, self.signal.y
-        print "This is PauseX INSIDE: ", self.receive.x
+        elif self.reset == 1:
+            self.state = State.goBackInit
+        elif self.spin == 1 or self.forwards == 1 or self.backwards == 1:
+            self.state = State.wait
+        elif self.gogo == 1:
+            self.state = State.check
+        else:
+            self.state = State.wait
+
         if self.state == State.goBackInit:
             self.back_startPoint()
             if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
@@ -97,8 +106,8 @@ class playable:
 
             else:
                 self.state = State.stop
-        elif self.state == State.wait:
-            self.stop_robot()
+        #elif self.state == State.wait:
+        #    self.stop_robot()
         else:
             self.state = State.check
 
@@ -170,9 +179,9 @@ class playable:
 
 #Wait state
         if self.state == State.wait:
+            self.waitCommand()
+            self.state = State.wait
 
-                self.state = State.wait
-                self.stop_robot()
 
 
 # Here are the functions for the state machine
@@ -293,7 +302,14 @@ class playable:
         self.newCommand = True
 
     def waitCommand(self):
-        self.goStart()
+        if self.spin == 1:
+            gt.spinningfull()
+        elif self.forwards == 1:
+            gt.fowardfull()
+        elif self.backwards == 1:
+            gt.backwardfull()
+        else:
+            self.stop_robot()
 
 
     def commandRoboclaws(self):
@@ -318,7 +334,11 @@ class playable:
 
     def signalCommand(self,info):
         self.pause = info.pause
-        self.receive.y = info.reset
+        self.reset = info.reset
+        self.spin = info.spin
+        self.fowards = info.fowards
+        self.backwards = info.backwards
+        self.gogo = info.gogo
 
 
         #self.pause = signal.pause
@@ -331,7 +351,7 @@ class playable:
         rospy.init_node('go', anonymous=True)
         print "go function"
         rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
-        rospy.Subscriber( 'signal', signal, self.signalCommand,queue_size=2)
+        rospy.Subscriber( 'signal', signal, self.signalCommand,queue_size=6)
         rospy.spin()
 
      #except KeyboardInterrupt:
