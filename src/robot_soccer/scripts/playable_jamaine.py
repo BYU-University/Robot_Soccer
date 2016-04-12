@@ -123,7 +123,7 @@ class playable:
         if self.state == State.getBehindBall:
             self.go_to_point_behind_ball()
             if self.ball.x < AWAY_GOALJAM.y+0.50:
-                self.state = State.check
+                self.state = State.defenseGoal
             else:
             #self.testState = TestState.getBehindBall
                 angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,AWAY_GOALJAM)
@@ -148,7 +148,7 @@ class playable:
             angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,AWAY_GOALJAM)
             deltaAngle = MotionSkills.deltaBetweenAngles(self.robotHome2.theta,angleBallGoal)
             #if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.11, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
-            if MotionSkills.isPointInFrontOfRobot(self.robotHome2,self.ball) and abs(deltaAngle) < .3:
+            if MotionSkills.isPointInFrontOfRobot(self.robotHome2,self.ball) and abs(deltaAngle) < .12:
             #if (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
                 self.state = State.rushGoal  # rush goal
                 self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
@@ -161,7 +161,7 @@ class playable:
         if self.state == State.rushGoal:
             #self.rush_goal()
             self.go_direction(AWAY_GOALJAM)
-            if self.distanceToBall < 0.3:
+            if self.distanceToBall < 0.12:
                 kick.kick()
                 self.state = State.check
             print "this is getime: ", getTime()
