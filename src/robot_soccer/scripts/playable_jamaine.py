@@ -294,8 +294,8 @@ class playable:
         self.robotHome2(data.home2_x,data.home2_y,data.home2_theta)
         self.ball.x = data.ball_x
         self.ball.y = data.ball_y
-        AWAY_GOALJAM.x = float(data.field_width/2-FIXFIELD)
-        AWAY_GOALJAM.y = float(data.field_height/2-FIXFIELD)
+        #AWAY_GOALJAM.x = float(data.field_width/2-FIXFIELD)
+        #AWAY_GOALJAM.y = float(data.field_height/2-FIXFIELD)
         self.distanceToBall = math.sqrt((self.ball.x-self.robotHome2.x)**2+(self.ball.y-self.robotHome2.y)**2)
         self.desiredPoint = Point(AWAY_GOALJAM.x - 0.32 , self.ball.y)
         #print "Distance to ball: ",self.distanceToBall
