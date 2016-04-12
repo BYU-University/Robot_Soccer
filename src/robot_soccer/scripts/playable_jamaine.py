@@ -110,19 +110,7 @@ class playable:
                 else:
                     self.state = State.check
 
-#RushGoal State
-        if self.state == State.rushGoal:
-            #self.rush_goal()
-            self.go_direction(AWAY_GOAL)
-            if self.distanceToBall < 0.12:
-                kick.kick()
-                self.state = State.check
-            print "this is getime: ", getTime()
-            if getTime() >= self.stopRushingGoalTime:
-                kick.kick()
-                self.state = State.check
-            else:
-                self.state = State.rushGoal
+
 
 #Stop State
         if self.state == State.stop:
@@ -135,7 +123,7 @@ class playable:
             angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,HOME_GOAL)
             deltaAngle = MotionSkills.deltaBetweenAngles(self.robotHome2.theta,angleBallGoal)
             #if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.11, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
-            if MotionSkills.isPointInFrontOfRobot(self.robotHome2,self.ball) and abs(deltaAngle) < .12:
+            if MotionSkills.isPointInFrontOfRobot(self.robotHome2,self.ball) and abs(deltaAngle) < .3:
             #if (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
                 self.state = State.rushGoal  # rush goal
                 self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
@@ -144,8 +132,21 @@ class playable:
             #self.state = State.check
 
 
+#RushGoal State
+        if self.state == State.rushGoal:
+            #self.rush_goal()
+            self.go_direction(AWAY_GOAL)
+            if self.distanceToBall < 0.15:
+                kick.kick()
+                self.state = State.check
+            print "this is getime: ", getTime()
+            if getTime() >= self.stopRushingGoalTime:
+                kick.kick()
+                self.state = State.check
+            else:
+                self.state = State.rushGoal
 
-
+#wait State
     def waitCommand(self):
         if self.spin == 1:
             gt.spinningfull()
@@ -182,14 +183,17 @@ class playable:
         if(self.robotHome2.x > (self.desiredPoint.x + 0.1) or self.robotHome2.x < (self.desiredPoint.x - 0.1)) or \
             (self.robotHome2.y > (self.desiredPoint.y + 0.1) or self.robotHome2.y < (self.desiredPoint.y - 0.1)):
             command = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
-            angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
+            #angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
 
-            omega = angular_command.omega
+            #omega = angular_command.omega
             self.vel_x = command.vel_x
             self.vel_y = command.vel_y
-            self.omega = omega
+            #self.omega = omega
         else:
             self.stop_robot()
+        angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
+        omega = angular_command.omega
+        self.omega = omega
         time.sleep(DELAY)
 
     def stop_robot(self):
