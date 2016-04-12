@@ -39,8 +39,7 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
-        self.pause = 0
-        self.reset = 0
+        self.signal = Point()
 
 
 
@@ -71,14 +70,14 @@ class playable:
     def play(self,data):
 
         self.updateLocations(data)
-        self.signalCommand(signal)
+        self.signalCommand(self.signal)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
 
-        if self.pause == 1:
+        if self.signal.x == 1:
             self.state = State.stop
-            print "This is Pause and Reset INSIDE: ", self.pause, self.reset
-        print "This is Pause and Reset outside: ", self.pause, self.reset
+            print "This is Pause and Reset INSIDE: ", self.signal.x, self.signal.y
+        print "This is Pause and Reset outside: ", self.signal.x, self.signal.y
         if self.state == State.goBackInit:
             self.back_startPoint()
             if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
@@ -313,8 +312,8 @@ class playable:
         #self.omega = 0
 
     def signalCommand(self, signal):
-        self.pause = signal.pause
-        self.reset = signal.reset
+        self.signal.x = signal.pause
+        self.signal.y = signal.reset
 
 
     def go(self):
