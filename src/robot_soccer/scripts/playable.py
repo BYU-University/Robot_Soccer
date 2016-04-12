@@ -128,9 +128,13 @@ class playable:
 
 #Check State
         if self.state == State.check:
+
+
             if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
                 (self.robotHome1.y > (self.desiredPoint.y + 0.05) or self.robotHome1.y < (self.desiredPoint.y - 0.05)):
                 self.state = State.getBehindBall
+
+
                 if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.11, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
                     self.state = State.rushGoal  # rush goal
                     self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
@@ -161,8 +165,8 @@ class playable:
 
 #RushGoal State
         if self.state == State.rushGoal:
-            #self.rush_goal()
-            self.go_direction(AWAY_GOAL)
+            self.rush_goal()
+            #self.go_direction(AWAY_GOAL)
             if self.distanceToBall < 0.135:
                 kick.kick()
                 self.state = State.check
@@ -184,7 +188,15 @@ class playable:
 #GetBehindBall State
         if self.state == State.getBehindBall:
             self.go_to_point_behind_ball()
-            self.state = State.check
+            #self.testState = TestState.getBehindBall
+            angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,HOME_GOAL)
+            deltaAngle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta,angleBallGoal)
+            #if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.11, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
+            if MotionSkills.isPointInFrontOfRobot(self.robotLocation,self.ball.point) and abs(deltaAngle) < .12:
+                self.state = State.rushGoal
+
+            else:
+                self.state = State.getBehindBall
 
 
 
