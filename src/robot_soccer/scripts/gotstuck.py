@@ -2,7 +2,7 @@
 import calibratepid as c
 from roboclaw import *
 import kick
-from param import *
+#from param import *
 
 
 def fowardfull():
@@ -54,7 +54,7 @@ def run():
     BackwardM1(129,20)
     BackwardM1(128,20)
     time.sleep(0.5)
-
+'''
 if __name__ == '__main__':
     try:
         while True:
@@ -75,3 +75,4 @@ if __name__ == '__main__':
         #global _SERIAL_ERR
         #_SERIAL_ERR = True
         print 'Finish'
+'''

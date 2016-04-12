@@ -305,7 +305,7 @@ class playable:
     def waitCommand(self):
         if self.spin == 1:
             gt.spinningfull()
-        elif self.forwards == 1:
+        elif self.front == 1:
             gt.fowardfull()
         elif self.back == 1:
             gt.backwardfull()
