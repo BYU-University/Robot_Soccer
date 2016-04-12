@@ -16,11 +16,12 @@ from Point import *
 
 
 class State(Enum):
-    rushGoal = 1
-    defenseGoal = 3
-    check = 4
-    returnToGollie = 5
-    stop = 6
+    wait = 1
+    check = 2
+    rushGoal = 3
+    defenseGoal = 4
+    #returnToGollie = 5
+    stop = 5
 
 class playable:
     def __init__(self):
@@ -28,7 +29,7 @@ class playable:
         self.robotHome1 = Locations.Locations().home1
         self.robotHome2 = Locations.Locations().home2
         self.distanceToBall = 0
-        self.state = State.check
+        self.state = State.wait
         self.stopRushingGoalTime = 0
         self.newCommand = False
         self.vel_x = 0.0
@@ -36,19 +37,9 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
-
-    #def key(self):
-        #for event in pygame.event.get():
-		#if event.type == pygame.QUIT:
-		#    sys.exit()calibratepidh
-#        keys=pygame.key.get_pressed()
- #       if keys[K_SPACE]:
-  #          print "space bar!"
-   #         exit(1)
-
-#probably enter override commands here in this part of the state machine
-    #check with Renato - we have a pause command and reset command
-    # force to "stop" and "return to goallie" states respectively
+        self.spin = 0
+        self.pause = 0
+        self.gogo = 0
 
 #Here starts the state machine
     def play(self,data):
@@ -56,11 +47,34 @@ class playable:
         self.updateLocations(data)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
-        if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
+        if self.pause == 1:
+            self.state = State.stop
+        #if self.reset == 1:
+        #    print "PRessed key for reset", self.reset
+         #   self.state = State.goBackInit
+        if self.spin == 1:
+            print "PRessed key for spin, front, back", self.spin, self.front, self.back
+            self.state = State.wait
+        if self.gogo == 1:
+            print "PRessed key for gogo", self.gogo
             self.state = State.check
-        else:
+
+
+
+        #if abs(self.ball.x) < WIDTH_FIELD and abs(self.ball.y) < HEIGHT_FIELD_METER:
+        #    self.state = State.check
+        #else:
             #self.state = State.returnToGollie
-            self.state = State.defenseGoal
+        #    self.state = State.defenseGoal
+
+
+
+
+#Wait state
+        if self.state == State.wait:
+            self.waitCommand()
+            self.state = State.wait
+
 
 
 #Check State
@@ -116,7 +130,8 @@ class playable:
         if (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
             self.state = State.rushGoal  # rush goal
             self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
-
+        else:
+            self.state = State.defenseGoal
             #self.state = State.check
 
 
@@ -149,6 +164,7 @@ class playable:
             (self.robotHome2.y > (self.desiredPoint.y + 0.1) or self.robotHome2.y < (self.desiredPoint.y - 0.1)):
             command = MotionSkills.go_to_point(self.robotHome2, self.desiredPoint)
             angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
+
             omega = angular_command.omega
             self.vel_x = command.vel_x
             self.vel_y = command.vel_y
@@ -251,6 +267,11 @@ class playable:
             self.omega = delta_angle * 3.0
         self.newCommand = True
 
+    def signalCommand(self,info):
+        self.pause = info.pause
+        #self.reset = info.reset
+        self.spin = info.spin
+        self.gogo = info.gogo
 
     def commandRoboclaws(self):
         correctX = float(-self.vel_x)
@@ -259,10 +280,11 @@ class playable:
         velchangers.goXYOmegaTheta(correctX, correctY, self.omega, self.robotHome2.theta)
 
     def go(self):
-     rospy.init_node('go', anonymous=True)
-     print "go Defense "
-     rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
-     rospy.spin()
+        rospy.init_node('go', anonymous=True)
+        print "go Defense "
+        rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
+        rospy.Subscriber( 'signal', signal, self.signalCommand,queue_size=6)
+        rospy.spin()
 
 
 
