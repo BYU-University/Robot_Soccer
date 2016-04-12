@@ -71,6 +71,7 @@ class playable:
     def play(self,data):
 
         self.updateLocations(data)
+        self.signalCommand(signal)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
 
