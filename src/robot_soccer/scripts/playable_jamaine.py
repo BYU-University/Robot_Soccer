@@ -175,10 +175,10 @@ class playable:
     def defense(self):
     # keep robot within the bounds of the goal
         print "values for Home GOAL: ", HOME_GOAL.x,HOME_GOAL.y
-        if self.desiredPoint.y > HOME_GOAL.y - 0.4:
-            self.desiredPoint.y = HOME_GOAL.y - 0.4
-        elif self.desiredPoint.y < -HOME_GOAL.y + 0.4:
-            self.desiredPoint.y = -HOME_GOAL.y + 0.4
+        if self.desiredPoint.y > HOME_GOAL.y - 0.6:
+            self.desiredPoint.y = HOME_GOAL.y - 0.6
+        elif self.desiredPoint.y < -HOME_GOAL.y + 0.6:
+            self.desiredPoint.y = -HOME_GOAL.y + 0.6
     # move to the self.desiredPoint
         if(self.robotHome2.x > (self.desiredPoint.x + 0.1) or self.robotHome2.x < (self.desiredPoint.x - 0.1)) or \
             (self.robotHome2.y > (self.desiredPoint.y + 0.1) or self.robotHome2.y < (self.desiredPoint.y - 0.1)):
