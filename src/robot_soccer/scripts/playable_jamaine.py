@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import rospy
 from robot_soccer.msg import convertedCoordinates
+from robo_soccer.msg import signal
 import calibratepid_j as c
 from roboclaw import *
 import kick
@@ -10,6 +11,7 @@ import Locations
 from param import *
 from enum import Enum
 from Point import *
+import gotstuck as gt
 #import pygame
 #from pygame.locals import *
 #from Tkinter import *
@@ -133,6 +135,20 @@ class playable:
         else:
             self.state = State.defenseGoal
             #self.state = State.check
+
+
+
+
+def waitCommand(self):
+        if self.spin == 1:
+            gt.spinningfull()
+        #elif self.front == 1:
+        #    gt.fowardfull()
+        #elif self.back == 1:
+        #    gt.backwardfull()
+        else:
+            self.stop_robot()
+
 
 
 # Here are the functions for the state machine
