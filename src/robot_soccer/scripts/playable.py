@@ -85,7 +85,7 @@ class playable:
             self.state = State.stop
         elif self.reset == 1:
             self.state = State.goBackInit
-        elif self.spin == 1 or self.forwards == 1 or self.backwards == 1:
+        elif self.spin == 1 or self.fowards == 1 or self.backwards == 1:
             self.state = State.wait
         elif self.gogo == 1:
             self.state = State.check
