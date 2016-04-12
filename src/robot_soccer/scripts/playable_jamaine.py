@@ -74,6 +74,7 @@ class playable:
 
 
 
+        print "STATE = ", self.state
 
 #Wait state
         if self.state == State.wait:
@@ -89,9 +90,9 @@ class playable:
                 (self.robotHome2.y > (self.desiredPoint.y + 0.05) or self.robotHome2.y < (self.desiredPoint.y - 0.05)):
                 print "Values for State Defense, ",self.desiredPoint.x, self.desiredPoint.y
                 self.state = State.defenseGoal
-            if abs(self.desiredPoint.x) > self.ball.x:
+            if abs(self.desiredPoint.x) < self.ball.x:
                 self.state = State.getBehindBall
-            elif self.ball.x < AWAY_GOALJAM.y+0.50:
+            if self.ball.x < AWAY_GOALJAM.y+0.50:
                 self.state = State.defenseGoal
 
 
