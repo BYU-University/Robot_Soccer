@@ -204,14 +204,14 @@ class playable:
 
 # Here are the functions for the state machine
     def rush_goal(self):
-        point_desired = AWAY_GOALJAM
+        point_desired = AWAY_GOAL
 
         #if  (self.robotHome1.x > (point_desired.x + 0.4)) or \
          #   (self.robotHome1.y > (point_desired.y + 0.3) or self.robotHome1.y < (point_desired.y - 0.3)):
 
         targetAngle = MotionSkills.angleBetweenPoints(Point(self.robotHome1.x, self.robotHome1.y), point_desired)
         angle_fix = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
-        angular_command = MotionSkills.go_to_angle(self.robotHome1, AWAY_GOALJAM)
+        angular_command = MotionSkills.go_to_angle(self.robotHome1, HOME_GOAL)
         omega = angular_command.omega
         if(angle_fix <= RADIAN5 and angle_fix >= -RADIAN5):
             omega = 0
