@@ -91,6 +91,8 @@ class playable:
                 self.state = State.defenseGoal
             if abs(self.desiredPoint.x) > self.ball.x:
                 self.state = State.getBehindBall
+            elif self.ball.x < AWAY_GOALJAM.y+0.50:
+                self.state = State.defenseGoal
 
 
             #if abs(self.robotHome2.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
@@ -119,8 +121,8 @@ class playable:
 #GetBehindBall State
         if self.state == State.getBehindBall:
             self.go_to_point_behind_ball()
-            if self.desiredPoint.x > AWAY_GOALJAM.x+.6:
-                self.state = State.returnToGollie
+            if self.ball.x < AWAY_GOALJAM.y+0.50:
+                self.state = State.check
             else:
             #self.testState = TestState.getBehindBall
                 angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,AWAY_GOALJAM)
