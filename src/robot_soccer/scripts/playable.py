@@ -18,8 +18,8 @@ from Point import *
 
 
 class State(Enum):
-    check = 1
-    wait = 2
+    wait = 1
+    check = 2
     getBehindBall = 3
     rushGoal = 4
     returnToPlay = 5
@@ -33,7 +33,7 @@ class playable:
         self.ball = Locations.Locations().ball
         self.robotHome1 = Locations.Locations().home1
         self.distanceToBall = 0
-        self.state = State.check
+        self.state = State.wait
         self.stopRushingGoalTime = 0
         self.newCommand = False
         self.vel_x = 0.0
@@ -84,14 +84,14 @@ class playable:
 
         if self.pause == 1:
             self.state = State.stop
-        elif self.reset == 1:
+        if self.reset == 1:
             self.state = State.goBackInit
-        elif self.spin == 1 or self.front == 1 or self.back == 1:
+        if self.spin == 1 or self.front == 1 or self.back == 1:
             self.state = State.wait
-        elif self.gogo == 1:
+        if self.gogo == 1:
             self.state = State.check
-        else:
-            self.state = State.wait
+        #else:
+         #   self.state = State.wait
 
         if self.state == State.goBackInit:
             self.back_startPoint()
