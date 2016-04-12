@@ -139,7 +139,7 @@ class playable:
 
 
 
-def waitCommand(self):
+    def waitCommand(self):
         if self.spin == 1:
             gt.spinningfull()
         #elif self.front == 1:
