@@ -211,7 +211,7 @@ class playable:
 
         targetAngle = MotionSkills.angleBetweenPoints(Point(self.robotHome1.x, self.robotHome1.y), point_desired)
         angle_fix = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
-        angular_command = MotionSkills.go_to_angle(self.robotHome1, HOME_GOAL)
+        angular_command = MotionSkills.go_to_angle(self.robotHome1, AWAY_GOALJAM)
         omega = angular_command.omega
         if(angle_fix <= RADIAN5 and angle_fix >= -RADIAN5):
             omega = 0
