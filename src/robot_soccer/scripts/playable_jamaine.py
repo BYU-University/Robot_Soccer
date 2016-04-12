@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 from robot_soccer.msg import convertedCoordinates
-from robo_soccer.msg import signal
+from robot_soccer.msg import signal
 import calibratepid_j as c
 from roboclaw import *
 import kick
