@@ -26,7 +26,7 @@ def spinningfull():
     ForwardM1(128,60)
     ForwardM2(128,60)
     ForwardM1(129,60)
-    time.sleep(1)
+    time.sleep(0.5)
     stopall()
 
 
