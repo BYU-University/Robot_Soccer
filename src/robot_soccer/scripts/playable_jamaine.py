@@ -23,7 +23,8 @@ class State(Enum):
     rushGoal = 3
     defenseGoal = 4
     returnToGollie = 5
-    stop = 6
+    getBehindBall = 6
+    stop = 7
 
 class playable:
     def __init__(self):
@@ -88,6 +89,8 @@ class playable:
                 (self.robotHome2.y > (self.desiredPoint.y + 0.05) or self.robotHome2.y < (self.desiredPoint.y - 0.05)):
                 print "Values for State Defense, ",self.desiredPoint.x, self.desiredPoint.y
                 self.state = State.defenseGoal
+            elif abs(self.desiredPoint.x) > self.ball.x:
+                self.state = State.getBehindBall
 
             #if abs(self.robotHome2.x) > HOME_GOAL.x or abs(self.ball.x) > WIDTH_FIELD:
             #    self.state = State.returnToGollie
@@ -110,6 +113,20 @@ class playable:
                 else:
                     self.state = State.check
 
+
+
+#GetBehindBall State
+        if self.state == State.getBehindBall:
+            self.go_to_point_behind_ball()
+            #self.testState = TestState.getBehindBall
+            angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,AWAY_GOALJAM)
+            deltaAngle = MotionSkills.deltaBetweenAngles(self.robotHome2.theta,angleBallGoal)
+            #if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.11, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
+            if MotionSkills.isPointInFrontOfRobot(self.robotHome2,self.ball) and abs(deltaAngle) < .12:
+                self.state = State.rushGoal
+
+            else:
+                self.state = State.getBehindBall
 
 
 #Stop State
@@ -135,7 +152,7 @@ class playable:
 #RushGoal State
         if self.state == State.rushGoal:
             #self.rush_goal()
-            self.go_direction(AWAY_GOAL)
+            self.go_direction(AWAY_GOALJAM)
             if self.distanceToBall < 0.15:
                 kick.kick()
                 self.state = State.check
@@ -157,7 +174,7 @@ class playable:
 
 # Here are the functions for the state machine
     def rush_goal(self):
-        point_desired = AWAY_GOAL
+        point_desired = AWAY_GOALJAM
         #if  (self.robotHome2.x > (point_desired.x + 0.4)) or \
          #   (self.robotHome2.y > (point_desired.y + 0.3) or self.robotHome2.y < (point_desired.y - 0.3)):
         targetAngle = MotionSkills.angleBetweenPoints(Point.Point(self.robotHome2.x, self.robotHome2.y), point_desired)
@@ -191,7 +208,7 @@ class playable:
             #self.omega = omega
         else:
             self.stop_robot()
-        angular_command = MotionSkills.go_to_angle(self.robotHome2, AWAY_GOAL)
+        angular_command = MotionSkills.go_to_angle(self.robotHome2, AWAY_GOALJAM)
         omega = angular_command.omega
         self.omega = omega
         time.sleep(DELAY)
