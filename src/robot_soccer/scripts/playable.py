@@ -323,8 +323,8 @@ class playable:
      # while STATEMACHINE:
         rospy.init_node('go', anonymous=True)
         print "go function"
-        rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
-        rospy.Subscriber( 'SignalforCommand', signal, winner.play)
+        rospy.Subscriber('coordinates', convertedCoordinates,signal, winner.play)
+        #rospy.Subscriber( 'SignalforCommand', signal, winner.play)
         rospy.spin()
 
      #except KeyboardInterrupt:
