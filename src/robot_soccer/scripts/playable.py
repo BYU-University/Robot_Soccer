@@ -73,7 +73,7 @@ class playable:
     def play(self,data):
 
         self.updateLocations(data)
-        self.signalCommand(self.receive)
+        self.signalCommand()
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
 
@@ -316,9 +316,9 @@ class playable:
         #self.vel_y = self.robotHome1.y
         #self.omega = 0
 
-    def signalCommand(self,ss):
-        self.pause = ss.pause
-        self.receive.x = ss.pause
+    def signalCommand(self,receive):
+        self.pause = receive.pause
+        self.receive.x = receive.pause
 
 
         #self.pause = signal.pause
