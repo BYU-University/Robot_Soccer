@@ -316,9 +316,9 @@ class playable:
         #self.vel_y = self.robotHome1.y
         #self.omega = 0
 
-    def signalCommand(self,receive):
-        self.pause = receive.pause
-        self.receive.x = receive.pause
+    def signalCommand(self,receives):
+        self.pause = receives.pause
+        #self.receive.x = receives.pause
 
 
         #self.pause = signal.pause
