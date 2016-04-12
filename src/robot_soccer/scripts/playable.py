@@ -45,8 +45,8 @@ class playable:
         self.pause = 0
         self.reset = 0
         self.spin = 0
-        self.fowards = 0
-        self.backwards = 0
+        self.front = 0
+        self.back = 0
         self.gogo = 0
         #self.receive = Point()
 
@@ -86,7 +86,7 @@ class playable:
             self.state = State.stop
         elif self.reset == 1:
             self.state = State.goBackInit
-        elif self.spin == 1 or self.fowards == 1 or self.backwards == 1:
+        elif self.spin == 1 or self.front == 1 or self.back == 1:
             self.state = State.wait
         elif self.gogo == 1:
             self.state = State.check
@@ -307,7 +307,7 @@ class playable:
             gt.spinningfull()
         elif self.forwards == 1:
             gt.fowardfull()
-        elif self.backwards == 1:
+        elif self.back == 1:
             gt.backwardfull()
         else:
             self.stop_robot()
@@ -337,8 +337,8 @@ class playable:
         self.pause = info.pause
         self.reset = info.reset
         self.spin = info.spin
-        self.fowards = info.fowards
-        self.backwards = info.backwards
+        self.front = info.front
+        self.back = info.back
         self.gogo = info.gogo
 
 
