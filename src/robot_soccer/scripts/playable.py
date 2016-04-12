@@ -19,12 +19,13 @@ from Point import *
 
 class State(Enum):
     check = 1
-    getBehindBall = 2
-    rushGoal = 3
-    returnToPlay = 4
-    goBackInit = 5
-    stop = 6
-    wait = 7
+    wait = 2
+    getBehindBall = 3
+    rushGoal = 4
+    returnToPlay = 5
+    goBackInit = 6
+    stop = 7
+
 
 
 class playable:
