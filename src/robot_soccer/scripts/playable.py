@@ -42,6 +42,7 @@ class playable:
         #self.signal = Point()
         self.pause = 0
         self.reset = 0
+        self.receive = Point()
 
 
 
@@ -69,17 +70,19 @@ class playable:
         print "pressed", keyPressed
     '''
 #This is the state machine
-    def play(self,data,signal):
+    def play(self,data):
 
         self.updateLocations(data)
-        self.signalCommand(signal)
+        self.signalCommand(self.receive)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
 
         if self.pause == 1:#self.signal.x == 1:
             self.state = State.stop
-            print "This is Pause and Reset INSIDE: ", self.pause,self.reset #self.signal.x, self.signal.y
-        print "This is Pause and Reset outside: ", self.pause, self.reset#self.signal.x, self.signal.y
+            print "This is Pause INSIDE: ", self.pause#,self.reset #self.signal.x, self.signal.y
+            print "This is PauseX INSIDE: ", self.receive.x
+        print "This is Pause and Reset outside: ", self.pause#, self.reset#self.signal.x, self.signal.y
+        print "This is PauseX INSIDE: ", self.receive.x
         if self.state == State.goBackInit:
             self.back_startPoint()
             if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
@@ -313,9 +316,13 @@ class playable:
         #self.vel_y = self.robotHome1.y
         #self.omega = 0
 
-    def signalCommand(self, signal):
-        self.pause = signal.pause
-        self.pause = signal.reset
+    def signalCommand(self,ss):
+        self.pause = ss.pause
+        self.receive.x = ss.pause
+
+
+        #self.pause = signal.pause
+        #self.pause = signal.reset
 
 
     def go(self):
@@ -323,8 +330,8 @@ class playable:
      # while STATEMACHINE:
         rospy.init_node('go', anonymous=True)
         print "go function"
-        rospy.Subscriber('coordinates', convertedCoordinates,signal, winner.play)
-        #rospy.Subscriber( 'SignalforCommand', signal, winner.play)
+        rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
+        rospy.Subscriber( 'signal', signal, winner.signalCommand)
         rospy.spin()
 
      #except KeyboardInterrupt:
