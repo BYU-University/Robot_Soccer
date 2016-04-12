@@ -131,11 +131,11 @@ class playable:
 #DefenseGoal State
         if self.state == State.defenseGoal:
             self.defense()
-        if (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
-            self.state = State.rushGoal  # rush goal
-            self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
-        else:
-            self.state = State.defenseGoal
+            if (MotionSkills.isPointInFrontOfRobot(self.robotHome2, self.ball, 0.1, 0.04 + abs(MAX_SPEED / 4))):  # This offset compensates for the momentum
+                self.state = State.rushGoal  # rush goal
+                self.stopRushingGoalTime = getTime() + int(2 * DIS_BEHIND_BALL / MAX_SPEED * 100)
+            else:
+                self.state = State.defenseGoal
             #self.state = State.check
 
 
