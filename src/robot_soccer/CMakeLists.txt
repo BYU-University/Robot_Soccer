@@ -52,6 +52,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    locations.msg
    convertedCoordinates.msg
+   signal.msg
  )
 #   Message1.msg
 #   Message2.msg

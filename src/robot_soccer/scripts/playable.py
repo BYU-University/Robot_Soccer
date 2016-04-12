@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import rospy
 from robot_soccer.msg import convertedCoordinates
+from robot_soccer.msg import signal
 import calibratepid as c
 from roboclaw import *
 import kick
@@ -38,6 +39,8 @@ class playable:
         self.omega = 0.0
         self.desiredPoint = 0.0
         self.stopped = True
+        self.pause = 0
+        self.reset = 0
 
 
 
@@ -70,6 +73,9 @@ class playable:
         self.updateLocations(data)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
+
+        if self.pause == 1:
+            self.state = State.stop
         if self.state == State.goBackInit:
             self.back_startPoint()
             if abs(self.ball.x) > 0 and abs(self.ball.x) <0.3 and abs(self.ball.y) > 0 and abs(self.ball.y) < 0.3:
@@ -158,19 +164,6 @@ class playable:
 #Wait state
         if self.state == State.wait:
 
-            print ("choose for : get the ball(g), or what go to Center? (c)")
-            print ("Dont forget to click enter After you damn letter input. Gosh!")
-            choose = raw_input('--> ')
-            print  "you damn chose " + choose +" letter, Good luck"
-            if choose == 'g':
-                #self.state = State.check
-                #self.play()
-                print  "you damn chose " + choose +" letter, Good luck"
-            elif choose == 'c':
-                #self.state = State.goBackInit
-                print  "you damn chose " + choose +" letter, Good luck"
-            else:
-                print  "you damn chose NOTHING letter, Good luck"
                 self.state = State.wait
                 self.stop_robot()
 
@@ -316,6 +309,9 @@ class playable:
         #self.vel_y = self.robotHome1.y
         #self.omega = 0
 
+    def signalCommand(self, signal):
+        self.pause = signal.pause
+        self.reset = signal.reset
 
 
     def go(self):
@@ -324,6 +320,7 @@ class playable:
         rospy.init_node('go', anonymous=True)
         print "go function"
         rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
+        rospy.Subscriber( 'SignalforCommand', signal, winner.signalCommand)
         rospy.spin()
 
      #except KeyboardInterrupt:
