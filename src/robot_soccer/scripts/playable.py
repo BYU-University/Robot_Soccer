@@ -192,7 +192,7 @@ class playable:
             angleBallGoal = MotionSkills.angleBetweenPoints(self.ball,HOME_GOAL)
             deltaAngle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta,angleBallGoal)
             #if MotionSkills.isPointInFrontOfRobot(self.robotHome1, self.ball, 0.11, 0.05 + abs(MAX_SPEED / 4)):  # This offset compensates for the momentum
-            if MotionSkills.isPointInFrontOfRobot(self.robotLocation,self.ball.point) and abs(deltaAngle) < .12:
+            if MotionSkills.isPointInFrontOfRobot(self.robotHome1,self.ball) and abs(deltaAngle) < .12:
                 self.state = State.rushGoal
 
             else:
