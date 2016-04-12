@@ -118,6 +118,11 @@ class playable:
          #   self.state = State.goBackInit
 
 
+#Wait state
+        if self.state == State.wait:
+            self.waitCommand()
+            self.state = State.wait
+
 #Check State
         if self.state == State.check:
             if (self.robotHome1.x > (self.desiredPoint.x + 0.05) or self.robotHome1.x < (self.desiredPoint.x - 0.05)) or \
@@ -169,7 +174,7 @@ class playable:
 #Stop State
         if self.state == State.stop:
             self.stop_robot()
-            #self.state = State.wait
+            self.state = State.wait
 
 
 
@@ -178,10 +183,7 @@ class playable:
             self.go_to_point_behind_ball()
             #self.state = State.check
 
-#Wait state
-        if self.state == State.wait:
-            self.waitCommand()
-            self.state = State.wait
+
 
 
 
