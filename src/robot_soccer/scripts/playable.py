@@ -204,7 +204,7 @@ class playable:
 
 # Here are the functions for the state machine
     def rush_goal(self):
-        point_desired = AWAY_GOAL
+        point_desired = AWAY_GOALJAM
 
         #if  (self.robotHome1.x > (point_desired.x + 0.4)) or \
          #   (self.robotHome1.y > (point_desired.y + 0.3) or self.robotHome1.y < (point_desired.y - 0.3)):
