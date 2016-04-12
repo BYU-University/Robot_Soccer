@@ -191,9 +191,9 @@ class playable:
             #self.omega = omega
         else:
             self.stop_robot()
-        angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
-        omega = angular_command.omega
-        self.omega = omega
+        #angular_command = MotionSkills.go_to_angle(self.robotHome2, HOME_GOAL)
+        #omega = angular_command.omega
+        self.omega = RADIAN180
         time.sleep(DELAY)
 
     def stop_robot(self):
