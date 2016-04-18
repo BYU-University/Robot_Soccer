@@ -12,10 +12,8 @@ import Locations
 from param import *
 from enum import Enum
 from Point import *
-#import readchar
-#from Tkinter import *
-#from msvcrt import getch
 
+#This file runs on first Robot. The robot will act as the forward player to score goals
 
 class State(Enum):
     wait = 1
@@ -25,8 +23,6 @@ class State(Enum):
     returnToPlay = 5
     goBackInit = 6
     stop = 7
-
-
 
 class playable:
     def __init__(self):
@@ -51,37 +47,14 @@ class playable:
         #self.receive = Point()
 
 
-
-#key for stop
-    '''
-    def key(self, event):
-        #if event.keysym == 'q':
-        #    self.root.destroy()
- #       z = getch()
-        if ord(z) == 27:
-            print "cacete de agulhaa"
-        keyPressed = event.char
-        if keyPressed == 's':
-           # self.state = State.stop
-           # self.stop_robot()
-            print "oi"
-        elif keyPressed == 'g':
-            #self.state = State.check
-            print "ola"
-        elif keyPressed == 'r':
-            print 'olaola'
-           # self.state = State.returnToPlay
-        else:
-            print keyPressed
-        print "pressed", keyPressed
-    '''
 #This is the state machine
     def play(self,data):
 
         self.updateLocations(data)
         self.commandRoboclaws()
         print "STATEMACHINE = ",self.state
-
+#here is for communicate with our robot from desktop computer.
+#We can stop, run. Also, we can spin, go forward and backward if the robot get stuck in the field.
         if self.pause == 1:
             self.state = State.stop
         if self.reset == 1:
@@ -110,16 +83,6 @@ class playable:
 
             else:
                 self.state = State.stop
-        #elif self.state == State.wait:
-        #    self.stop_robot()
-        #else:
-        #    self.state = State.check
-
-        #elif abs(self.ball.x) > WIDTH_FIELD or abs(self.ball.y) > HEIGHT_FIELD_METER:
-        #    self.state = State.returnToPlay
-        #else:
-         #   self.state = State.goBackInit
-
 
 #Wait state
         if self.state == State.wait:
@@ -146,8 +109,6 @@ class playable:
             if abs(self.ball.x) > HOME_GOAL.x:
                 self.state = State.goBackInit
 
-            #if (self.robotHome1.x > (AWAY_GOAL.x+ 0.4)) and \
-            #(self.robotHome1.y > (AWAY_GOAL.y + 0.3) and self.robotHome1.y < (AWAY_GOAL.y - 0.3)):
 
 #Return To Play State
         if self.state == State.returnToPlay:
@@ -202,12 +163,11 @@ class playable:
 
 
 
-# Here are the functions for the state machine
+# From here, there are the functions for the state machine
+
+#Rush to goal function
     def rush_goal(self):
         point_desired = AWAY_GOAL
-
-        #if  (self.robotHome1.x > (point_desired.x + 0.4)) or \
-         #   (self.robotHome1.y > (point_desired.y + 0.3) or self.robotHome1.y < (point_desired.y - 0.3)):
 
         targetAngle = MotionSkills.angleBetweenPoints(Point(self.robotHome1.x, self.robotHome1.y), point_desired)
         angle_fix = (self.robotHome1.theta - targetAngle + RADIAN180) % RADIAN360 - RADIAN180
@@ -221,18 +181,18 @@ class playable:
         self.omega = omega
         time.sleep(DELAY)
 
-
+#Go to start point
     def back_startPoint(self):
         self.goStart()
 
-
+#function to stop robot
     def stop_robot(self):
         self.vel_x = 0
         self.vel_y = 0
         self.omega = 0
         #print "StopPosition",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
 
-
+#Function working to go behind ball point
     def go_to_point_behind_ball(self):
         robot_point = Point(self.robotHome1.x, self.robotHome1.y)
         self.desiredPoint = MotionSkills.getPointBehindBall(self.ball, AWAY_GOAL)
@@ -250,7 +210,7 @@ class playable:
         self.omega = omega #delta_angle
         time.sleep(DELAY)
 
-
+#Second function to go to point. Could be used as well to go behind ball
     def go_to_point(self, x, y, lookAtPoint=None):
         # print "go_to_point"
         if lookAtPoint == None:
@@ -267,8 +227,6 @@ class playable:
         delta_angle = angle - self.robotHome1.theta
 
         bestDelta = math.atan2(math.sin(delta_angle), math.cos(delta_angle)) * SCALE_OMEGA
-        # print bestDelta
-        #print " Check SPEED MAG and Vel_x, Vel_y ",mag,self.vel_x,self.vel_y
         if mag >= MAX_SPEED:
             self.vel_x = (MAX_SPEED / mag) * self.vel_x
             self.vel_y = (MAX_SPEED / mag) * self.vel_y
@@ -280,6 +238,7 @@ class playable:
             bestDelta = 0
             self.omega = bestDelta
 
+#Get the correct location of all scenario.
     def updateLocations(self,data):
         self.robotHome1(data.home1_x,data.home1_y,data.home1_theta)
         self.ball.x = data.ball_x
@@ -305,20 +264,7 @@ class playable:
             self.omega = delta_angle
         self.newCommand = True
 
-    def go_direction2(self, point):
-        print "X and Y", point.x,point.y
-        print "robotHome coordinates",self.robotHome1.x,self.robotHome1.y,self.robotHome1.theta
-        angle = MotionSkills.angleBetweenPoints(self.robotHome1, point)
-        self.vel_x = math.cos(angle) * MAX_SPEED
-        self.vel_y = math.sin(angle) * MAX_SPEED
-        des_angle = MotionSkills.angleBetweenPoints(self.ball, HOME_GOAL)
-        delta_angle = MotionSkills.deltaBetweenAngles(self.robotHome1.theta, des_angle)
-        if abs(delta_angle) < .1:
-            self.omega = 0
-        else:
-            self.omega = delta_angle * 3.0
-        self.newCommand = True
-
+#Function for keyboard input
     def waitCommand(self):
         if self.spin == 1:
             gt.spinningfull()
@@ -329,27 +275,21 @@ class playable:
         else:
             self.stop_robot()
 
-
+#Function for sending the speed to our robot
     def commandRoboclaws(self):
         correctX = float(-self.vel_x)  # for some how it was going backwards. Has to fix it
         correctY = float(-self.vel_y)
         print "values of vel_x,vel_y,Omega,Theta: ", correctX, correctY, self.omega, self.robotHome1.theta
         velchangers.goXYOmegaTheta(correctX, correctY, self.omega, self.robotHome1.theta)
 
-
+#Go to start position
     def goStart(self):
         start = 0.45
         self.go_to_point(CENTER.x+start, CENTER.y, HOME_GOAL)
 
 
 
-        print "info for debugg trying to go to start point"
-        #xposition = float(start + self.robotHome1.x)
-    #print "ballx,bally,homex,homey, hometheta",-ball[0],ball[1],bret[0],bret[1],bret[2]
-        #self.vel_x = xposition
-        #self.vel_y = self.robotHome1.y
-        #self.omega = 0
-
+#Get the input keyboard signal command
     def signalCommand(self,info):
         self.pause = info.pause
         self.reset = info.reset
@@ -358,28 +298,13 @@ class playable:
         self.back = info.back
         self.gogo = info.gogo
 
-
-        #self.pause = signal.pause
-        #self.pause = signal.reset
-
-
+#Function based on ROS information. Gets the data from vision
     def go(self):
-     #try:
-     # while STATEMACHINE:
         rospy.init_node('go', anonymous=True)
         print "go function"
         rospy.Subscriber('coordinates', convertedCoordinates, winner.play)
         rospy.Subscriber( 'signal', signal, self.signalCommand,queue_size=6)
         rospy.spin()
-
-     #except KeyboardInterrupt:
-        #pass
-        #self.state = State.goBackInit
-        #if self.robotHome1.x > 0 and self.robotHome1.x < STARTPOINTHOME:
-        #STATEMACHINE = False
-      #  self.state == State.stop
-      #  self.stop_robot()
-      #  self.commandRoboclaws()
 
 
 if __name__ == '__main__':

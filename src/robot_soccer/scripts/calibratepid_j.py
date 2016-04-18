@@ -18,7 +18,7 @@ d = 6.0999908447265625
 #q = 100
 q = 308419
 
-
+#Calibrate PID for Jamaine
 
 def forward(speed):
 		ForwardM1(128,speed)

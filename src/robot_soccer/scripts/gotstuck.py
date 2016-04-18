@@ -35,7 +35,7 @@ def stopall():
     ForwardM2(128,0)
     ForwardM1(129,0)
 
-
+#Debug purpose
 def run():
     ForwardM1(128,30)
     ForwardM2(128,30)
