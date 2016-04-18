@@ -39,7 +39,6 @@ def strategy_init(data):
 
     # G.ballPast = ball
 
-
 def reset():
     G.reset = True
 
